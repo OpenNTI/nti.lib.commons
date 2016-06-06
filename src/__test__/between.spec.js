@@ -18,17 +18,17 @@ describe('between', () => {
 	it('should correctly work with numbers', () => {
 
 		expect(between(0, -1, 1)).toBe(true);
-		expect(between(0, -1, 1, false)).toBe(true);
-		expect(between(0, -1, 1, true)).toBe(true);
+		expect(between(0, -1, 1)).toBe(true);
+		expect(between.inclusive(0, -1, 1)).toBe(true);
 		//order independent
 		expect(between(0, 1, -1)).toBe(true);
-		expect(between(0, 1, -1, false)).toBe(true);
-		expect(between(0, 1, -1, true)).toBe(true);
+		expect(between(0, 1, -1)).toBe(true);
+		expect(between.inclusive(0, 1, -1)).toBe(true);
 
-		expect(between(2, 1, -1, true)).toBe(false);
+		expect(between(2, 1, -1)).toBe(false);
 
-		expect(between(1, 1, -1, true)).toBe(true);
-		expect(between(1, 1, -1, false)).toBe(false);
+		expect(between.inclusive(1, 1, -1)).toBe(true);
+		expect(between(1, 1, -1)).toBe(false);
 		expect(between(1, 1, -1)).toBe(false);
 
 
