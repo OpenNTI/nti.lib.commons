@@ -6,7 +6,7 @@ export const PERIOD = Object.freeze({
 export default class Time {
 
 	constructor (date = new Date()) {
-		Object.defineProperty('date', {
+		Object.defineProperty(this, 'date', {
 			configurable: false,
 			enumerable: false,
 			writable: false,
@@ -28,7 +28,7 @@ export default class Time {
 		return this.date.getHours();
 	}
 
-	setHours (hours: Number) {
+	setHours (hours) {
 		const d = new Date(this.date);
 		d.setHours(hours);
 		return new Time(d);
@@ -38,7 +38,7 @@ export default class Time {
 		return this.date.getMinutes();
 	}
 
-	setMinutes (minutes: Number) {
+	setMinutes (minutes) {
 		const d = new Date(this.date);
 		d.setMinutes(minutes);
 		return new Time(d);
@@ -48,7 +48,7 @@ export default class Time {
 		return (this.getHours() < 12) ? PERIOD.AM : PERIOD.PM;
 	}
 
-	setPeriod (period: PERIOD) {
+	setPeriod (period) {
 		if (!Object.values(PERIOD).includes(period)) {
 			throw new Error('Must supply a period.');
 		}
