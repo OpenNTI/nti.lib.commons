@@ -1,4 +1,4 @@
-export const getID = o => typeof o === 'object' ? o.getID() : o;
+export const getID = o => (typeof o === 'object' && o.getID) ? o.getID() : o;
 
 export default function matcherFactory (object) {
 	return function (o) {
