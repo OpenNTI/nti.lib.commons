@@ -22,6 +22,29 @@ export default class SelectionModel extends EventEmitter {
 	}
 
 
+	get length () {
+		return this[Selected].length;
+	}
+
+
+	[Symbol.iterator] () {
+		let snapshot = this.getItems();
+		let {length} = snapshot;
+		let index = 0;
+
+		return {
+
+			next () {
+				let done = index >= length;
+				let value = snapshot[index++];
+
+				return { value, done };
+			}
+
+		};
+	}
+
+
 	isSelected (object) {
 		return this[Selected].findIndex(this.match(object)) >= 0;
 	}
