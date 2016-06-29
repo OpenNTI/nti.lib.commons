@@ -85,7 +85,7 @@ export default class SelectionModel extends EventEmitter {
 
 
 	set (objects) {
-		this[Selected] = Array.isArray(objects) ? objects : [objects];
+		this[Selected] = Array.isArray(objects) ? objects : (objects == null ? [] : [objects]);
 		this.emit('change');
 	}
 
