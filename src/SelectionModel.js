@@ -49,6 +49,7 @@ export default class SelectionModel extends EventEmitter {
 		return this[Selected].findIndex(this.match(object)) >= 0;
 	}
 
+
 	add (...objects) {
 		let list = this[Selected];
 		for (let obj of objects) {
@@ -58,11 +59,11 @@ export default class SelectionModel extends EventEmitter {
 		}
 
 		if (this[Selected] !== list) {
-			this[Selected] = list;
-			this.emit('change');
+			this.set(list);
 			return true;
 		}
 	}
+
 
 	remove (...objects) {
 		let list = this[Selected];
@@ -82,6 +83,11 @@ export default class SelectionModel extends EventEmitter {
 		}
 	}
 
+
+	set (objects) {
+		this[Selected] = Array.isArray(objects) ? objects : [objects];
+		this.emit('change');
+	}
 
 	getItems () {
 		return this[Selected].slice();
