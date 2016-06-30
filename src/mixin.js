@@ -1,6 +1,6 @@
 function inPrototype (o, key) {
 	let proto = Object.getPrototypeOf(o || {});
-	return proto.hasOwnProperty(key);
+	return proto && (proto.hasOwnProperty(key) || inPrototype(proto, key));
 }
 
 export default function mixin (dest, partial, ...optionalConstructorData) {
