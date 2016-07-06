@@ -11,6 +11,16 @@ export default class Executor extends EventEmitter {
 		});
 	}
 
+	/**
+	 * Add a single task to the queue.
+	 *
+	 * @param  {function} task a single function that returns a Promise
+	 * @return {Promise}      the fulfillment of the functions return
+	 */
+	queueTask (task) {
+		return this.queueTasks(task)[0];
+	}
+
 
 	/**
 	 * Adds tasks to the queue for execution.
@@ -19,7 +29,7 @@ export default class Executor extends EventEmitter {
 	 * @return {Promise[]} The promise of each argument.
 	 * @public
 	 */
-	queue (...tasks) {
+	queueTasks (...tasks) {
 		const {queue} = this;
 		for (let task of tasks) {
 			if (!queue.includes(task)) {
