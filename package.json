@@ -1,6 +1,6 @@
 {
   "name": "nti-commons",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "author": "nextthought",
   "license": "UNLICENSED",
   "description": "Common utility javascript functions & classes.",
