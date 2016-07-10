@@ -1,8 +1,16 @@
 import Time from '../Time';
 
 describe('Time', () => {
+	beforeEach(() => {
+		jasmine.clock().install();
+	});
+
+	afterEach(() => {
+		jasmine.clock().uninstall();
+	});
 
 	it('Time intializes with current time by default', () => {
+		jasmine.clock().mockDate();//lock the clock so we don't get millisecond differences
 		const time = new Time();
 		const date = new Date();
 		expect(time.getHours()).toEqual(date.getHours());

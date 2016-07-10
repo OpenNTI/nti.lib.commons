@@ -1,5 +1,5 @@
 export default function wait (milliseconds) {
-	return new Promise(resume => setTimeout(()=>resume(), milliseconds));
+	return new Promise(resume => setTimeout(()=>resume(), milliseconds || 0));
 }
 
 export const SHORT = 300;
