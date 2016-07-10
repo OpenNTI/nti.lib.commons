@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "isempty": "0.0.1",
+    "media-typer": "^0.3.0",
     "nti-util-logger": "^1.0.0"
   },
   "devDependencies": {
