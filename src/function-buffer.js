@@ -11,13 +11,36 @@ export default function buffer (time, fn) {
 	if (typeof fn !== 'function') { throw new Error('Illegal Argument: The second argument must be a function'); }
 
 	let id = null;
-	let f = function () { //must be a regular function (not an arrow function)
-		clearTimeout(id);
-		let args = arguments;
-		id = setTimeout(()=> fn.apply(this, args), time);
+	let call = null;
+
+	const clear = () => (clearTimeout(id), id = null);
+
+	const f = function () { //must be a regular function (not an arrow function)
+		const args = arguments;
+
+		clear();
+
+		call = () => (id = null, call = null, fn.apply(this, args));
+		id = setTimeout(call, time);
 	};
 
 	f.buffered = time;
+
+	f.cancel = clear;
+
+	f.flush = () => {
+		clear();
+
+		if (call) {
+			call();
+		}
+	};
+
+	Object.defineProperty(f, 'pending', {
+		get () {
+			return !!id;
+		}
+	});
 
 	return f;
 }
