@@ -87,20 +87,26 @@ describe('FileTypeDescriptor', () => {
 		expect(parseExtention.bind(null, '*')).not.toThrow();
 
 		spyOn(logger, 'warn');
-		parseExtention('*.*');
+		const oldWild = parseExtention('*.*');
 		expect(logger.warn).toHaveBeenCalledWith('For file wildcards, use *, not *.*');
 
 		const wild = parseExtention('*');
 
 		expect(wild.isWild).toBeTruthy();
-
 		expect(wild.extention).toBe('');
 		expect(wild.mask.extention).toBe('*');
 
 		expect(wild.match).toBeDefined();
-		expect(wild.match).toBeDefined();
 		expect(wild.match({name: 'Report.pdf'})).toBeTruthy();
 		expect(wild.match({name: 'Report.doc'})).toBeTruthy();
+
+		expect(oldWild.isWild).toBeTruthy();
+		expect(oldWild.extention).toBe('');
+		expect(oldWild.mask.extention).toBe('*');
+
+		expect(oldWild.match).toBeDefined();
+		expect(oldWild.match({name: 'Report.pdf'})).toBeTruthy();
+		expect(oldWild.match({name: 'Report.doc'})).toBeTruthy();
 	});
 
 	it ('Parsing wildcard MimeType', () => {
