@@ -1,4 +1,7 @@
 import Mime, {ANY} from './MimeComparator';
+import Logger from 'nti-util-logger';
+
+const logger = Logger.get('lib:FileTypeDescriptor');
 
 /*
  * type FileTypeDescriptor {
@@ -25,11 +28,17 @@ import Mime, {ANY} from './MimeComparator';
 
 
 export function parseExtention (extention) {
-	const WILDCARD = '*.*';
+	const WILDCARD = '*';
 	const WILD = /\*/g;
+	const OLD_WILD = /\*\.\*/g;
 
 	if (typeof extention !== 'string') {
 		throw new TypeError('Argument should be a string representing an extention');
+	}
+
+	if (OLD_WILD.test(extention)) {
+		logger.warn('For file wildcards, use *, not *.*');
+		extention = extention.replace(OLD_WILD, '*'); //replace *.* with *. This for backwards compatibility.
 	}
 
 	if (
@@ -51,7 +60,7 @@ export function parseExtention (extention) {
 		isWild,
 		extention: isWild ? '' : normal,
 		mask: {
-			extention: `*${isWild ? '.*' : normal}`
+			extention: `*${isWild ? '' : normal}`
 		},
 
 		match: (file) => file && (isWild || String(file.name).endsWith(normal)),

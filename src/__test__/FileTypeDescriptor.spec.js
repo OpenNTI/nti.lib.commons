@@ -1,4 +1,7 @@
 import {parseMimeType, parseExtention} from '../FileTypeDescriptor';
+import Logger from 'nti-util-logger';
+
+const logger = Logger.get('lib:FileTypeDescriptor');
 
 describe('FileTypeDescriptor', () => {
 
@@ -81,14 +84,18 @@ describe('FileTypeDescriptor', () => {
 
 	it ('Parsing wildcard extention', () => {
 
-		expect(parseExtention.bind(null, '*.*')).not.toThrow();
+		expect(parseExtention.bind(null, '*')).not.toThrow();
 
-		const wild = parseExtention('*.*');
+		spyOn(logger, 'warn');
+		parseExtention('*.*');
+		expect(logger.warn).toHaveBeenCalledWith('For file wildcards, use *, not *.*');
+
+		const wild = parseExtention('*');
 
 		expect(wild.isWild).toBeTruthy();
 
 		expect(wild.extention).toBe('');
-		expect(wild.mask.extention).toBe('*.*');
+		expect(wild.mask.extention).toBe('*');
 
 		expect(wild.match).toBeDefined();
 		expect(wild.match).toBeDefined();

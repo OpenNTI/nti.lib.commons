@@ -1,4 +1,4 @@
-import FileSet from '../FileSet';
+import FileSet from '../FileSetDescriptor';
 
 const MOCK_PDF_FILE = {type: 'application/pdf', name:'Report.pdf', size: 54234};
 const MOCK_TXT_FILE = {type: 'text/plain', name:'Report.txt', size: 512};
