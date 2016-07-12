@@ -143,4 +143,12 @@ describe('MimeComparator', () => {
 		expect(o.matches(E)).not.toBeTruthy();
 	});
 
+	it ('matches application/vnd.nextthought.pageinfo+json to application/vnd.nextthought.pageinfo+json; charset=UTF-8', () => {
+		const A = 'application/vnd.nextthought.pageinfo+json';
+		const B = 'application/vnd.nextthought.pageinfo+json; charset=UTF-8';
+		const comp = new MimeComparator(A);
+		expect(comp.matches(B)).toBeTruthy();
+		expect(comp.is(B)).toBeTruthy();
+	});
+
 });

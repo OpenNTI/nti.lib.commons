@@ -1,5 +1,4 @@
 import MediaTyper from 'media-typer';
-import equals from './object-equals';
 
 export const ANY = {
 	type: '*',
@@ -55,7 +54,27 @@ export default class MimeComparator {
 	parametersMatch (o) {
 		const {parameters} = this.type;
 		const {parameters: other} = o;
-		return !parameters || equals(parameters || {}, other);
+
+		// if we don't have parameters...
+		if(!parameters) {
+			return true;
+		}
+
+		// if the other defines a parameter that we also define, they must match
+		for(let key of Object.keys(other)) {
+			if (key in parameters && parameters[key] !== other[key]) {
+				return false;
+			}
+		}
+
+		// if we define a parameter, the other must match it
+		for(let key of Object.keys(parameters)) {
+			if (other[key] !== parameters[key]) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	partMatches (key, o) {
