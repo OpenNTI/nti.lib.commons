@@ -11,7 +11,7 @@
  */
 export default function getKeyCode (e) {
 	const modifiers = ['ctrlKey', 'altKey', 'shiftKey', 'metaKey'];
-	const code = [];
+	const code = ['nti'];
 
 	for (let mod of modifiers) {
 		if (e[mod]) {
@@ -23,5 +23,11 @@ export default function getKeyCode (e) {
 		code.push(e.key.toLowerCase());
 	}
 
-	return code.length ? code.join('-') : null;
+	return code.length > 1 ? code.join('-') : null;
 }
+
+//Define some common key combos
+getKeyCode.SHIFT_TAB = getKeyCode({shiftKey: true, key: 'Tab'});
+getKeyCode.TAB = getKeyCode({key: 'Tab'});
+
+getKeyCode.ENTER = getKeyCode({key: 'Enter'});
