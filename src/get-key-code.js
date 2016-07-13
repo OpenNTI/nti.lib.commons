@@ -31,3 +31,6 @@ getKeyCode.SHIFT_TAB = getKeyCode({shiftKey: true, key: 'Tab'});
 getKeyCode.TAB = getKeyCode({key: 'Tab'});
 
 getKeyCode.ENTER = getKeyCode({key: 'Enter'});
+
+getKeyCode.BACKSPACE = getKeyCode({key: 'Backspace'});
+getKeyCode.DELETE = getKeyCode({key: 'Delete'});
