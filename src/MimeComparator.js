@@ -122,7 +122,7 @@ export default class MimeComparator {
 		const other = get(type);
 		const self = this.type;
 
-		return Object.keys(self).every(key =>
+		return other && Object.keys(self).every(key =>
 			self[key] == null
 			|| other[key] === self[key]
 			|| (
