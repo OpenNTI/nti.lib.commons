@@ -59,6 +59,10 @@ export default class Idle {
 			state.timerId = this[Schedule]();
 		};
 
+		if (state.handler) {
+			return;
+		}
+
 		state.handler = handler;
 
 		let events = opt.events.split(' ');
@@ -86,6 +90,8 @@ export default class Idle {
 		for (let evt of events) {
 			un(element, evt, state.handler);
 		}
+
+		delete state.handler;
 	}
 
 
