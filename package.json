@@ -1,6 +1,6 @@
 {
   "name": "nti-commons",
-  "version": "1.0.29",
+  "version": "1.0.30",
   "author": "nextthought",
   "license": "UNLICENSED",
   "description": "Common utility javascript functions & classes.",
@@ -28,8 +28,8 @@
   "dependencies": {
     "isempty": "0.0.1",
     "media-typer": "^0.3.0",
-	"node-uuid": "1.4.7",
-	"nti-lib-ntiids": "^1.0.0",
+    "node-uuid": "1.4.7",
+    "nti-lib-ntiids": "^1.0.0",
     "nti-util-logger": "^1.0.0"
   },
   "devDependencies": {
