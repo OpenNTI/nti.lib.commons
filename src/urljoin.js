@@ -1,11 +1,3 @@
-import path from 'path';
-import url from 'url';
-
-export default function urlJoin (...parts) {
-	let base = url.parse(parts.shift());
-
-	parts.unshift(base.pathname);
-	base.pathname = path.join(...parts.map(i=> !i ? '' : i.toString()));
-
-	return base.format();
-}
+import fn from './url-join';
+console.error('urljoin moved to url-join. Update your import.');//eslint-disable-line
+export default fn;
