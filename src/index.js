@@ -21,3 +21,4 @@ export * from './jsx';
 export wait from './wait';
 export Point from './Point';
 export Time from './Time';
+export Handlers from './Handlers';
