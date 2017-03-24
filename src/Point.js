@@ -45,6 +45,7 @@ export default class Point {
 	/**
 	* Returns a new Point that is this point multiplied by the given scale factor
 	* @param {number} factor The scale factor
+	* @param {Point} [origin] origin point
 	* @returns {Point} a new Point that is this point multiplied by the given scale factor
 	*/
 	scale (factor = 1.0, origin = Point.ORIGIN) {
