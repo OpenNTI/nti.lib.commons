@@ -8,6 +8,16 @@ export default {
 	dest: 'lib/index.js',
 	sourceMap: true,
 	exports: 'named',
+	external: [
+		'events',
+		'isempty',
+		'media-typer',
+		'nti-lib-ntiids',
+		'nti-util-logger',
+		'path',
+		'url',
+		'uuid/v4'
+	],
 	plugins: [
 		babel({ exclude: 'node_modules/**' }),
 		commonjs({
