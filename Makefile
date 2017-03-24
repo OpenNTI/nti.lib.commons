@@ -1,6 +1,7 @@
 .PHONY: clean check test
 
 LIBDIR = lib
+REPORTSDIR = reports
 
 all: node_modules lib
 
@@ -14,10 +15,11 @@ check:
 	@eslint --ext .js,.jsx ./src
 
 test: node_modules check
-	@karma start --single-run
+	@jest
 
 clean:
 	@rm -rf $(LIBDIR)
+	@rm -rf $(REPORTSDIR)
 
 lib: clean
-	@NODE_ENV=rollup rollup -c
+	@rollup -c
