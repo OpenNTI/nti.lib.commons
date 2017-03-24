@@ -1,4 +1,4 @@
-import uuid from 'uuid/v4';
+import uuid from 'uuid';
 
 export default class Point {
 	static ORIGIN = new Point(0, 0)

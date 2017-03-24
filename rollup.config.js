@@ -16,7 +16,7 @@ export default {
 		'nti-util-logger',
 		'path',
 		'url',
-		'uuid/v4'
+		'uuid'
 	],
 	plugins: [
 		babel({ exclude: 'node_modules/**' }),
