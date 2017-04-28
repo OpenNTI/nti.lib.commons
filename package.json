@@ -4,7 +4,8 @@
   "author": "nextthought",
   "license": "UNLICENSED",
   "description": "Common utility javascript functions & classes.",
-  "main": "lib/index.js",
+  "main": "lib/cjs-index.js",
+  "module": "lib/index.js",
   "files": [
     "lib"
   ],

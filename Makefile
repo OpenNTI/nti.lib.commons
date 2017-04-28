@@ -23,3 +23,4 @@ clean:
 
 lib: clean
 	@rollup -c
+	@rollup -c -f cjs -o lib/cjs-index.js
