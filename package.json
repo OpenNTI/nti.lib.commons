@@ -1,6 +1,6 @@
 {
   "name": "nti-commons",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "author": "nextthought",
   "license": "UNLICENSED",
   "description": "Common utility javascript functions & classes.",
@@ -58,7 +58,11 @@
       "!**/*.spec.js"
     ],
     "coverageDirectory": "reports/coverage",
-    "coverageReporters": ["text", "lcov", "cobertura"],
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "cobertura"
+    ],
     "testResultsProcessor": "./node_modules/jest-junit",
     "testMatch": [
       "**/__test__/**/*.(spec).js?(x)"
