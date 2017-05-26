@@ -19,7 +19,7 @@ export default class MockDate extends Date {
 	constructor (...args) {
 		super();
 
-		if (args.length) {
+		if (args.length === 0) {
 			return new GlobalDate(MockDate.time);
 		} else {
 			return new GlobalDate(...args);
