@@ -1,4 +1,5 @@
 export * as Array from './array';
+export * as Date from './date';
 export * as Events from './events';
 export * as FileAPI from './file-api';
 export * as FileType from './file-type';
