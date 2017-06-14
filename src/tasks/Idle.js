@@ -65,11 +65,12 @@ export default class Idle {
 
 		state.handler = handler;
 
-		let events = opt.events.split(' ');
-		for (let evt of events) {
-			on(element, evt, handler);
+		if (element) {
+			let events = opt.events.split(' ');
+			for (let evt of events) {
+				on(element, evt, handler);
+			}
 		}
-
 		state.timerId = this[Schedule]();
 	}
 
@@ -146,7 +147,7 @@ function on (element, event, fn) {
 		element.addEventListener(event, fn, false);
 	}
 	catch (e) {
-		if (element.attachEvent) {
+		if (element && element.attachEvent) {
 			element.attachEvent('on' + event, fn);
 		}
 	}
@@ -157,7 +158,7 @@ function un (element, event, fn) {
 		element.removeEventListener(event, fn, false);
 	}
 	catch (e) {
-		if (element.detachEvent) {
+		if (element && element.detachEvent) {
 			element.detachEvent('on' + event, fn);
 		}
 	}
