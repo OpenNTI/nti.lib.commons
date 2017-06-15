@@ -1,5 +1,6 @@
-import SelectionModel from './SelectionModel';
 import {EntityMatcherFactory} from '../filters';
+
+import SelectionModel from './SelectionModel';
 
 
 export default class EntitySelectionModel extends SelectionModel {

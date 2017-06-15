@@ -1,7 +1,8 @@
+/* eslint-env jest */
 import definePublic from '../define-public';
 
 describe ('Object property spec macros:', () => {
-	it ('definePublic (readOnly, but enumerable)', () => {
+	test ('definePublic (readOnly, but enumerable)', () => {
 		expect(definePublic({test: 'abc', foo: 'bar'}))
 			.toEqual({
 				test: {configurable: true, enumerable: true, writable: false, value: 'abc'},

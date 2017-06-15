@@ -1,5 +1,6 @@
-import {encodeForURI} from 'nti-lib-ntiids';
 import {join} from 'path';
+
+import {encodeForURI} from 'nti-lib-ntiids';
 
 const getNodeId = node => node && (node.getContentId ? node.getContentId() : node.getID());
 
@@ -24,7 +25,7 @@ export default class ListBackedPageSource {
 		const {list, pathPrefix} = this;
 
 		//list maybe array like, and not actually an array
-		const nodes = list.reduce ? list : Array.from(list); 
+		const nodes = list.reduce ? list : Array.from(list);
 
 		const index = nodes.reduce(
 			(found, node, ix) =>

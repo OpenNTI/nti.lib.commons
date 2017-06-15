@@ -1,7 +1,8 @@
+/* eslint-env jest */
 import readOnly from '../define-readonly';
 
 describe ('Object property spec macros:', () => {
-	it ('readOnly', () => {
+	test ('readOnly', () => {
 		expect(readOnly('abc')).toEqual({configurable: true, enumerable: false, writable: false, value: 'abc'});
 		expect(readOnly('abc', true)).toEqual({configurable: true, enumerable: true, writable: false, value: 'abc'});
 

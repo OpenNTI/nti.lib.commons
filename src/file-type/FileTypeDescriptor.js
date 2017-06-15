@@ -1,5 +1,6 @@
-import Mime, {ANY} from './MimeComparator';
 import Logger from 'nti-util-logger';
+
+import Mime, {ANY} from './MimeComparator';
 
 const logger = Logger.get('lib:FileTypeDescriptor');
 

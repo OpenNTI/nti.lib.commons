@@ -1,8 +1,9 @@
+/* eslint-env jest */
 import matchesFilter, {normalize, generateMatchFilter} from '../matches-filter';
 
-describe('Matches Filter Tests', () => {
-	describe('Normalize', () => {
-		it('Case is normalized away', () => {
+describe ('Matches Filter Tests', () => {
+	describe ('Normalize', () => {
+		test ('Case is normalized away', () => {
 			const a = normalize('test');
 			const b = normalize('TEST');
 
@@ -10,29 +11,29 @@ describe('Matches Filter Tests', () => {
 		});
 	});
 
-	describe('matchesFilter', () => {
+	describe ('matchesFilter', () => {
 		const filter = 'filter';
 
-		it('Filter is exactly the term', () => {
+		test ('Filter is exactly the term', () => {
 			const term = filter;
 
 			expect(matchesFilter(term, filter)).toBeTruthy();
 		});
 
-		describe('Filter is substring of the term', () => {
-			it('Start', () => {
+		describe ('Filter is substring of the term', () => {
+			test ('Start', () => {
 				const term = `${filter} plus some more`;
 
 				expect(matchesFilter(term, filter)).toBeTruthy();
 			});
 
-			it('Middle', () => {
+			test ('Middle', () => {
 				const term = `first ${filter} last`;
 
 				expect(matchesFilter(term, filter)).toBeTruthy();
 			});
 
-			it('End', () => {
+			test ('End', () => {
 				const term = `some stuff then ${filter}`;
 
 				expect(matchesFilter(term, filter)).toBeTruthy();
@@ -45,7 +46,7 @@ describe('Matches Filter Tests', () => {
 			expect(matchesFilter(term, filter)).toBeFalsy();
 		});
 
-		it('Filter is superset of term', () => {
+		test ('Filter is superset of term', () => {
 			const f = `${filter} plus some more`;
 			const term = filter;
 
@@ -53,10 +54,10 @@ describe('Matches Filter Tests', () => {
 		});
 	});
 
-	describe('generateMatchFilter', () => {
+	describe ('generateMatchFilter', () => {
 		const filter = 'filter';
 
-		it('filters out terms that don\'t match', () => {
+		test ('filters out terms that don\'t match', () => {
 			const values = [filter, 'not'];
 			const filterFn = generateMatchFilter(filter);
 			const filteredValues = values.filter(filterFn);

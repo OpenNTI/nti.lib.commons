@@ -1,5 +1,8 @@
-import {parseMimeType, parseExtention} from '../FileTypeDescriptor';
+/* globals spyOn */
+/* eslint-env jest */
 import Logger from 'nti-util-logger';
+
+import {parseMimeType, parseExtention} from '../FileTypeDescriptor';
 
 const logger = Logger.get('lib:FileTypeDescriptor');
 
@@ -27,7 +30,7 @@ describe('FileTypeDescriptor', () => {
 	 * defined instead of one or the other.
 	 */
 
-	it ('Parsing extention', () => {
+	test ('Parsing extention', () => {
 
 		expect(parseExtention.bind(null)).toThrowError(TypeError, 'Argument should be a string representing an extention');
 		expect(parseExtention.bind(null, 'json.*')).toThrowError(TypeError, 'Argument cannot have wildcards, other than at the beginning');
@@ -59,7 +62,7 @@ describe('FileTypeDescriptor', () => {
 		expect(extB.match({name: 'Report.doc'})).not.toBeTruthy();
 	});
 
-	it ('Parsing MimeType', () => {
+	test ('Parsing MimeType', () => {
 		expect(parseMimeType.bind(null)).toThrowError(TypeError, 'Argument was not a valid MimeType');
 		expect(parseMimeType.bind(null, 'type*/*')).toThrowError(TypeError, 'Argument was not a valid MimeType');
 		expect(parseMimeType.bind(null, '*/subtype')).toThrowError(TypeError, 'Argument was not a valid MimeType');
@@ -82,7 +85,7 @@ describe('FileTypeDescriptor', () => {
 		expect(mime.match({type: 'application/json'})).not.toBeTruthy();
 	});
 
-	it ('Parsing wildcard extention', () => {
+	test ('Parsing wildcard extention', () => {
 
 		expect(parseExtention.bind(null, '*')).not.toThrow();
 
@@ -109,7 +112,7 @@ describe('FileTypeDescriptor', () => {
 		expect(oldWild.match({name: 'Report.doc'})).toBeTruthy();
 	});
 
-	it ('Parsing wildcard MimeType', () => {
+	test ('Parsing wildcard MimeType', () => {
 
 		expect(parseMimeType.bind(null, '*/*')).not.toThrow();
 

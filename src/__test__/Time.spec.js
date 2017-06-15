@@ -1,16 +1,19 @@
+/* eslint-env jest */
+import {MockDate} from '../date';
 import Time from '../Time';
 
 describe('Time', () => {
-	beforeEach(() => {
-		jasmine.clock().install();
+	beforeEach (() => {
+		jest.useFakeTimers();
 	});
 
-	afterEach(() => {
-		jasmine.clock().uninstall();
+	afterEach (() => {
+		MockDate.uninstall();
+		jest.useRealTimers();
 	});
 
-	it('Time intializes with current time by default', () => {
-		jasmine.clock().mockDate();//lock the clock so we don't get millisecond differences
+	test ('Time intializes with current time by default', () => {
+		MockDate.install();//lock the clock so we don't get millisecond differences
 		const time = new Time();
 		const date = new Date();
 		expect(time.getHours()).toEqual(date.getHours());
@@ -18,7 +21,7 @@ describe('Time', () => {
 		expect(time.date.getTime()).toEqual(date.getTime());
 	});
 
-	it('Time intializes with given date`s time', () => {
+	test ('Time intializes with given date`s time', () => {
 		const date = new Date();
 		date.setHours(168);
 
@@ -28,7 +31,7 @@ describe('Time', () => {
 		expect(time.date.getTime()).toEqual(date.getTime());
 	});
 
-	it('Hours Setter do not mutate and set correct time', () => {
+	test ('Hours Setter do not mutate and set correct time', () => {
 		const time = new Time();
 		const testTime = new Date();
 
@@ -41,7 +44,7 @@ describe('Time', () => {
 		expect(newTime.getHours()).toEqual(testTime.getHours());
 	});
 
-	it('Minutes Setter do not mutate and set correct time', () => {
+	test ('Minutes Setter do not mutate and set correct time', () => {
 		const time = new Time();
 		const testTime = new Date();
 
@@ -54,7 +57,7 @@ describe('Time', () => {
 		expect(newTime.getMinutes()).toEqual(testTime.getMinutes());
 	});
 
-	it('GetHours always in 24-hours', () => {
+	test ('GetHours always in 24-hours', () => {
 		const date = new Date();
 		date.setHours(13);
 		const time = new Time(date);
@@ -62,7 +65,7 @@ describe('Time', () => {
 		expect(time.getHours()).toEqual(date.getHours());
 	});
 
-	it('GetMinutes', () => {
+	test ('GetMinutes', () => {
 		const date = new Date();
 		date.setMinutes(30);
 		const time = new Time(date);
@@ -70,7 +73,7 @@ describe('Time', () => {
 		expect(time.getHours()).toEqual(date.getHours());
 	});
 
-	it('SetPeriod correctly converts AM => PM', () => {
+	test ('SetPeriod correctly converts AM => PM', () => {
 		// Setup up day that is set at 2 AM
 		const date = new Date();
 		date.setHours(2);
@@ -81,7 +84,7 @@ describe('Time', () => {
 		expect(newTime.getHours()).toEqual(14);
 	});
 
-	it('SetPeriod correctly converts PM => AM', () => {
+	test ('SetPeriod correctly converts PM => AM', () => {
 		const date = new Date();
 		date.setHours(14);
 		date.setMinutes(0);
@@ -90,7 +93,7 @@ describe('Time', () => {
 		expect(newTime.getHours()).toEqual(2);
 	});
 
-	it('incrementHours rolls', () => {
+	test ('incrementHours rolls', () => {
 		const date = new Date();
 		date.setHours(23);
 		const time = new Time(date);
@@ -98,7 +101,7 @@ describe('Time', () => {
 		const newTime = time.incrementHours();
 		expect(newTime.getHours()).toEqual(0);
 	});
-	it('incrementMinutes rolls', () => {
+	test ('incrementMinutes rolls', () => {
 		const date = new Date();
 		date.setMinutes(59);
 		const time = new Time(date);
@@ -107,7 +110,7 @@ describe('Time', () => {
 		expect(newTime.getMinutes()).toEqual(0);
 	});
 
-	it('decrementHours rolls', () => {
+	test ('decrementHours rolls', () => {
 		const date = new Date();
 		date.setHours(0);
 		const time = new Time(date);
@@ -116,7 +119,7 @@ describe('Time', () => {
 		expect(newTime.getHours()).toEqual(23);
 	});
 
-	it('decrementMinutes rolls', () => {
+	test ('decrementMinutes rolls', () => {
 		const date = new Date();
 		date.setMinutes(0);
 		const time = new Time(date);

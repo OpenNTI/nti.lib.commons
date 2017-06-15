@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 
 export default class Point {
-	static ORIGIN = new Point(0, 0)
+	// static ORIGIN = new Point(0, 0)
 
 	/**
 	* Creates a new Point
@@ -69,3 +69,5 @@ export default class Point {
 	}
 
 }
+//workaround a bug in basel-plugin-transform-decorators(-legacy), when this plugin is active (static) class properties cannot access the class name. :|
+Point.ORIGIN = new Point(0, 0);

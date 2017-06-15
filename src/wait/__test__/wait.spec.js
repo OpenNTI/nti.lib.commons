@@ -1,21 +1,25 @@
+/* globals spyOn */
+/* eslint-env jest */
 import wait from '../index';
+import {MockDate} from '../../date';
 
 describe('wait', () => {
-	beforeEach(() => {
-		jasmine.clock().install();
+	beforeEach (() => {
+		jest.useFakeTimers();
 	});
 
-	afterEach(() => {
-		jasmine.clock().uninstall();
+	afterEach (() => {
+		MockDate.uninstall();
+		jest.useRealTimers();
 	});
 
 
-	it('Returns a promise', () => {
+	test ('Returns a promise', () => {
 		expect(wait() instanceof Promise).toBeTruthy();
 	});
 
-	it('Fulfills on timeout', (done) => {
-		jasmine.clock().mockDate();
+	test ('Fulfills on timeout', (done) => {
+		MockDate.install();
 		const time = Date.now();
 		const waitTime = 100;
 		const o = {spy () {}};
@@ -31,6 +35,7 @@ describe('wait', () => {
 
 		expect(o.spy).not.toHaveBeenCalled();
 
-		jasmine.clock().tick(waitTime);
+		MockDate.install(time + waitTime);
+		jest.runTimersToTime(waitTime);
 	});
 });

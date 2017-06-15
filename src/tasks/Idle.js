@@ -1,3 +1,4 @@
+/* globals document */
 const ACTIVE = 'active';
 const IDLE = 'idle';
 

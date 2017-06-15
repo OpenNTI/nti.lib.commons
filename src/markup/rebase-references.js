@@ -1,6 +1,8 @@
 import Url from 'url';
-import {hash} from '../string';
+
 import Logger from 'nti-util-logger';
+
+import {hash} from '../string';
 
 const logger = Logger.get('lib:rebase-references');
 

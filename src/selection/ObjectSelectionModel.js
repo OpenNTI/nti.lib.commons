@@ -1,5 +1,6 @@
-import SelectionModel from './SelectionModel';
 import {ObjectMatcherFactory} from '../filters';
+
+import SelectionModel from './SelectionModel';
 
 
 export default class ObjectSelectionModel extends SelectionModel {

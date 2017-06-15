@@ -1,7 +1,8 @@
+/* eslint-env jest */
 import updateValue from '../define-update-value';
 
 describe ('Object property spec macros:', () => {
-	it ('updateValue', () => {
+	test ('updateValue', () => {
 		const o = {test: 'abc'};
 		const spec = {...Object.getOwnPropertyDescriptor(o, 'test')};
 		expect(o.test).toBe('abc');

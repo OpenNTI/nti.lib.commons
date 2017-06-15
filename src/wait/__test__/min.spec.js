@@ -1,17 +1,21 @@
+/* globals spyOn */
+/* eslint-env jest */
 import waitMin from '../min';
+import {MockDate} from '../../date';
 
 describe('wait-min', () => {
-	beforeEach(() => {
-		jasmine.clock().install();
+	beforeEach (() => {
+		jest.useFakeTimers();
 	});
 
-	afterEach(() => {
-		jasmine.clock().uninstall();
+	afterEach (() => {
+		MockDate.uninstall();
+		jest.useRealTimers();
 	});
 
 
-	it('Fulfills before min wait time, waits at least the min wait time and then resolves with result', (done) => {
-		jasmine.clock().mockDate();
+	test ('Fulfills before min wait time, waits at least the min wait time and then resolves with result', (done) => {
+		MockDate.install();
 		const start = Date.now();
 		const time = 500;
 		const value = 'foobar';
@@ -31,12 +35,13 @@ describe('wait-min', () => {
 
 		expect(o.spy).not.toHaveBeenCalled();
 
-		jasmine.clock().tick(time);
+		MockDate.install(start + time);
+		jest.runTimersToTime(time);
 	});
 
 
-	it('Fulfills after min wait time, resolves with result', (done) => {
-		jasmine.clock().mockDate();
+	test ('Fulfills after min wait time, resolves with result', (done) => {
+		MockDate.install();
 		const start = Date.now();
 		const time = 500;
 		const value = 'foobar2';
@@ -50,7 +55,8 @@ describe('wait-min', () => {
 			expect(o.spy2).not.toHaveBeenCalled();
 			expect(diff >= time).toBeTruthy();
 			expect(result).toBe(value);
-			jasmine.clock().tick(1);
+			MockDate.install(gap + 1);
+			jest.runTimersToTime(1);
 			return result;
 		});
 
@@ -71,6 +77,7 @@ describe('wait-min', () => {
 		expect(o.spy1).not.toHaveBeenCalled();
 		expect(o.spy2).not.toHaveBeenCalled();
 
-		jasmine.clock().tick(time);
+		MockDate.install(start + time);
+		jest.runTimersToTime(time);
 	});
 });

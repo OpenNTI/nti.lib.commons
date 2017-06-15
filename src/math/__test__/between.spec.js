@@ -1,8 +1,9 @@
+/* eslint-env jest */
 import between from '../between';
 
-describe('between', () => {
+describe ('between', () => {
 
-	it('should not throw errors with odd input', () => {
+	test ('should not throw errors with odd input', () => {
 
 		expect(between(0)).toBe(false);
 		expect(between('0')).toBe(false);
@@ -15,7 +16,7 @@ describe('between', () => {
 
 	});
 
-	it('should correctly work with numbers', () => {
+	test ('should correctly work with numbers', () => {
 
 		expect(between(0, -1, 1)).toBe(true);
 		expect(between(0, -1, 1)).toBe(true);

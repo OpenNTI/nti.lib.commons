@@ -1,4 +1,5 @@
 import {ensure as array} from '../array';
+
 import {parseExtention, parseMimeType} from './FileTypeDescriptor';
 
 

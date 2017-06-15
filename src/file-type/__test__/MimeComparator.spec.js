@@ -1,15 +1,16 @@
+/* eslint-env jest */
 import MimeComparator from '../MimeComparator';
 
 describe('MimeComparator', () => {
 
-	it ('new MimeComparator()', () => {
+	test ('new MimeComparator()', () => {
 		const o = new MimeComparator();
 
 		expect(String(o)).toBe('invalid');
 		expect(o.type).toBe(void 0);
 	});
 
-	it ('*/* matches any other mime', () => {
+	test ('*/* matches any other mime', () => {
 		const o = new MimeComparator('*/*');
 
 		expect(o.is('foo/bar')).not.toBeTruthy();
@@ -22,7 +23,7 @@ describe('MimeComparator', () => {
 	});
 
 
-	it ('matches type/subtype to type/subtype and type/subtype+prefix', () => {
+	test ('matches type/subtype to type/subtype and type/subtype+prefix', () => {
 		const A = 'type/subtype';
 		const B = 'type/subtype+prefix';
 		const C = 'type/subtype+prefix2';
@@ -40,7 +41,7 @@ describe('MimeComparator', () => {
 	});
 
 
-	it ('does not match type/subtype to type/subtype2, type2/subtype, nor type/subtype2+prefix', () => {
+	test ('does not match type/subtype to type/subtype2, type2/subtype, nor type/subtype2+prefix', () => {
 		const A = 'type/subtype';
 
 		const X = 'type/subtype2';
@@ -59,7 +60,7 @@ describe('MimeComparator', () => {
 	});
 
 
-	it ('matches type/subtype+prefix to type/subtype+prefix but not type/subtype nor type/subtype+prefix2', () => {
+	test ('matches type/subtype+prefix to type/subtype+prefix but not type/subtype nor type/subtype+prefix2', () => {
 		const A = 'type/subtype+prefix';
 		const B = 'type/subtype';
 		const C = 'type/subtype+prefix2';
@@ -76,7 +77,7 @@ describe('MimeComparator', () => {
 		expect(o.matches(C)).not.toBeTruthy();
 	});
 
-	it ('matches "type/subtype+prefix; param=xyz" to "type/subtype+prefix; param=xyz" but not type/subtype, type/subtype+prefix2, nor "type/subtype+prefix; param=abc"', () => {
+	test ('matches "type/subtype+prefix; param=xyz" to "type/subtype+prefix; param=xyz" but not type/subtype, type/subtype+prefix2, nor "type/subtype+prefix; param=abc"', () => {
 		const A = 'type/subtype+prefix; charset=utf-8; foo=bar';
 		const B = 'type/subtype+prefix; charset=utf-8; foo=baz';
 		const C = 'type/subtype+prefix';
@@ -100,7 +101,7 @@ describe('MimeComparator', () => {
 	});
 
 
-	it ('matches type/* to type/subtypeA and type/subtypeB as well as type/subtype+prefix', () => {
+	test ('matches type/* to type/subtypeA and type/subtypeB as well as type/subtype+prefix', () => {
 		const o = new MimeComparator('type/*');
 
 		const A = 'type/subtypeA';
@@ -120,7 +121,7 @@ describe('MimeComparator', () => {
 		expect(o.matches(D)).not.toBeTruthy();
 	});
 
-	it ('matches type/* to type/subtypeA and type/subtypeB as well as type/subtype+prefix', () => {
+	test ('matches type/* to type/subtypeA and type/subtypeB as well as type/subtype+prefix', () => {
 		const o = new MimeComparator('type/*');
 
 		const A = 'type/subtypeA';
@@ -143,7 +144,7 @@ describe('MimeComparator', () => {
 		expect(o.matches(E)).not.toBeTruthy();
 	});
 
-	it ('matches application/vnd.nextthought.pageinfo+json to application/vnd.nextthought.pageinfo+json; charset=UTF-8', () => {
+	test ('matches application/vnd.nextthought.pageinfo+json to application/vnd.nextthought.pageinfo+json; charset=UTF-8', () => {
 		const A = 'application/vnd.nextthought.pageinfo+json';
 		const B = 'application/vnd.nextthought.pageinfo+json; charset=UTF-8';
 		const comp = new MimeComparator(A);

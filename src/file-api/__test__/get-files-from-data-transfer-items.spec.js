@@ -1,3 +1,4 @@
+/* eslint-env jest */
 import getFilesFromDataTransferItems from '../get-files-from-data-transfer-items';
 
 function createItem (name, isDirectory) {
@@ -9,7 +10,7 @@ function createItem (name, isDirectory) {
 }
 
 describe('getFilesFromDataTransferItems tests', () => {
-	it ('Returns files, and excludes directories', () => {
+	test ('Returns files, and excludes directories', () => {
 		const name = 'file-name';
 		const data = {
 			0: createItem(name),

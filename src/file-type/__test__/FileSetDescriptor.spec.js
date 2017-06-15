@@ -1,3 +1,4 @@
+/* eslint-env jest */
 import FileSet from '../FileSetDescriptor';
 
 const MOCK_PDF_FILE = {type: 'application/pdf', name:'Report.pdf', size: 54234};
@@ -6,7 +7,7 @@ const MOCK_ZIP_FILE = {type: 'application/zip', name:'Report.zip', size: 1512};
 
 describe('FileSetDescriptor', () => {
 
-	it ('Backwards Compatibility', () => {
+	test ('Backwards Compatibility', () => {
 
 		const pdfs = new FileSet(['.pdf'], ['*/*']);
 
@@ -14,7 +15,7 @@ describe('FileSetDescriptor', () => {
 		expect(pdfs.matches(MOCK_TXT_FILE)).not.toBeTruthy();
 	});
 
-	it ('Empty Accepts Lists accept nothing', () => {
+	test ('Empty Accepts Lists accept nothing', () => {
 
 		const pdfs = new FileSet([], []);
 
@@ -23,7 +24,7 @@ describe('FileSetDescriptor', () => {
 	});
 
 
-	it ('Accepts any match in the set of allowed extensions and mimeTypes', () => {
+	test ('Accepts any match in the set of allowed extensions and mimeTypes', () => {
 
 		const pdfs = new FileSet(['.pdf'], ['text/plain']);
 
