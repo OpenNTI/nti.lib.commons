@@ -59,13 +59,13 @@ export default class Executor extends EventEmitter {
 		const {queue, current, maxConcurrency: max} = this;
 		const remove = f => (f = current.indexOf(f), f >= 0 && current.splice(f, 1));
 		const run = f => Promise.resolve().then(f)
-							//these catch and consume any exception/rejection.
-							//Also, the resolve our .promise. (let callers know)
-							.then(f.resolve, f.reject)
-							//Always remove ourselves from the current.
-							.then(() => remove(f))
-							//always run schedual.
-							.then(this.schedual, this.schedual);
+			//these catch and consume any exception/rejection.
+			//Also, the resolve our .promise. (let callers know)
+			.then(f.resolve, f.reject)
+			//Always remove ourselves from the current.
+			.then(() => remove(f))
+			//always run schedual.
+			.then(this.schedual, this.schedual);
 
 		if (current.length < max) {
 

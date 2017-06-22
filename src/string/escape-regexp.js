@@ -1,4 +1,4 @@
-const re = /[\-\[\]{}()*+?.,\\\^$|#\s]/g;
+const re = /[-[\]{}()*+?.,\\^$|#\s]/g;
 
 export default function escape (s) {
 	if (typeof s !== 'string') {

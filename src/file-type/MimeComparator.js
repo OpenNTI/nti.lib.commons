@@ -126,9 +126,9 @@ export default class MimeComparator {
 			self[key] == null
 			|| other[key] === self[key]
 			|| (
-				key === 'parameters'
+					key === 'parameters'
 				&& this.parametersMatch(other)
-			)
+				)
 		);
 	}
 

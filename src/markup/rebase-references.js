@@ -6,7 +6,7 @@ import {hash} from '../string';
 
 const logger = Logger.get('lib:rebase-references');
 
-const CORS_BUSTER_REGEX = /(\S+)\s*=\s*"(((\/[^"\/]+\/)||\/)resources\/[^?"]*?)"/igm;
+const CORS_BUSTER_REGEX = /(\S+)\s*=\s*"(((\/[^"/]+\/)||\/)resources\/[^?"]*?)"/igm;
 
 const isDataURI = RegExp.prototype.test.bind(/^data:/i);
 const isSrc = RegExp.prototype.test.bind(/src/i);
