@@ -40,7 +40,7 @@ describe ('Matches Filter Tests', () => {
 			});
 		});
 
-		it ('Filter is not in term', () => {
+		test ('Filter is not in term', () => {
 			const term = 'nothing to match';
 
 			expect(matchesFilter(term, filter)).toBeFalsy();
