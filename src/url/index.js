@@ -1,3 +1,3 @@
-export appendQueryParam from './append-query-param';
+export appendQueryParams from './append-query-params';
 export join from './join';
 export resolve from './resolve';

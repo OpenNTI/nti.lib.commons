@@ -1,7 +1,7 @@
 import URL from 'url';
 import QueryString from 'querystring';
 
-export default function appendQueryParam (uri, params) {
+export default function appendQueryParams (uri, params) {
 	const url = URL.parse(uri);
 
 	url.search = QueryString.stringify({
