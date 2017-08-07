@@ -1,5 +1,6 @@
 import URL from 'url';
-import QueryString from 'querystring';
+
+import QueryString from 'query-string';
 
 export default function appendQueryParams (uri, params) {
 	const url = URL.parse(uri);
