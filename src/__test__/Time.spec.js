@@ -32,6 +32,7 @@ describe('Time', () => {
 	});
 
 	test ('Hours Setter do not mutate and set correct time', () => {
+		MockDate.install(new Date('2017-08-18T16:30:00Z'));//lock the date for the test
 		const time = new Time();
 		const testTime = new Date();
 
@@ -45,6 +46,7 @@ describe('Time', () => {
 	});
 
 	test ('Minutes Setter do not mutate and set correct time', () => {
+		MockDate.install(new Date('2017-08-18T16:30:00Z'));//lock the date for the test
 		const time = new Time();
 		const testTime = new Date();
 
