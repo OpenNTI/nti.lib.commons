@@ -4,6 +4,7 @@ export * as Events from './events';
 export * as FileAPI from './file-api';
 export * as FileType from './file-type';
 export * as Filters from './filters';
+export * as HOC from './hoc';
 export * as Iterable from './iterable';
 export * as Markup from './markup';
 export * as Math from './math';
