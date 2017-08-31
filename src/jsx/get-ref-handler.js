@@ -13,10 +13,10 @@ export default function getRefHandler (parentRef, localRef) {
 		return localRef;
 	}
 
-	let h = REF_HANDLERS.get(parentRef);
+	let h = REF_HANDLERS.get(localRef);
 	if (!h) {
 		h = (x) => {parentRef(x); localRef(x);};
-		REF_HANDLERS.set(parentRef, h);
+		REF_HANDLERS.set(localRef, h);
 	}
 	return h;
 }
