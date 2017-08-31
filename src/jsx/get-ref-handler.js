@@ -13,10 +13,11 @@ export default function getRefHandler (parentRef, localRef) {
 		return localRef;
 	}
 
-	let h = REF_HANDLERS.get(localRef);
-	if (!h) {
-		h = (x) => {parentRef(x); localRef(x);};
-		REF_HANDLERS.set(localRef, h);
-	}
+	const PARENT_REF_MAP = REF_HANDLERS.get(localRef) || new WeakMap();
+	REF_HANDLERS.set(localRef, PARENT_REF_MAP);
+
+	const h = PARENT_REF_MAP.get(parentRef) || (x) => {parentRef(x); localRef(x);};
+	PARENT_REF_MAP.set(parentRef, h);
+
 	return h;
 }
