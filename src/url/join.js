@@ -1,11 +1,25 @@
 import path from 'path';
 import url from 'url';
 
-export default function urlJoin (...parts) {
+import QueryString from 'query-string';
+
+export default function join (...parts) {
 	let base = url.parse(parts.shift());
 
 	parts.unshift(base.pathname);
-	base.pathname = path.join(...parts.map(i=> !i ? '' : i.toString()));
+
+	const urls = parts
+		.filter(Boolean)
+		.map(x => url.parse(x.toString()));
+
+	for(let part of urls) {
+		base.pathname = path.join(base.pathname, part.pathname);
+		base.hash = part.hash;
+		base.search = QueryString.stringify({
+			...QueryString.parse(base.search),
+			...QueryString.parse(part.search),
+		});
+	}
 
 	return base.format();
 }
