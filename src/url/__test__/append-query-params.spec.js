@@ -4,7 +4,7 @@ import appendQueryParams from '../append-query-params';
 describe('appendQueryParams', () => {
 
 	test('Throws on invalid arguments', () => {
-		expect(() => appendQueryParams()).toThrow(/Parameter "url" must be a string/);
+		expect(() => appendQueryParams()).toThrow();
 	});
 
 
