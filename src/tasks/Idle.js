@@ -1,4 +1,6 @@
 /* globals document */
+import {supportsPassive} from '../events';
+
 const ACTIVE = 'active';
 const IDLE = 'idle';
 
@@ -145,7 +147,8 @@ export default class Idle {
 
 function on (element, event, fn) {
 	try {
-		element.addEventListener(event, fn, false);
+		const options = supportsPassive() ? {passive:true} : false;
+		element.addEventListener(event, fn, options);
 	}
 	catch (e) {
 		if (element && element.attachEvent) {
@@ -156,7 +159,8 @@ function on (element, event, fn) {
 
 function un (element, event, fn) {
 	try {
-		element.removeEventListener(event, fn, false);
+		const options = supportsPassive() ? {passive:true} : false;
+		element.removeEventListener(event, fn, options);
 	}
 	catch (e) {
 		if (element && element.detachEvent) {
