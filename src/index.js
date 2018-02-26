@@ -11,6 +11,7 @@ export * as Math from './math';
 export * as Paging from './paging';
 export * as Parsing from './parsing';
 export * as PropTypes from './prop-types';
+export * as Registry from './registry';
 export * as Selection from './selection';
 export * as String from './string';
 export * as Tasks from './tasks';
