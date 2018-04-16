@@ -15,7 +15,7 @@ export default class Registry {
 
 		return function decorator (item) {
 			registry.registerItem(key, item);
-		}
+		};
 	}
 
 	/**
