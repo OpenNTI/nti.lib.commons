@@ -3,7 +3,7 @@
  *
  * Exampple:
  *
- * import {cooloff} from 'nti-commons';
+ * import {cooloff} from '@nti/lib-commons';
  *
  * function doSomething (...) {
  *     if (cooloff(doSomething)) {return;}

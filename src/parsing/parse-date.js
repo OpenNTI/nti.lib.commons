@@ -1,4 +1,4 @@
-import Logger from 'nti-util-logger';
+import Logger from '@nti/util-logger';
 // const MILLI = /\.\d+/;
 // const ZULU = /Z$/;
 // const ISODATE = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z?/;

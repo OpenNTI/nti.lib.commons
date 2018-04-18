@@ -1,6 +1,6 @@
 import Url from 'url';
 
-import Logger from 'nti-util-logger';
+import Logger from '@nti/util-logger';
 
 import {hash} from '../string';
 

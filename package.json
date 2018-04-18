@@ -1,5 +1,5 @@
 {
-  "name": "nti-commons",
+  "name": "@nti/lib-commons",
   "version": "2.13.0-alpha",
   "author": "nextthought",
   "license": "UNLICENSED",
@@ -27,10 +27,10 @@
     "registry": "https://npm.nextthought.com"
   },
   "dependencies": {
+    "@nti/lib-ntiids": "^1.0.0",
+    "@nti/util-logger": "^1.0.0",
     "isempty": "0.0.1",
     "media-typer": "^0.3.0",
-    "nti-lib-ntiids": "^1.0.0",
-    "nti-util-logger": "^1.0.0",
     "uuid": "^3.0.1",
     "query-string": "^5.0.0"
   },
