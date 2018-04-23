@@ -29,11 +29,11 @@ export default class HandlerRegistry extends Base {
 	}
 
 
-	getItemFor (type) {
+	getItemFor (...args) {
 		for (let item of this[ITEMS]) {
 			const {handler, key} = item;
 
-			if (typeof key === 'function' && key(type)) {
+			if (typeof key === 'function' && key(...args)) {
 				return handler;
 			}
 		}
