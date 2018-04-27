@@ -5,10 +5,8 @@ import Logger from '@nti/util-logger';
 
 const logger = Logger.get('lib:date-parsing');
 
-const TYPES = RegExp.prototype.test.bind(/^(object|string|number)$/i);
-
 export default function parseDate (value) {
-	if (value == null || !TYPES(typeof vlaue)) {
+	if (value == null) {
 		return null;
 	}
 
