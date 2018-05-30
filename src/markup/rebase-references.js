@@ -1,6 +1,7 @@
 import Url from 'url';
 
 import Logger from '@nti/util-logger';
+import {isNTIID} from '@nti/lib-ntiids';
 
 import {hash} from '../string';
 
@@ -11,6 +12,9 @@ const CORS_BUSTER_REGEX = /(\S+)\s*=\s*"(((\/[^"/]+\/)||\/)resources\/[^?"]*?)"/
 const isDataURI = RegExp.prototype.test.bind(/^data:/i);
 const isSrc = RegExp.prototype.test.bind(/src/i);
 const isYouTube = RegExp.prototype.test.bind(/youtube/i);
+const isHrefParam = RegExp.prototype.test.bind(/name="href"/i);
+
+const paramValue = /value="([^"]+)"/igm;
 
 
 export function bustCorsForResources (htmlString, name, value) {
@@ -71,10 +75,36 @@ export default function rebaseAndSaltReferences (htmlString, basePath) {
 			original : `${attr}="${uri}"`;
 	}
 
+
+	function fixParamValue (original, uri) {
+		if (isNTIID(uri)) { return original; }
+
+		const url = Url.parse(uri);
+
+		const anchor = url.pathname == null && url.hash !== null;
+		const firstChar = (url.pathname || '').charAt(0);
+		const absolute = firstChar === '/';
+
+		const fullyQualified = Boolean(url.protocol || url.host || absolute);
+		const fixed = fullyQualified || anchor || isDataURI(url) ? uri : url.parse(basePath).resolve(uri);
+
+		return `value="${fixed}"`;
+	}
+
+
+	function maybeFixParam (original, attributes) {
+		if (!isHrefParam(attributes)) { return original; }
+
+		return original.replace(paramValue, fixParamValue);
+	}
+
+
+
 	const envSalt = '';
 	const locationHash = hash(location.hostname + envSalt);
 
 	htmlString = bustCorsForResources(htmlString, 'h', locationHash);
 	htmlString = htmlString.replace(/(src|href|poster|data-source-wrapped)="(.*?)"/igm, fixReferences);
+	htmlString = htmlString.replace(/<param([^>]+)>/igm, maybeFixParam);
 	return htmlString;
 }
