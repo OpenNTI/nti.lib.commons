@@ -21,6 +21,6 @@ describe('rebase-references', () => {
 		test('leave href params alone if the value is a NTIID', () => {
 			expect(rebase('<param name="href" value="tag:nextthought.com,2011-10:OU-NTICard-OU_BIOL2124_F_2017_Human_Physiology.nticard.nticard_week_glance_011" />', 'https://test.nextthought.com'))
 				.toEqual('<param name="href" value="tag:nextthought.com,2011-10:OU-NTICard-OU_BIOL2124_F_2017_Human_Physiology.nticard.nticard_week_glance_011" />');
-		})
+		});
 	});
 });
