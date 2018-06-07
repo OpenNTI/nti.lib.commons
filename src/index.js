@@ -10,6 +10,7 @@ export * as Markup from './markup';
 export * as Math from './math';
 export * as Paging from './paging';
 export * as Parsing from './parsing';
+export * as Promises from './promises';
 export * as PropTypes from './prop-types';
 export * as Registry from './registry';
 export * as Selection from './selection';
