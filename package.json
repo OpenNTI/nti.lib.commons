@@ -32,7 +32,7 @@
     "isempty": "0.0.1",
     "media-typer": "^0.3.0",
     "uuid": "^3.0.1",
-    "query-string": "^5.0.0"
+    "query-string": "^6.1.0"
   },
   "devDependencies": {
     "@nti/lib-scripts": "^1.16.0"
