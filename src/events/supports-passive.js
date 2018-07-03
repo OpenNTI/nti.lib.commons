@@ -4,7 +4,7 @@ export default function supportsPassive () {
 
 	if (supported == null) {
 		try {
-			global.addEventListener('test', null, { get passive () { supported = true; } });
+			global.addEventListener('test', null, { get passive () { return supported = true; } });
 		} catch(e) {/**/}
 	}
 
