@@ -65,7 +65,7 @@ export default function rebaseAndSaltReferences (htmlString, basePath) {
 		}
 
 		if (!anchor && !fullyQualified && !isDataURI(url)) {
-			logger.warn('Content Still has non-fullyqualified HTML references! (assumed base: %s, ref: %s)', basePath, uri);
+			logger.debug('Content Still has non-fullyqualified HTML references! (assumed base: %s, ref: %s)', basePath, uri);
 
 			uri = url.parse(basePath).resolve(uri);
 		}
