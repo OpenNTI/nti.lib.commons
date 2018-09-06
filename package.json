@@ -4,10 +4,11 @@
   "author": "nextthought",
   "license": "UNLICENSED",
   "description": "Common utility javascript functions & classes.",
-  "main": "lib/cjs-index.js",
-  "module": "lib/index.js",
+  "main": "lib/index.js",
+  "module": "src/index.js",
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "scripts": {
     "test": "lib-scripts test",
@@ -35,6 +36,6 @@
     "query-string": "^6.1.0"
   },
   "devDependencies": {
-    "@nti/lib-scripts": "^1.16.0"
+    "@nti/lib-scripts": "^2.0.0"
   }
 }
