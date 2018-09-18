@@ -24,7 +24,7 @@ const ToggleState = Symbol('state:toggle');
 export default class Idle {
 
 	constructor (opt) {
-		let op = this.opt = Object.assign({}, DEFAULTS, opt);
+		let op = this.opt = { ...DEFAULTS, ...opt};
 		this.element = op.element || (typeof document !== 'undefined' ? document : void 0);
 
 		this.state = {
