@@ -32,8 +32,9 @@
     "@nti/util-logger": "^1.0.0",
     "isempty": "0.0.1",
     "media-typer": "^0.3.0",
-    "uuid": "^3.0.1",
-    "query-string": "^6.1.0"
+    "query-string": "^6.1.0",
+    "react-is": "^16.5.1",
+    "uuid": "^3.0.1"
   },
   "devDependencies": {
     "@nti/lib-scripts": "^2.0.0"
