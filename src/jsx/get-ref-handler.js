@@ -8,6 +8,7 @@ export function getRefHandler (parentRef, localRef) {
 
 	if (!isRef(parentRef)) {
 		if (parentRef) {
+			// eslint-disable-next-line no-console
 			console.error(`Unsupported value (${typeof parentRef}: ${parentRef}) has been dropped. Use a ref object or callback instead.`);
 		}
 		return localRef;
