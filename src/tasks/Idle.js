@@ -69,10 +69,7 @@ export default class Idle {
 		state.handler = handler;
 
 		if (element) {
-			let events = opt.events.split(' ');
-			for (let evt of events) {
-				on(element, evt, handler);
-			}
+			opt.events.split(' ').forEach(evt => on(element, evt, handler));
 		}
 		state.timerId = this[Schedule]();
 	}
@@ -90,10 +87,7 @@ export default class Idle {
 		//clear any pending timeouts
 		clearTimeout(state.timerId);
 
-		const events = opt.events.split(' ');
-		for (let evt of events) {
-			un(element, evt, state.handler);
-		}
+		opt.events.split(' ').forEach(evt => un(element, evt, state.handler));
 
 		delete state.handler;
 	}
