@@ -15,9 +15,10 @@ function buildRef (node, pathPrefix) {
 
 export default class ListBackedPageSource {
 
-	constructor (list, pathPrefix = '') {
+	constructor (list, pathPrefix = '', id) {
 		this.list = list;
 		this.pathPrefix = pathPrefix;
+		this.id = id;
 	}
 
 
