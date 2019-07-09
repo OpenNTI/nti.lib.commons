@@ -1,4 +1,3 @@
-/* globals document */
 import {supportsPassive} from '../events';
 
 const ACTIVE = 'active';

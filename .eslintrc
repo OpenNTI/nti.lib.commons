@@ -1,3 +1,6 @@
 {
+	"globals": {
+		"document": true
+	},
 	"extends": "./node_modules/@nti/lib-scripts/config/eslintrc.js"
 }
