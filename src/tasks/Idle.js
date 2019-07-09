@@ -1,3 +1,4 @@
+/* eslint-env browser */
 import {supportsPassive} from '../events';
 
 const ACTIVE = 'active';
