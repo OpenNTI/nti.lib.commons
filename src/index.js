@@ -22,6 +22,7 @@ export * from './function';
 export * from './object';
 export * from './jsx';
 
+export Color from './color';
 export wait from './wait';
 export Point from './Point';
 export Time from './Time';
