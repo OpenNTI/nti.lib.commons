@@ -135,16 +135,23 @@ function getHSVMethods (color) {
 	};
 }
 
+function isSameColor (a, b) {
+	return a.hex.toString() === b.hex.toString();
+}
+
 function getColorMethods (color) {
 	if (!color.isValid()) { throw new Error('Invalid Color'); }
 
-	return {
+	const colorMethods = {
 		isColor: true,
+		isSameColor: (colorB) => colorB && colorB.isColor && isSameColor(colorMethods, colorB),
 		hex: getHexMethods(color),
 		rgb: getRGBMethods(color),
 		hsl: getHSLMethods(color),
 		hsv: getHSVMethods(color)
 	};
+
+	return colorMethods;
 }
 
 Color.fromCSS = (css) => getColorMethods(tinycolor(css));
