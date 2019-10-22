@@ -135,6 +135,12 @@ function getHSVMethods (color) {
 	};
 }
 
+function getAccessibilityMethods (color) {
+	return {
+		isReadable: other => tinycolor.isReadable(color, other),
+	};
+}
+
 function isSameColor (a, b) {
 	return a.hex.toString() === b.hex.toString();
 }
@@ -148,7 +154,8 @@ function getColorMethods (color) {
 		hex: getHexMethods(color),
 		rgb: getRGBMethods(color),
 		hsl: getHSLMethods(color),
-		hsv: getHSVMethods(color)
+		hsv: getHSVMethods(color),
+		a11y: getAccessibilityMethods(color)
 	};
 
 	return colorMethods;

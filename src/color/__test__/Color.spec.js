@@ -30,4 +30,33 @@ describe('Color', () => {
 			expect(color.rgb.setA(0.5).rgb.a).toEqual(0.5);
 		});
 	});
+
+	describe('accessibility', () => {
+		describe('reports correct readability', () => {
+			test('compared with hex', () => {
+				const white = Color.fromCSS('white');
+				const black = Color.fromCSS('black');
+
+				expect(() => white.a11y.isReadable('#000')).not.toThrow();
+				expect(white.a11y.isReadable('#000')).toEqual(true);
+				expect(white.a11y.isReadable('#fff')).toEqual(false);
+				expect(white.a11y.isReadable('#ccc')).toEqual(false);
+				expect(white.a11y.isReadable('#999')).toEqual(false);
+				expect(white.a11y.isReadable('#666')).toEqual(true);
+
+				expect(black.a11y.isReadable('#000')).toEqual(false);
+				expect(black.a11y.isReadable('#fff')).toEqual(true);
+				expect(black.a11y.isReadable('#333')).toEqual(false);
+				expect(black.a11y.isReadable('#666')).toEqual(false);
+				expect(black.a11y.isReadable('#999')).toEqual(true);
+			});
+
+			test('compared with instance', () => {
+				const hotpink = Color.fromCSS('#ff0088');
+				const purple = Color.fromCSS('#5c1a72');
+
+				expect(hotpink.a11y.isReadable(purple)).toEqual(true);
+			});
+		});
+	});
 });
