@@ -1,5 +1,7 @@
 export applyIf from './applyif';
 export equals from './equals';
+export get from './get';
+export has from './has';
 export mixin from './mixin';
 export pluck from './pluck';
 

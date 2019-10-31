@@ -1,4 +1,4 @@
-const has = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+import has from './has';
 
 function inPrototype (o, key) {
 	let proto = Object.getPrototypeOf(o || {});
