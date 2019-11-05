@@ -23,7 +23,7 @@ test ('Separator in the key name', () => {
 });
 
 test ('Alt Separator', () => {
-	expect(get({foo: {['baz.bar']: {zomg: 'woh'}}}, 'foo/baz.bar/zomg', '/')).toBe('woh');
-	expect(get({foo: {['baz.bar']: {zomg: 'woh'}}}, 'foo/baz.b/zomg', '/')).toBe(undefined);
-	expect(get({foo: {['baz.bar']: null}}, 'foo/baz.bar/zomg', '/')).toBe(null);
+	expect(get({foo: {['baz.bar']: {zomg: 'woh'}}}, {path: 'foo/baz.bar/zomg', sep: '/'})).toBe('woh');
+	expect(get({foo: {['baz.bar']: {zomg: 'woh'}}}, {path: 'foo/baz.b/zomg', sep: '/'})).toBe(undefined);
+	expect(get({foo: {['baz.bar']: null}}, {path: 'foo/baz.bar/zomg', sep: '/'})).toBe(null);
 });

@@ -1,4 +1,4 @@
-import has from './has';
+import has from './utils/has';
 
 function inPrototype (o, key) {
 	let proto = Object.getPrototypeOf(o || {});
