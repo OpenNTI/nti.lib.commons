@@ -10,7 +10,7 @@ export default function set (root, path, value) {
 	let o = root;
 
 	for (let part of prefix) {
-		if (!has(o, part)) {
+		if (!has(o, part) || (o[part] == null)) {
 			o = (o[part] = Object.create(null));
 		} else if (typeof o[part] === 'object') {
 			o = o[part];
