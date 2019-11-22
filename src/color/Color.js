@@ -138,6 +138,7 @@ function getHSVMethods (color) {
 function getAccessibilityMethods (color) {
 	return {
 		isReadable: (other, size) => tinycolor.isReadable(color, other, size || ({'level': 'AA', 'size': 'small'})),
+		readability: (other) => tinycolor.readability(color, other)
 	};
 }
 
