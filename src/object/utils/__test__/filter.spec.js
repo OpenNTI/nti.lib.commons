@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import filter from '../filter';
-
+import set from '../set';
 
 test('base cases', () => {
 
@@ -20,6 +20,7 @@ test('base cases', () => {
 
 test('filter function', () => {
 
+	//Objects are frozen to catch accidental mutation
 	const o = Object.freeze({
 		a: 1,
 		b: 2,
@@ -50,4 +51,30 @@ test('filter function', () => {
 	expect(filter(o2, (k,v) => /[2]/.test(k) ? void 0 : v, true))
 		.toEqual({ a: 1, b: 2, c: [1,2,4] });
 
+});
+
+
+test('filter function with null-prototype objects', () => {
+	const o3 = Object.create(null);
+	set(o3, 'theme.login.noLogo', false);
+	set(o3, 'assets.login_logo.source', 'data:image/png;base64,');
+	set(o3, 'assets.login_logo.href', 'data:image/png;base64,');
+	set(o3, 'assets.login_logo.file', {});
+	set(o3, 'assets.login_logo.filename', 'poulet_nucleaire-destroy-graph.png');
+	set(o3, 'assets.login_logo.MimeType', 'image');
+
+	const fileFilter = (key, value) => {
+		const {file, ...v} = value || {};
+		if (!file || v.MimeType !== 'image') {
+			return value;
+		}
+	};
+
+	expect(filter(o3, fileFilter, true)).toEqual({
+		theme: {
+			login: {
+				noLogo: false
+			}
+		}
+	});
 });
