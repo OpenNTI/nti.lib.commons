@@ -1,5 +1,7 @@
 import tinycolor from 'tinycolor2';
 
+import {normalizeToHSL} from './utils';
+
 function callOnce (method) {
 	let result = null;
 
@@ -12,14 +14,12 @@ function callOnce (method) {
 	};
 }
 
-function update (oldValue, u) {
-	const newValue = {...oldValue, ...u};
+function update (oldValue, updatedValue) {
+	return getColorMethods({...oldValue, ...updatedValue});
+} 
 
-	return getColorMethods(tinycolor(newValue));
-}
-
-function getRGBMethods (color) {
-	const value = callOnce(() => color.toRgb());
+function getRGB (hsl) {
+	const value = callOnce(() => tinycolor(hsl).toRgb());
 
 	const setR = r => update(value(), {r});
 	const setG = g => update(value(), {g});
@@ -48,25 +48,25 @@ function getRGBMethods (color) {
 		setAlpha: setA,
 
 		toString () {
-			return color.toRgbString();
+			return tinycolor(hsl).toRgbString();
 		}
 	};
 }
 
-function getHexMethods (color) {
-	const value = callOnce(() => color.toHex());
+function getHex (hsl) {
+	const value = callOnce(() => tinycolor(hsl).toHex());
 
 	return {
 		get value () { return value(); },
 
 		toString () {
-			return color.toHexString();
+			return tinycolor(hsl).toHexString();
 		}
 	};
 }
 
-function getHSLMethods (color) {
-	const value = callOnce(() => color.toHsl());
+function getHSL (hsl) {
+	const value = callOnce(() => hsl);
 
 	const setH = h => update(value(), {h});
 	const setS = s => update(value(), {s});
@@ -95,13 +95,16 @@ function getHSLMethods (color) {
 		setAlpha: setA,
 
 		toString () {
-			return color.toHslString();
+			return tinycolor(hsl).toHslString();
 		}
 	};
 }
 
-function getHSVMethods (color) {
-	const value = callOnce(() => color.toHsv());
+function getHSV (hsl) {
+	const value = callOnce(() => {
+		const hsv = tinycolor(hsl).toHsv();
+		return {h: hsl.h, s: hsv.s, v: hsv.v};
+	});
 
 	const setH = h => update(value(), {h});
 	const setS = s => update(value(), {s});
@@ -130,12 +133,14 @@ function getHSVMethods (color) {
 		setAlpha: setA,
 
 		toString () {
-			return color.toHSLString();
+			return tinycolor(hsl).toHSLString();
 		}
 	};
 }
 
-function getAccessibilityMethods (color) {
+function getAccessibilityMethods (hsl) {
+	const color = tinycolor(hsl);
+
 	return {
 		isReadable: (other, size) => tinycolor.isReadable(color, other, size || ({'level': 'AA', 'size': 'small'})),
 		readability: (other) => tinycolor.readability(color, other)
@@ -147,26 +152,28 @@ function isSameColor (a, b) {
 }
 
 function getColorMethods (color) {
-	if (!color.isValid()) { throw new Error('Invalid Color'); }
+	if (color.isColor) { return color; }
+
+	const hsl = normalizeToHSL(color);
 
 	const colorMethods = {
 		isColor: true,
 		isSameColor: (colorB) => colorB && colorB.isColor && isSameColor(colorMethods, colorB),
-		hex: getHexMethods(color),
-		rgb: getRGBMethods(color),
-		hsl: getHSLMethods(color),
-		hsv: getHSVMethods(color),
-		a11y: getAccessibilityMethods(color)
+		hex: getHex(hsl),
+		rgb: getRGB(hsl),
+		hsl: getHSL(hsl),
+		hsv: getHSV(hsl),
+		a11y: getAccessibilityMethods(hsl)
 	};
 
 	return colorMethods;
 }
 
-Color.fromCSS = (css) => getColorMethods(tinycolor(css));
-Color.fromHex = (hex) => getColorMethods(tinycolor(hex));
-Color.fromRGB = (r, g, b, a = 1) => getColorMethods(tinycolor({r, g, b, a}));
-Color.fromHSL = (h, s, l) => getColorMethods(tinycolor({h, s, l}));
-Color.fromHSV = (h, s, v) => getColorMethods(tinycolor({h, s, v}));
+Color.fromCSS = (css) => getColorMethods(css);
+Color.fromHex = (hex) => getColorMethods(hex);
+Color.fromRGB = (r, g, b, a = 1) => getColorMethods({r, g, b, a});
+Color.fromHSL = (h, s, l) => getColorMethods({h, s, l});
+Color.fromHSV = (h, s, v) => getColorMethods({h, s, v});
 export default function Color (color) {
-	return getColorMethods(tinycolor(color));
+	return getColorMethods(color);
 }
