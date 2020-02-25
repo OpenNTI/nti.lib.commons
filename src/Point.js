@@ -10,7 +10,7 @@ export default class Point {
 	* @param {number} y - the y coordinate
 	* @param {string} [id=guid] - the ID for this point; defaults to a guid.
 	*/
-	constructor (x, y, id = uuid()) {
+	constructor (x, y, id = uuid.v4()) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
