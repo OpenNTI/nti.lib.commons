@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import {v4 as uuid} from 'uuid';
 
 export default class Point {
 	// static ORIGIN = new Point(0, 0)
@@ -10,7 +10,7 @@ export default class Point {
 	* @param {number} y - the y coordinate
 	* @param {string} [id=guid] - the ID for this point; defaults to a guid.
 	*/
-	constructor (x, y, id = uuid.v4()) {
+	constructor (x, y, id = uuid()) {
 		this.x = x;
 		this.y = y;
 		this.id = id;
