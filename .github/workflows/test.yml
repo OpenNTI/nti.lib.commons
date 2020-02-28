@@ -1,0 +1,38 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+env:
+  CI: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: jsg2021/checkout@add-globals
+        with:
+          token: ${{ secrets.actions_repo_access }}
+          global-credentials: true
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - name: npm config
+        run: |
+          npm config set loglevel error
+          npm config set progress false
+          npm config set '@nti:registry' 'https://npm.nextthought.com'
+
+      - run: npm install
+      - run: npm test
+      - run: npm run check --if-present
+
+      - run: git config --global --unset-all http.https\:\/\/github.com\/.extraheader
+        if: failure() || cancelled() || success()
+    # TODO: Setup code coverage/test result reporting?
+    # TODO: Publish Docs?

@@ -13,12 +13,9 @@
   "scripts": {
     "test": "lib-scripts test",
     "start": "lib-scripts test --watch",
-    "prepack": "lib-scripts build",
-    "build": "lib-scripts build",
     "clean": "lib-scripts clean",
     "check": "lib-scripts check",
-    "release": "lib-scripts release",
-    "install-snapshots": "lib-scripts install-snapshots"
+    "release": "lib-scripts release"
   },
   "repository": {
     "type": "git",
@@ -28,8 +25,8 @@
     "registry": "https://npm.nextthought.com"
   },
   "dependencies": {
-    "@nti/lib-ntiids": "^1.0.0",
-    "@nti/util-logger": "^1.0.0",
+    "@nti/lib-ntiids": "NextThought/nti.lib.ntiids",
+    "@nti/util-logger": "NextThought/nti.util.logger",
     "isempty": "0.0.1",
     "media-typer": "^0.3.0",
     "query-string": "^6.1.0",
