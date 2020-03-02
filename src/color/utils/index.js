@@ -1,1 +1,1 @@
-export normalizeToHSL from './normalize-to-hsl';
+export { default as normalizeToHSL } from './normalize-to-hsl';

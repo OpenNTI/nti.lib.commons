@@ -22,10 +22,10 @@ export * from './function';
 export * from './object';
 export * from './jsx';
 
-export Color from './color';
-export wait from './wait';
-export Point from './Point';
-export Time from './Time';
-export Handlers from './Handlers';
+export { default as Color } from './color';
+export { default as wait } from './wait';
+export { default as Point } from './Point';
+export { default as Time } from './Time';
+export { default as Handlers } from './Handlers';
 
-export isEmpty from 'isempty';
+export { default as isEmpty } from 'isempty';

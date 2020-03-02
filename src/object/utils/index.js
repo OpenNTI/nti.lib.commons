@@ -1,5 +1,5 @@
-export get from './get';
-export has from './has';
-export set from './set';
-export hide from './hide';
-export filter from './filter';
+export { default as get } from './get';
+export { default as has } from './has';
+export { default as set } from './set';
+export { default as hide } from './hide';
+export { default as filter } from './filter';

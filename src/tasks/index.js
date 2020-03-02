@@ -1,4 +1,4 @@
-export Executor from './Executor';
-export Idle from './Idle';
-export SharedExecution from './SharedExecution';
-export Task from './Task';
+export { default as Executor } from './Executor';
+export { default as Idle } from './Idle';
+export { default as SharedExecution } from './SharedExecution';
+export { default as Task } from './Task';

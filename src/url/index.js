@@ -1,4 +1,4 @@
-export appendQueryParams from './append-query-params';
-export join from './join';
-export resolve from './resolve';
-export parse from './parse';
+export { default as appendQueryParams } from './append-query-params';
+export { default as join } from './join';
+export { default as resolve } from './resolve';
+export { default as parse } from './parse';

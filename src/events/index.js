@@ -1,4 +1,4 @@
-export getKeyCode from './get-key-code';
-export isActionable from './is-event-actionable';
-export stop from './stop';
-export supportsPassive from './supports-passive';
+export { default as getKeyCode } from './get-key-code';
+export { default as isActionable } from './is-event-actionable';
+export { default as stop } from './stop';
+export { default as supportsPassive } from './supports-passive';

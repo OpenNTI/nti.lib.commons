@@ -1,1 +1,1 @@
-export between from './between';
+export { default as between } from './between';

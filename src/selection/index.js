@@ -1,3 +1,3 @@
-export EntitySelectionModel from './EntitySelectionModel';
-export ObjectSelectionModel from './ObjectSelectionModel';
-export Model from './SelectionModel';
+export { default as EntitySelectionModel } from './EntitySelectionModel';
+export { default as ObjectSelectionModel } from './ObjectSelectionModel';
+export { default as Model } from './SelectionModel';

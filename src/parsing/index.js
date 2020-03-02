@@ -1,2 +1,2 @@
-export parseJSON from './parse-json';
-export parseDate from './parse-date';
+export { default as parseJSON } from './parse-json';
+export { default as parseDate } from './parse-date';

@@ -1,2 +1,2 @@
-export deprecated from './deprecated';
-export component from './component';
+export { default as deprecated } from './deprecated';
+export { default as component } from './component';

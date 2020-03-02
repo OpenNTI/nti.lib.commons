@@ -1,1 +1,1 @@
-export ListBackedPageSource from './ListBackedPageSource';
+export { default as ListBackedPageSource } from './ListBackedPageSource';

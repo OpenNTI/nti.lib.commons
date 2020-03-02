@@ -1,2 +1,2 @@
-export rebaseReferences from './rebase-references';
-export sanitize from './sanitize';
+export { default as rebaseReferences } from './rebase-references';
+export { default as sanitize } from './sanitize';

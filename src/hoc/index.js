@@ -1,1 +1,1 @@
-export hoistStatics from './hoist-statics';
+export { default as hoistStatics } from './hoist-statics';

@@ -1,5 +1,5 @@
-export autobind from './autobind';
-export buffer from './buffer';
-export chain from './chain';
-export cooloff from './cooloff';
-export forward from './forwarding';
+export { default as autobind } from './autobind';
+export { default as buffer } from './buffer';
+export { default as chain } from './chain';
+export { default as cooloff } from './cooloff';
+export { default as forward } from './forwarding';
