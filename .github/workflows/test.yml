@@ -1,9 +1,16 @@
 name: Tests
 
 on:
+  # schedule:
+    # every weekday morning at 7:00am
+    # - cron:  '0 7 * * 1-5'
+
   push:
     branches:
       - master
+    tags:
+      - 'v[0-9]+*'
+
   pull_request:
     branches:
       - master
@@ -15,29 +22,26 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.4.0
         with:
-          token: ${{ secrets.actions_repo_access }}
-          persist-credentials: true
-          submodules: true
+          ssh-private-key: ${{ secrets.ACTIONS_REPO_ACCESS }}
+
+      - uses: actions/checkout@v2
 
       - uses: actions/setup-node@v1
         with:
-          node-version: "10.x"
+          node-version: "14.x"
+
       - name: npm config
         run: |
-          auth_header="$(git config --local --get http.https://github.com/.extraheader)"
-          git config --global http.https\:\/\/github.com\/.extraheader "$auth_header"
-          git config --local --unset-all http.https\:\/\/github.com\/.extraheader
           npm config set loglevel error
           npm config set progress false
           npm config set '@nti:registry' 'https://npm.nextthought.com'
 
       - run: npm install
-      - run: npm test
-      - run: npm run check --if-present
 
-      - run: git config --global --unset-all http.https\:\/\/github.com\/.extraheader
-        if: failure() || cancelled() || success()
-    # TODO: Setup code coverage/test result reporting?
-    # TODO: Publish Docs?
+      - run: npm test
+
+      - run: npm run check --if-present
