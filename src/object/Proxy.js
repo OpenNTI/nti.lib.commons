@@ -14,7 +14,7 @@ export default class ProxyObject {
 			Object.defineProperty(this, prop, {
 				enumerable: false,
 				configurable: false,
-				set: n => target[prop] = n,
+				set: n => {target[prop] = n;},
 				get () {
 					let val = target[prop];
 
