@@ -27,5 +27,6 @@ export { default as wait } from './wait';
 export { default as Point } from './Point';
 export { default as Time } from './Time';
 export { default as Handlers } from './Handlers';
+export { decorate } from './decorate';
 
 export { default as isEmpty } from 'isempty';
