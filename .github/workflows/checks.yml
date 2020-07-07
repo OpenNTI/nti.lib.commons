@@ -1,9 +1,9 @@
-name: Tests
+name: Project Health
 
 on:
-  # schedule:
+  schedule:
     # every weekday morning at 7:00am
-    # - cron:  '0 7 * * 1-5'
+    - cron:  '0 7 * * 1-5'
 
   push:
     branches:
@@ -19,7 +19,7 @@ env:
   CI: true
 
 jobs:
-  verify:
+  Verify:
     runs-on: ubuntu-latest
     steps:
 
@@ -45,3 +45,4 @@ jobs:
       - run: npm test
 
       - run: npm run check --if-present
+
