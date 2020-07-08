@@ -1,4 +1,4 @@
-const isObj = x => x?.constructor?.name?.toLowerCase() === 'object' || (typeof x === 'object' && x?.constructor === void 0);
+const isObj = x => /^object$/i.test(x && x.constructor && x.constructor.name) || (typeof x === 'object' && x && x.constructor === void 0);
 const isIter = x => Array.isArray(x) || isObj(x);
 const getOut = x => Array.isArray(x) ? [] : isObj(x) ? Object.create(null) : x;
 const isEmpty = x => x == null || (Array.isArray(x) && x.length === 0) || (isObj(x) && Object.keys(x).length === 0);
