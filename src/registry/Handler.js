@@ -33,7 +33,7 @@ export default class HandlerRegistry extends Base {
 		for (let item of this[ITEMS]) {
 			const {handler, key} = item;
 
-			if (typeof key === 'function' && key(...args)) {
+			if ((typeof key === 'function' && key(...args)) || (args.includes(key))) {
 				return handler;
 			}
 		}
