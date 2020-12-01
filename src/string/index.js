@@ -1,2 +1,3 @@
-export { default as escapeForRegExp } from './escape-regexp';
-export { default as hash } from './hash';
+export * from './escape-regexp';
+export * from './hash';
+export * from './escape-html';

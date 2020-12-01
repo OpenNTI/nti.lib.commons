@@ -1,4 +1,4 @@
-export default function hash (str) {
+export function hash (str) {
 	let h = 0;
 	if (str == null || str === '') {
 		return h;
