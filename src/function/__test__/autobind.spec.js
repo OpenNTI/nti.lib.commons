@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import autobind from '../autobind';
+import {autobind} from '../autobind';
 
 describe ('autobind', () => {
 

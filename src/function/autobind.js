@@ -5,7 +5,7 @@
  * @param  {string} methods Names of menthods on the {scope} to bind.
  * @return {void}
  */
-export default function autobind (scope, ...methods) {
+export function autobind (scope, ...methods) {
 	if (!scope) {
 		throw new Error('Must supply a scope!');
 	}

@@ -1,5 +1,5 @@
-import isAsyncFunction from './is-async';
-import awaitWrapper from './await-wrapper';
+import {isAsyncFunction} from './is-async';
+import {awaitWrapper} from './await-wrapper';
 
 
 /**
@@ -9,7 +9,7 @@ import awaitWrapper from './await-wrapper';
  * @param {AsyncFunction} asyncFunction - A task to perform that all async functions in class instance should wait for.
  * @returns {void}
  */
-export default function awaitAsyncCall (scope, asyncFunction) {
+export function awaitAsyncCall (scope, asyncFunction) {
 	if (!scope || !scope.constructor || !scope.constructor.prototype) {
 		throw new Error('Invalid scope');
 	}

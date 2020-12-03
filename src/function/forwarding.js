@@ -45,7 +45,7 @@ function reflect (fn, key) {
  * @param  {string} key The key where the object is at.
  * @returns {object}	Object with function names to bound functions
  */
-export default function forwardFunctions (fns, key) {
+export function forward (fns, key) {
 	let result = {};
 
 	for(let fn of fns) {
