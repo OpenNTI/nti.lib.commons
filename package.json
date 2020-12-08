@@ -30,7 +30,7 @@
     "isempty": "0.0.1",
     "media-typer": "^0.3.0",
     "query-string": "^6.1.0",
-    "react-is": "^16.5.1",
+    "react-is": "^17.0.1",
     "tinycolor2": "^1.4.1",
     "uuid": "^8.3.0",
     "esm": "^3.2.25"
