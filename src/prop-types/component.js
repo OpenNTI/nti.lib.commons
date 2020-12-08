@@ -1,3 +1,8 @@
+// react-is package comes from 'prop-types'...
+// to avoid unnecessary version conflicts,
+// we just want this method... from prop-types,
+// but its not exposed there...
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { isValidElementType } from 'react-is';
 
 // https://github.com/facebook/prop-types/issues/200#issuecomment-409391696
