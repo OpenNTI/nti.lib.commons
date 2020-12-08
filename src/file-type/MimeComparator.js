@@ -1,4 +1,5 @@
-import MediaTyper from 'media-typer';
+import ContentType from 'content-type';
+import MediaType from 'media-typer';
 
 export const ANY = {
 	type: '*',
@@ -9,7 +10,11 @@ export const ANY = {
 export function get (x) {
 	const WILD_SUBTYPE = 'wild-sub-type-key';
 	try {
-		return MediaTyper.parse(x);
+		const {parameters, type} = ContentType.parse(x);
+		return {
+			...MediaType.parse(type),
+			parameters: Object.keys(parameters).length > 0 ? parameters : undefined,
+		};
 	}
 	catch (e) {
 		if (x === '*/*') {
@@ -52,8 +57,8 @@ export default class MimeComparator {
 	}
 
 	parametersMatch (o) {
-		const {parameters} = this.type;
-		const {parameters: other} = o;
+		const {parameters = {}} = this.type;
+		const {parameters: other = {}} = o;
 
 		// if we don't have parameters...
 		if(!parameters) {
@@ -142,6 +147,10 @@ export default class MimeComparator {
 
 		if (type.subtype === '*') { return `${type.type}/*`; }
 
-		return MediaTyper.format(type);
+		let {parameters} = type;
+
+		type = MediaType.format(type);
+
+		return parameters ? ContentType.format({type, parameters}) : type;
 	}
 }

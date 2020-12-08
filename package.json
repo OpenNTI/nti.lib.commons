@@ -27,13 +27,14 @@
   "dependencies": {
     "@nti/lib-ntiids": "NextThought/nti.lib.ntiids",
     "@nti/util-logger": "NextThought/nti.util.logger",
+    "content-type": "^1.0.4",
+    "esm": "^3.2.25",
     "isempty": "0.0.1",
     "media-typer": "^1.1.0",
     "query-string": "^6.1.0",
     "react-is": "^17.0.1",
     "tinycolor2": "^1.4.1",
-    "uuid": "^8.3.0",
-    "esm": "^3.2.25"
+    "uuid": "^8.3.0"
   },
   "devDependencies": {
     "@nti/lib-scripts": "^2.0.0"
