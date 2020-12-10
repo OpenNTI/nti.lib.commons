@@ -1,5 +1,5 @@
 export const escapeHTML = html => (
-	html
+	(html || '')
 		.replace(/&/g, '&amp;')
 		.replace(/</g, '&lt;')
 );
