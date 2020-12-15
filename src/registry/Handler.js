@@ -29,7 +29,7 @@ export default class HandlerRegistry extends Base {
 	}
 
 
-	getItemFor (...args) {
+	getItem (...args) {
 		for (let item of this[ITEMS]) {
 			const {handler, key} = item;
 

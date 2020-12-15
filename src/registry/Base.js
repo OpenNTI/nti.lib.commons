@@ -49,7 +49,11 @@ export default class Registry {
 		throw new Error('register should be implemented by the subclass.');
 	}
 
-	getItemFor () {
+	getItemFor (...args) {
+		return this.getItem(...args);
+	}
+
+	getItem () {
 		throw new Error('getItemFor register should be implemented by the subclass.');
 	}
 }

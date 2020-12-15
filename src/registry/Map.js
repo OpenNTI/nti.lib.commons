@@ -31,7 +31,7 @@ export default class MapRegistry extends Base {
 		}
 	}
 
-	getItemFor (type) {
+	getItem (type) {
 		return this[ITEMS][type] || this[ITEMS][Default];
 	}
 }
