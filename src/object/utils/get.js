@@ -8,9 +8,10 @@ import parsePath from './parse-path';
  *
  * @param {object} root - Object with nested values
  * @param {*} path - path to value in object.
+ * @param {function} keyCollector - a function called each time we access a key
  * @returns {*} - Value of the nested key or undefined/null if any key along that path is missing/null.
  */
-export default function get (root, path) {
+export default function get (root, path, keyCollector) {
 	let {parts, sep} = parsePath(path);
 	let o = root;
 
@@ -23,6 +24,9 @@ export default function get (root, path) {
 			key = key == null ? segment : [key, segment].join(sep);
 		}
 
+		if (Object.prototype.hasOwnProperty.call(o, key)) {
+			keyCollector?.(key);
+		}
 		o = o[key];
 
 	}
