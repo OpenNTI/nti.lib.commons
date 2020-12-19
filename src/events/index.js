@@ -1,3 +1,4 @@
+export { default as Bus } from './bus';
 export { default as getKeyCode } from './get-key-code';
 export { default as isActionable } from './is-event-actionable';
 export { default as stop } from './stop';
