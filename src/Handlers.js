@@ -70,7 +70,7 @@ export default class Handlers {
 	 * @param  {Object|String} obj the object to get the handlers for
 	 * @return {[Mixed]}     the handlers passed in for that object
 	 */
-	getAllHandlersFor (obj) {
+	getAllHandlers (obj) {
 		const type = getTypeFor(obj);
 		let handlers = this[MAP][type] || [];
 
@@ -90,8 +90,8 @@ export default class Handlers {
 	 * @param  {Object|String} obj the object to get the handler for
 	 * @return {Mixed}     the handler passed in for that object
 	 */
-	getHandlerFor (obj) {
-		const handlers = this.getAllHandlersFor(obj);
+	getHandler (obj) {
+		const handlers = this.getAllHandlers(obj);
 
 		return handlers[0];
 	}
