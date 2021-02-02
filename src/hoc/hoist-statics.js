@@ -29,7 +29,7 @@ const unwrapComponentReference = x => (x && unwrapComponentReference(x.WrappedCo
  * @param  {Component|Function} component      The component that is being composed.
  * @param  {string} displayName    A name to give the composer compoennt.
  * @param  {Object|string[]} [blacklist={}] A list of property names to NOT hoist.
- * @return {Component|Function} the composer, modified.
+ * @returns {Component|Function} the composer, modified.
  */
 export default function hoistStatics (composer, component, displayName, blacklist = {}) {
 	const {create, assign, defineProperty} = Object;

@@ -5,7 +5,7 @@ export default class Point {
 
 	/**
 	* Creates a new Point
-	* @constructor
+	* @class
 	* @param {number} x - the x coordinate
 	* @param {number} y - the y coordinate
 	* @param {string} [id=guid] - the ID for this point; defaults to a guid.

@@ -3,7 +3,7 @@
  *
  * @param  {*} scope      any value you want to bind to.
  * @param  {string} methods Names of menthods on the {scope} to bind.
- * @return {void}
+ * @returns {void}
  */
 export function autobind (scope, ...methods) {
 	if (!scope) {

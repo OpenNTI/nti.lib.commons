@@ -6,7 +6,7 @@ import parsePath from './parse-path';
  * path is null/undefined, the traversal to the leaf is terminated and returns the last value (undefined or null)
  * If a computed property name contains the path separator, this will still work.
  *
- * @param {object} root - Object with nested values
+ * @param {Object} root - Object with nested values
  * @param {*} path - path to value in object.
  * @param {function} keyCollector - a function called each time we access a key
  * @returns {*} - Value of the nested key or undefined/null if any key along that path is missing/null.

@@ -11,7 +11,7 @@ export default class FileSetDescriptor {
 	 *
 	 * @param  {string[]} extensions - A list of extensions.
 	 * @param  {string[]} mimeTypes - A list of MimeTypes.
-	 * @return {void}
+	 * @returns {void}
 	 */
 	constructor (extensions, mimeTypes) {
 
@@ -27,7 +27,7 @@ export default class FileSetDescriptor {
 		 *
 		 * @param  {FileTypeDescriptor[]} list The list to build the set from.
 		 * @param  {FileTypeDescriptor[]} counterList The counterList to examine for emptiness.
-		 * @return {Set} The set of FileTypeDescriptors.
+		 * @returns {Set} The set of FileTypeDescriptors.
 		 */
 		function buildSet (list, counterList) {
 			const wild = x => x.isWild;

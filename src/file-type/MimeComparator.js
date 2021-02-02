@@ -96,7 +96,7 @@ export default class MimeComparator {
 	 * Equality
 	 *
 	 * @param  {string} type mimeType string
-	 * @return {Boolean} True if type equals our type.
+	 * @returns {boolean} True if type equals our type.
 	 */
 	matches (type) {
 		type = get(type);
@@ -121,7 +121,7 @@ export default class MimeComparator {
 	 * type/star is type/star but not type/subtype.
 	 *
 	 * @param  {string} type mimeType string
-	 * @return {Boolean} if the type is the same as ours.
+	 * @returns {boolean} if the type is the same as ours.
 	 */
 	is (type) {
 		const other = get(type);

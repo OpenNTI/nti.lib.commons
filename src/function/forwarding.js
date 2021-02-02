@@ -43,7 +43,7 @@ function reflect (fn, key) {
  *
  * @param  {string[]} fns An array of function names to bind and return
  * @param  {string} key The key where the object is at.
- * @returns {object}	Object with function names to bound functions
+ * @returns {Object}	Object with function names to bound functions
  */
 export function forward (fns, key) {
 	let result = {};

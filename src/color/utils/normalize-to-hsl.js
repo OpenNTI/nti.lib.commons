@@ -7,8 +7,8 @@ import tinycolor from 'tinycolor2';
  * our input editors are setting the Hue we need to keep track of that
  * information. So we are going to use HSL as the storage format.
  *
- * @param  {Object|String} input the color to normalize to HSL
- * @return {Object}       the hsl description of the input
+ * @param  {Object|string} input the color to normalize to HSL
+ * @returns {Object}       the hsl description of the input
  */
 export default function normalizeToHSL (input) {
 	const color = tinycolor(input);

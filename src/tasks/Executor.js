@@ -15,7 +15,7 @@ export default class Executor extends EventEmitter {
 	 * Add a single task to the queue.
 	 *
 	 * @param  {function} task a single function that returns a Promise
-	 * @return {Promise}      the fulfillment of the functions return
+	 * @returns {Promise}      the fulfillment of the functions return
 	 */
 	queueTask (task) {
 		return this.queueTasks(task)[0];
@@ -26,7 +26,7 @@ export default class Executor extends EventEmitter {
 	 * Adds tasks to the queue for execution.
 	 *
 	 * @param  {...function} tasks - Each argument of this method should be a function that returns a Promise.
-	 * @return {Promise[]} The promise of each argument.
+	 * @returns {Promise[]} The promise of each argument.
 	 * @public
 	 */
 	queueTasks (...tasks) {
@@ -53,7 +53,7 @@ export default class Executor extends EventEmitter {
 	 * Responsible for moving the tasks forward.
 	 *
 	 * @private
-	 * @return {void}
+	 * @returns {void}
 	 */
 	schedual = () => {
 		const {queue, current, maxConcurrency: max} = this;

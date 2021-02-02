@@ -1,4 +1,3 @@
-/* eslint-disable no-sequences */
 /**
  * Waits a short amount of time before invoking a function. If called again before the timeout,
  * the timeout is canceled and recreated.

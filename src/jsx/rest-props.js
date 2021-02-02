@@ -6,7 +6,7 @@ const PROP_TYPES_KEY = 'propTypes';
  * @method restProps
  * @param  {Component|Function} T The Component that declares a static propTypes property
  * @param  {Object}  props Props in.
- * @return {Object} Props minus the props defined on T.propTypes
+ * @returns {Object} Props minus the props defined on T.propTypes
  */
 export function restProps (T, {...props} = {}) {
 	for (let prop of Object.keys((T || {})[PROP_TYPES_KEY] || {})) {

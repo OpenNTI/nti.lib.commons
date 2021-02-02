@@ -8,8 +8,8 @@ export {SHORT, LONG};
  * will return a promise that fulfills with its first arg after
  * at least the duration given has passed.
  *
- * @param  {Number} minWait the min time to wait
- * @return {Function} see description
+ * @param  {number} minWait the min time to wait
+ * @returns {Function} see description
  */
 export default function (minWait) {
 	const start = new Date();

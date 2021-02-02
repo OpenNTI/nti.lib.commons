@@ -19,7 +19,7 @@ export default class Handlers {
 	 * 3) Function //Takes the object and returns a boolean
 	 *
 	 * @param  {[Any]} handlers the list of handlers
-	 * @return {Object}         Handlers utility
+	 * @returns {Object}         Handlers utility
 	 */
 	constructor (handlers) {
 		this[MAP] = {};
@@ -67,8 +67,8 @@ export default class Handlers {
 	/**
 	 * Get all the handlers for an object
 	 *
-	 * @param  {Object|String} obj the object to get the handlers for
-	 * @return {[Mixed]}     the handlers passed in for that object
+	 * @param  {Object|string} obj the object to get the handlers for
+	 * @returns {[Mixed]}     the handlers passed in for that object
 	 */
 	getAllHandlers (obj) {
 		const type = getTypeFor(obj);
@@ -87,8 +87,8 @@ export default class Handlers {
 	 * Get a single handler for an object
 	 * If we have more than one just return the first one
 	 *
-	 * @param  {Object|String} obj the object to get the handler for
-	 * @return {Mixed}     the handler passed in for that object
+	 * @param  {Object|string} obj the object to get the handler for
+	 * @returns {Mixed}     the handler passed in for that object
 	 */
 	getHandler (obj) {
 		const handlers = this.getAllHandlers(obj);

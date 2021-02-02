@@ -7,7 +7,7 @@
  * @param  {string} e.key - A string representation of they key. eg: 'S'
  * @param  {boolean} e.metaKey - a flag that states if the meta/super/command key is active.
  * @param  {boolean} e.shiftKey - a flag that states if the shift key is active.
- * @return {string|null} Returns the key-command or null if the object did not represent keys.
+ * @returns {string|null} Returns the key-command or null if the object did not represent keys.
  */
 export default function getKeyCode (e) {
 	const modifiers = ['ctrlKey', 'altKey', 'shiftKey', 'metaKey'];
