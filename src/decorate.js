@@ -17,12 +17,12 @@ const IsFunction = x => typeof x === 'function';
  * </code></pre>
  *
  * @param {*} target - The target class
- * @param {Object} spec - the decoration specification
+ * @param {Object|Function[]} spec - the decoration specification
  * @param {Function[]} spec.with - list of decorators, last one is applied first. (inside out application)
  * @returns {*} target (as mutated or replaced by the decorators)
  */
 export function decorate (target, spec) {
-	const {with: decorators = []} = spec || {};
+	const {with: decorators = (Array.isArray(spec) ? spec : [])} = spec || {};
 	if (decorators.length === 0 || !decorators.every(IsFunction) || !target) {
 		throw new TypeError('Invalid arguments to decorate()');
 	}
