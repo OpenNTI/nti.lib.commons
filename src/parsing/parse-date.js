@@ -5,7 +5,7 @@ import Logger from '@nti/util-logger';
 
 const logger = Logger.get('lib:date-parsing');
 
-export default function parseDate (value) {
+export default function parseDate(value) {
 	if (value == null) {
 		return null;
 	}
@@ -23,7 +23,10 @@ export default function parseDate (value) {
 	const date = new Date(value);
 
 	if (isNaN(date.getTime())) {
-		logger.error('The value %o given for date parsing resulted in an invalid date.', value);
+		logger.error(
+			'The value %o given for date parsing resulted in an invalid date.',
+			value
+		);
 		return null;
 	}
 

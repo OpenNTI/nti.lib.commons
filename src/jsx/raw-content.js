@@ -5,4 +5,4 @@
  *
  * @returns {Object} An object with one prop: dangerouslySetInnerHTML setup to contain your raw content value.
  */
-export default x => ({dangerouslySetInnerHTML: {__html: x}});
+export default x => ({ dangerouslySetInnerHTML: { __html: x } });

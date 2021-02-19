@@ -3,8 +3,7 @@ import EventEmitter from 'events';
 const Selected = Symbol();
 
 export default class SelectionModel extends EventEmitter {
-
-	constructor (matcher, initialSelection = []) {
+	constructor(matcher, initialSelection = []) {
 		super();
 
 		if (!matcher) {
@@ -16,44 +15,39 @@ export default class SelectionModel extends EventEmitter {
 		this.add(...initialSelection);
 	}
 
-
-	get empty () {
+	get empty() {
 		return this[Selected].length === 0;
 	}
 
-
-	get length () {
+	get length() {
 		return this[Selected].length;
 	}
 
-
-	[Symbol.iterator] () {
+	[Symbol.iterator]() {
 		let snapshot = this.getItems();
-		let {length} = snapshot;
+		let { length } = snapshot;
 		let index = 0;
 
 		return {
-
-			next () {
+			next() {
 				let done = index >= length;
 				let value = snapshot[index++];
 
 				return { value, done };
-			}
-
+			},
 		};
 	}
 
-
-	isSelected (object) {
+	isSelected(object) {
 		return this[Selected].findIndex(this.match(object)) >= 0;
 	}
 
-
-	add (...objects) {
+	add(...objects) {
 		let list = this[Selected];
 		for (let obj of objects) {
-			if (this.isSelected(obj)) { continue; }
+			if (this.isSelected(obj)) {
+				continue;
+			}
 			//don't use push, treat the array as immutable
 			list = [...list, obj];
 		}
@@ -64,15 +58,14 @@ export default class SelectionModel extends EventEmitter {
 		}
 	}
 
-
-	remove (...objects) {
+	remove(...objects) {
 		let list = this[Selected];
 
 		for (let object of objects) {
 			let i = list.findIndex(this.match(object));
 			if (i >= 0) {
 				//don't use splice... treat the array as immutable.
-				list = list.slice(0,i).concat(list.slice(i + 1));
+				list = list.slice(0, i).concat(list.slice(i + 1));
 			}
 		}
 
@@ -83,13 +76,16 @@ export default class SelectionModel extends EventEmitter {
 		}
 	}
 
-
-	set (objects) {
-		this[Selected] = Array.isArray(objects) ? objects : (objects == null ? [] : [objects]);
+	set(objects) {
+		this[Selected] = Array.isArray(objects)
+			? objects
+			: objects == null
+			? []
+			: [objects];
 		this.emit('change');
 	}
 
-	getItems () {
+	getItems() {
 		return this[Selected].slice();
 	}
 }

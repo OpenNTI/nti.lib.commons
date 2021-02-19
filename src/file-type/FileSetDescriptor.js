@@ -1,11 +1,9 @@
-import {ensure as array} from '../array';
+import { ensure as array } from '../array';
 
-import {parseExtention, parseMimeType} from './FileTypeDescriptor';
-
+import { parseExtention, parseMimeType } from './FileTypeDescriptor';
 
 /* A class to help classify Accepted File types */
 export default class FileSetDescriptor {
-
 	/**
 	 * Constructs class and sets up data.
 	 *
@@ -13,8 +11,7 @@ export default class FileSetDescriptor {
 	 * @param  {string[]} mimeTypes - A list of MimeTypes.
 	 * @returns {void}
 	 */
-	constructor (extensions, mimeTypes) {
-
+	constructor(extensions, mimeTypes) {
 		extensions = array(extensions).map(parseExtention);
 		mimeTypes = array(mimeTypes).map(parseMimeType);
 
@@ -29,24 +26,24 @@ export default class FileSetDescriptor {
 		 * @param  {FileTypeDescriptor[]} counterList The counterList to examine for emptiness.
 		 * @returns {Set} The set of FileTypeDescriptors.
 		 */
-		function buildSet (list, counterList) {
+		function buildSet(list, counterList) {
 			const wild = x => x.isWild;
 			const isWild = list.some(wild);
-			const counterListIsEmptyOrWild = counterList.some(wild) || counterList.length === 0;
+			const counterListIsEmptyOrWild =
+				counterList.some(wild) || counterList.length === 0;
 
-			return new Set((isWild && !counterListIsEmptyOrWild) ? [] : list);
+			return new Set(isWild && !counterListIsEmptyOrWild ? [] : list);
 		}
 
 		Object.assign(this, {
 			extensions: buildSet(extensions, mimeTypes),
-			mimeTypes: buildSet(mimeTypes, extensions)
+			mimeTypes: buildSet(mimeTypes, extensions),
 		});
 
 		this.rules = new Set([...this.extensions, ...this.mimeTypes]);
 	}
 
-
-	matches = (file) => {
+	matches = file => {
 		//ANY match (OR-ing all the remaining extensions and mimeTypes after
 		//our "heuristic of exclusions"* to maintain backwards compatibility)
 		for (let descriptor of this.rules) {
@@ -56,10 +53,9 @@ export default class FileSetDescriptor {
 		}
 
 		return false;
-	}
+	};
 
-
-	getFileMask () {
+	getFileMask() {
 		return Array.from(this.rules).map(x => x.mask);
 	}
 }

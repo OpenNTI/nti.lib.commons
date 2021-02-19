@@ -1,5 +1,5 @@
 /* eslint-env browser */
-import {supportsPassive} from '../events';
+import { supportsPassive } from '../events';
 
 const ACTIVE = 'active';
 const IDLE = 'idle';
@@ -14,25 +14,25 @@ const DEFAULTS = {
 	// what element to attach to
 	element: null,
 	// activity is one of these events
-	events: 'mousemove keydown DOMMouseScroll mousewheel mousedown touchstart touchmove'
+	events:
+		'mousemove keydown DOMMouseScroll mousewheel mousedown touchstart touchmove',
 };
-
 
 const Schedule = Symbol('state:schedule');
 const ToggleState = Symbol('state:toggle');
 
 export default class Idle {
-
-	constructor (opt) {
-		let op = this.opt = { ...DEFAULTS, ...opt};
-		this.element = op.element || (typeof document !== 'undefined' ? document : void 0);
+	constructor(opt) {
+		let op = (this.opt = { ...DEFAULTS, ...opt });
+		this.element =
+			op.element || (typeof document !== 'undefined' ? document : void 0);
 
 		this.state = {
 			idle: op.idle,
 			timeout: op.timeout,
 			enabled: op.enabled,
 			idleFn: [],
-			activeFn: []
+			activeFn: [],
 		};
 
 		if (op.start) {
@@ -40,13 +40,12 @@ export default class Idle {
 		}
 	}
 
-
 	/**
 	 * Start the idle timer.
 	 * @returns {void}
 	 */
-	start () {
-		const {state, element, opt} = this;
+	start() {
+		const { state, element, opt } = this;
 
 		const handler = () => {
 			clearTimeout(state.timerId);
@@ -74,13 +73,12 @@ export default class Idle {
 		state.timerId = this[Schedule]();
 	}
 
-
 	/**
 	 * Stop the idle timer.
 	 * @returns {void}
 	 */
-	stop () {
-		const {state, element, opt} = this;
+	stop() {
+		const { state, element, opt } = this;
 
 		state.enabled = false;
 
@@ -92,26 +90,22 @@ export default class Idle {
 		delete state.handler;
 	}
 
-
-	on (state, fn) {
-		const {idleFn, activeFn} = this.state;
-		const list = (state === IDLE) ? idleFn : activeFn;
+	on(state, fn) {
+		const { idleFn, activeFn } = this.state;
+		const list = state === IDLE ? idleFn : activeFn;
 		list.push(fn);
 	}
 
-	getElapsed () {
-		return ( +new Date() ) - this.state.olddate;
+	getElapsed() {
+		return +new Date() - this.state.olddate;
 	}
 
-
-
-	[Schedule] () {
-		return setTimeout(()=>this[ToggleState](), this.state.timeout);
+	[Schedule]() {
+		return setTimeout(() => this[ToggleState](), this.state.timeout);
 	}
 
-
-	[ToggleState] () {
-		const {state} = this;
+	[ToggleState]() {
+		const { state } = this;
 		state.idle = !state.idle;
 
 		const now = Date.now();
@@ -119,7 +113,7 @@ export default class Idle {
 		state.olddate = now;
 
 		// handle js alert or comfirm popup
-		if (state.idle && (elapsed < state.timeout)) {
+		if (state.idle && elapsed < state.timeout) {
 			state.idle = false;
 			clearTimeout(state.timerId);
 			if (state.enabled) {
@@ -128,35 +122,30 @@ export default class Idle {
 			return;
 		}
 
-
 		const evt = state.idle ? IDLE : ACTIVE;
-		const fns = (evt === IDLE) ? state.idleFn : state.activeFn;
+		const fns = evt === IDLE ? state.idleFn : state.activeFn;
 		for (let fn of fns) {
 			fn();
 		}
 	}
 }
 
-
-
-function on (element, event, fn) {
+function on(element, event, fn) {
 	try {
-		const options = supportsPassive() ? {passive:true} : false;
+		const options = supportsPassive() ? { passive: true } : false;
 		element.addEventListener(event, fn, options);
-	}
-	catch (e) {
+	} catch (e) {
 		if (element && element.attachEvent) {
 			element.attachEvent('on' + event, fn);
 		}
 	}
 }
 
-function un (element, event, fn) {
+function un(element, event, fn) {
 	try {
-		const options = supportsPassive() ? {passive:true} : false;
+		const options = supportsPassive() ? { passive: true } : false;
 		element.removeEventListener(event, fn, options);
-	}
-	catch (e) {
+	} catch (e) {
 		if (element && element.detachEvent) {
 			element.detachEvent('on' + event, fn);
 		}

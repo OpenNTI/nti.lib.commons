@@ -1,10 +1,11 @@
 /* eslint-env jest */
-import {autobind} from '../autobind';
+import { autobind } from '../autobind';
 
-describe ('autobind', () => {
-
-	test ('should replace the keys with bound functions', () => {
-		const func = function () { return this; };
+describe('autobind', () => {
+	test('should replace the keys with bound functions', () => {
+		const func = function () {
+			return this;
+		};
 		const o = { func };
 
 		autobind(o, 'func');
@@ -17,5 +18,4 @@ describe ('autobind', () => {
 		expect(boundFunc()).toBe(o);
 		expect(func()).not.toBe(o);
 	});
-
 });

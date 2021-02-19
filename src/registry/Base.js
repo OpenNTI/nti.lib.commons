@@ -10,10 +10,10 @@ export default class Registry {
 	 * @param  {[string]|string} key the key to register the decorated item for
 	 * @returns {Function}              function for the decorator to call
 	 */
-	static register (key) {
+	static register(key) {
 		const registry = this;
 
-		return function decorator (item) {
+		return function decorator(item) {
 			registry.registerItem(key, item);
 		};
 	}
@@ -22,10 +22,10 @@ export default class Registry {
 	 * Return a the same instance of the registry
 	 * @returns {MapRegistry} instance of MapRegistry
 	 */
-	static getInstance () {
+	static getInstance() {
 		const Register = this;
 
-		this[INSTANCE] = this[INSTANCE] || new Register;
+		this[INSTANCE] = this[INSTANCE] || new Register();
 
 		return this[INSTANCE];
 	}
@@ -36,24 +36,29 @@ export default class Registry {
 	 * @param  {Object} item     the item for the key
 	 * @returns {void}
 	 */
-	static registerItem (key, item) {
+	static registerItem(key, item) {
 		return this.getInstance().register(key, item);
 	}
 
-
-	constructor () {
-		if (this.constructor === Registry) { throw new Error('Do not use Registry directly, should be subclassed.'); }
+	constructor() {
+		if (this.constructor === Registry) {
+			throw new Error(
+				'Do not use Registry directly, should be subclassed.'
+			);
+		}
 	}
 
-	register () {
+	register() {
 		throw new Error('register should be implemented by the subclass.');
 	}
 
-	getItemFor (...args) {
+	getItemFor(...args) {
 		return this.getItem(...args);
 	}
 
-	getItem () {
-		throw new Error('getItemFor register should be implemented by the subclass.');
+	getItem() {
+		throw new Error(
+			'getItemFor register should be implemented by the subclass.'
+		);
 	}
 }

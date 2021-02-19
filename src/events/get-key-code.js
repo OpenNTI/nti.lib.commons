@@ -9,7 +9,7 @@
  * @param  {boolean} e.shiftKey - a flag that states if the shift key is active.
  * @returns {string|null} Returns the key-command or null if the object did not represent keys.
  */
-export default function getKeyCode (e) {
+export default function getKeyCode(e) {
 	const modifiers = ['ctrlKey', 'altKey', 'shiftKey', 'metaKey'];
 	const code = ['nti'];
 
@@ -27,10 +27,10 @@ export default function getKeyCode (e) {
 }
 
 //Define some common key combos
-getKeyCode.SHIFT_TAB = getKeyCode({shiftKey: true, key: 'Tab'});
-getKeyCode.TAB = getKeyCode({key: 'Tab'});
+getKeyCode.SHIFT_TAB = getKeyCode({ shiftKey: true, key: 'Tab' });
+getKeyCode.TAB = getKeyCode({ key: 'Tab' });
 
-getKeyCode.ENTER = getKeyCode({key: 'Enter'});
+getKeyCode.ENTER = getKeyCode({ key: 'Enter' });
 
-getKeyCode.BACKSPACE = getKeyCode({key: 'Backspace'});
-getKeyCode.DELETE = getKeyCode({key: 'Delete'});
+getKeyCode.BACKSPACE = getKeyCode({ key: 'Backspace' });
+getKeyCode.DELETE = getKeyCode({ key: 'Delete' });

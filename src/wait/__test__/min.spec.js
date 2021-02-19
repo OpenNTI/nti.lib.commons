@@ -1,26 +1,25 @@
 /* globals spyOn */
 /* eslint-env jest */
 import waitMin from '../min';
-import {MockDate} from '../../date';
+import { MockDate } from '../../date';
 
 describe('wait-min', () => {
-	beforeEach (() => {
+	beforeEach(() => {
 		jest.useFakeTimers();
 	});
 
-	afterEach (() => {
+	afterEach(() => {
 		MockDate.uninstall();
 		jest.useRealTimers();
 	});
 
-
-	test ('Fulfills before min wait time, waits at least the min wait time and then resolves with result', (done) => {
+	test('Fulfills before min wait time, waits at least the min wait time and then resolves with result', done => {
 		MockDate.install();
 		const start = Date.now();
 		const time = 500;
 		const value = 'foobar';
 
-		const o = {spy () {}};
+		const o = { spy() {} };
 
 		spyOn(o, 'spy').and.callFake(result => {
 			const diff = Date.now() - start;
@@ -39,15 +38,14 @@ describe('wait-min', () => {
 		jest.runTimersToTime(time);
 	});
 
-
-	test ('Fulfills after min wait time, resolves with result', (done) => {
+	test('Fulfills after min wait time, resolves with result', done => {
 		MockDate.install();
 		const start = Date.now();
 		const time = 500;
 		const value = 'foobar2';
 		let gap;
 
-		const o = {spy1 () {}, spy2 () {}};
+		const o = { spy1() {}, spy2() {} };
 
 		spyOn(o, 'spy1').and.callFake(result => {
 			gap = Date.now();
@@ -63,12 +61,12 @@ describe('wait-min', () => {
 		spyOn(o, 'spy2').and.callFake(result => {
 			const now = Date.now();
 			const diff = now - start;
-			expect((gap - now) < (time / 2)).toBeTruthy();
+			expect(gap - now < time / 2).toBeTruthy();
 			expect(diff >= time).toBeTruthy();
 			expect(result).toBe(value);
 		});
 
-		new Promise((resume) => setTimeout(()=> resume(value), time))
+		new Promise(resume => setTimeout(() => resume(value), time))
 			.then(o.spy1)
 			.then(waitMin(time / 2)) //make original promise take longer than min-wait.
 			.then(o.spy2)

@@ -3,8 +3,7 @@ const LIST = Symbol('Handler List');
 const ADD_TO_MAP = Symbol('Add To Map');
 const ADD_TO_LIST = Symbol('Add To List');
 
-
-function getTypeFor (obj) {
+function getTypeFor(obj) {
 	return obj.MimeType || obj.type || obj;
 }
 
@@ -21,7 +20,7 @@ export default class Handlers {
 	 * @param  {[Any]} handlers the list of handlers
 	 * @returns {Object}         Handlers utility
 	 */
-	constructor (handlers) {
+	constructor(handlers) {
 		this[MAP] = {};
 		this[LIST] = [];
 
@@ -30,9 +29,8 @@ export default class Handlers {
 		}
 	}
 
-
-	[ADD_TO_MAP] (handler) {
-		let {handles} = handler;
+	[ADD_TO_MAP](handler) {
+		let { handles } = handler;
 
 		if (!Array.isArray(handles)) {
 			handles = [handles];
@@ -47,13 +45,11 @@ export default class Handlers {
 		}
 	}
 
-
-	[ADD_TO_LIST] (handler) {
+	[ADD_TO_LIST](handler) {
 		this[LIST].push(handler);
 	}
 
-
-	addHandler (handler) {
+	addHandler(handler) {
 		if (!handler.handles) {
 			throw new Error('Invalid handler');
 		} else if (typeof handler.handles === 'function') {
@@ -63,14 +59,13 @@ export default class Handlers {
 		}
 	}
 
-
 	/**
 	 * Get all the handlers for an object
 	 *
 	 * @param  {Object|string} obj the object to get the handlers for
 	 * @returns {[Mixed]}     the handlers passed in for that object
 	 */
-	getAllHandlers (obj) {
+	getAllHandlers(obj) {
 		const type = getTypeFor(obj);
 		let handlers = this[MAP][type] || [];
 
@@ -90,7 +85,7 @@ export default class Handlers {
 	 * @param  {Object|string} obj the object to get the handler for
 	 * @returns {Mixed}     the handler passed in for that object
 	 */
-	getHandler (obj) {
+	getHandler(obj) {
 		const handlers = this.getAllHandlers(obj);
 
 		return handlers[0];

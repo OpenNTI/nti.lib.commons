@@ -1,19 +1,29 @@
-const hasSameNumberOfKeys = (A, B) => Object.keys(B).length === Object.keys(A).length;
+const hasSameNumberOfKeys = (A, B) =>
+	Object.keys(B).length === Object.keys(A).length;
 
-function getComparable (o) {
-	if(o instanceof Date) {
+function getComparable(o) {
+	if (o instanceof Date) {
 		return o.getTime();
 	}
 
 	return o;
 }
 
-const compare = (A, B, deep) => (typeof A !== 'object' || !deep) ? A === B : objectEquals(A, B, deep);
+const compare = (A, B, deep) =>
+	typeof A !== 'object' || !deep ? A === B : objectEquals(A, B, deep);
 
-export default function objectEquals (A, B, deep) {
-	if (!A && !B) { return true; }
-	if (!A || !B) { return false; }
+export default function objectEquals(A, B, deep) {
+	if (!A && !B) {
+		return true;
+	}
+	if (!A || !B) {
+		return false;
+	}
 
-	return hasSameNumberOfKeys(A, B) &&
-		Object.keys(A).every(key => compare(...[A[key], B[key], deep].map(getComparable)));
+	return (
+		hasSameNumberOfKeys(A, B) &&
+		Object.keys(A).every(key =>
+			compare(...[A[key], B[key], deep].map(getComparable))
+		)
+	);
 }

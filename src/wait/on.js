@@ -1,14 +1,8 @@
 const emptyFunction = () => {};
 
-
-const NEVER_FAIL = thenable =>
-	thenable.then(
-		emptyFunction,
-		emptyFunction);
-
+const NEVER_FAIL = thenable => thenable.then(emptyFunction, emptyFunction);
 
 export default function (pending, timeout) {
-
 	if (!Array.isArray(pending)) {
 		pending = [Promise.resolve(pending)];
 	}
@@ -23,7 +17,7 @@ export default function (pending, timeout) {
 			timeout = setTimeout(onTimeout, timeout);
 		}
 
-		Promise.all(pending.map(NEVER_FAIL)).then(()=>
+		Promise.all(pending.map(NEVER_FAIL)).then(() =>
 			// Do not pass the resolve function reference to "then"...
 			// otherwize it won't be able to be ignored after timeout.
 			resolve()

@@ -1,6 +1,5 @@
 import isEmpty from 'isempty';
 
-export default function ensureIterable (a) {
-	return a[Symbol.iterator] ? a :
-		(isEmpty(a, true) ? [] : [a]);
+export function ensure(a) {
+	return a[Symbol.iterator] ? a : isEmpty(a, true) ? [] : [a];
 }

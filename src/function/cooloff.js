@@ -17,7 +17,7 @@
  * @param  {string}   [key='cooloff']  - A key to store the cooldown timer id.
  * @returns {boolean} true if the cool down period is still on, false if function is clear to call again.
  */
-export function cooloff (fn, time = 1000, key = 'cooloff') {
+export function cooloff(fn, time = 1000, key = 'cooloff') {
 	const currentCooloff = fn[key];
 	clearTimeout(currentCooloff);
 	fn[key] = setTimeout(() => delete fn[key], time);

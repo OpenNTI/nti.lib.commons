@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import { getRefHandler } from '../get-ref-handler';
 
-test ('getRefHandler', () => {
+test('getRefHandler', () => {
 	const parentRef = jest.fn();
 	const localRef = jest.fn();
 	jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -13,7 +13,6 @@ test ('getRefHandler', () => {
 
 	expect(getRefHandler({}, localRef)).toBe(localRef);
 	expect(console.error.mock.calls).toMatchSnapshot();
-
 
 	const A = getRefHandler(parentRef, localRef);
 	const B = getRefHandler(parentRef, localRef);

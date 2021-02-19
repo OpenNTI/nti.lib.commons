@@ -1,19 +1,19 @@
 /* eslint-env jest */
-import {MockDate} from '../date';
+import { MockDate } from '../date';
 import Time from '../Time';
 
 describe('Time', () => {
-	beforeEach (() => {
+	beforeEach(() => {
 		jest.useFakeTimers();
 	});
 
-	afterEach (() => {
+	afterEach(() => {
 		MockDate.uninstall();
 		jest.useRealTimers();
 	});
 
-	test ('Time intializes with current time by default', () => {
-		MockDate.install();//lock the clock so we don't get millisecond differences
+	test('Time intializes with current time by default', () => {
+		MockDate.install(); //lock the clock so we don't get millisecond differences
 		const time = new Time();
 		const date = new Date();
 		expect(time.getHours()).toEqual(date.getHours());
@@ -21,7 +21,7 @@ describe('Time', () => {
 		expect(time.date.getTime()).toEqual(date.getTime());
 	});
 
-	test ('Time intializes with given date`s time', () => {
+	test('Time intializes with given date`s time', () => {
 		const date = new Date();
 		date.setHours(168);
 
@@ -31,8 +31,8 @@ describe('Time', () => {
 		expect(time.date.getTime()).toEqual(date.getTime());
 	});
 
-	test ('Hours Setter do not mutate and set correct time', () => {
-		MockDate.install(new Date('2017-08-18T16:30:00Z'));//lock the date for the test
+	test('Hours Setter do not mutate and set correct time', () => {
+		MockDate.install(new Date('2017-08-18T16:30:00Z')); //lock the date for the test
 		const time = new Time();
 		const testTime = new Date();
 
@@ -45,8 +45,8 @@ describe('Time', () => {
 		expect(newTime.getHours()).toEqual(testTime.getHours());
 	});
 
-	test ('Minutes Setter do not mutate and set correct time', () => {
-		MockDate.install(new Date('2017-08-18T16:30:00Z'));//lock the date for the test
+	test('Minutes Setter do not mutate and set correct time', () => {
+		MockDate.install(new Date('2017-08-18T16:30:00Z')); //lock the date for the test
 		const time = new Time();
 		const testTime = new Date();
 
@@ -59,7 +59,7 @@ describe('Time', () => {
 		expect(newTime.getMinutes()).toEqual(testTime.getMinutes());
 	});
 
-	test ('GetHours always in 24-hours', () => {
+	test('GetHours always in 24-hours', () => {
 		const date = new Date();
 		date.setHours(13);
 		const time = new Time(date);
@@ -67,7 +67,7 @@ describe('Time', () => {
 		expect(time.getHours()).toEqual(date.getHours());
 	});
 
-	test ('GetMinutes', () => {
+	test('GetMinutes', () => {
 		const date = new Date();
 		date.setMinutes(30);
 		const time = new Time(date);
@@ -75,7 +75,7 @@ describe('Time', () => {
 		expect(time.getHours()).toEqual(date.getHours());
 	});
 
-	test ('SetPeriod correctly converts AM => PM', () => {
+	test('SetPeriod correctly converts AM => PM', () => {
 		// Setup up day that is set at 2 AM
 		const date = new Date();
 		date.setHours(2);
@@ -86,7 +86,7 @@ describe('Time', () => {
 		expect(newTime.getHours()).toEqual(14);
 	});
 
-	test ('SetPeriod correctly converts PM => AM', () => {
+	test('SetPeriod correctly converts PM => AM', () => {
 		const date = new Date();
 		date.setHours(14);
 		date.setMinutes(0);
@@ -95,7 +95,7 @@ describe('Time', () => {
 		expect(newTime.getHours()).toEqual(2);
 	});
 
-	test ('incrementHours rolls', () => {
+	test('incrementHours rolls', () => {
 		const date = new Date();
 		date.setHours(23);
 		const time = new Time(date);
@@ -103,7 +103,7 @@ describe('Time', () => {
 		const newTime = time.incrementHours();
 		expect(newTime.getHours()).toEqual(0);
 	});
-	test ('incrementMinutes rolls', () => {
+	test('incrementMinutes rolls', () => {
 		const date = new Date();
 		date.setMinutes(59);
 		const time = new Time(date);
@@ -112,7 +112,7 @@ describe('Time', () => {
 		expect(newTime.getMinutes()).toEqual(0);
 	});
 
-	test ('decrementHours rolls', () => {
+	test('decrementHours rolls', () => {
 		const date = new Date();
 		date.setHours(0);
 		const time = new Time(date);
@@ -121,7 +121,7 @@ describe('Time', () => {
 		expect(newTime.getHours()).toEqual(23);
 	});
 
-	test ('decrementMinutes rolls', () => {
+	test('decrementMinutes rolls', () => {
 		const date = new Date();
 		date.setMinutes(0);
 		const time = new Time(date);

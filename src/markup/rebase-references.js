@@ -1,23 +1,22 @@
 import Url from 'url';
 
 import Logger from '@nti/util-logger';
-import {isNTIID} from '@nti/lib-ntiids';
+import { isNTIID } from '@nti/lib-ntiids';
 
-import {hash} from '../string';
+import { hash } from '../string';
 
 const logger = Logger.get('lib:rebase-references');
 
-const CORS_BUSTER_REGEX = /(\S+)\s*=\s*"(((\/[^"/]+\/)||\/)resources\/[^?"]*?)"/igm;
+const CORS_BUSTER_REGEX = /(\S+)\s*=\s*"(((\/[^"/]+\/)||\/)resources\/[^?"]*?)"/gim;
 
 const isDataURI = RegExp.prototype.test.bind(/^data:/i);
 const isSrc = RegExp.prototype.test.bind(/src/i);
 const isYouTube = RegExp.prototype.test.bind(/youtube/i);
 const isHrefParam = RegExp.prototype.test.bind(/name="href"/i);
 
-const paramValue = /value="([^"]+)"/igm;
+const paramValue = /value="([^"]+)"/gim;
 
-
-export function bustCorsForResources (htmlString, name, value) {
+export function bustCorsForResources(htmlString, name, value) {
 	//Look for things we know come out of a different domain
 	//and append a query param.  This allows us to, for example,
 	//add a query param related to our location host so that
@@ -28,15 +27,16 @@ export function bustCorsForResources (htmlString, name, value) {
 	//absolute urls (//).  We look for relative urls rooted at resources.
 	//or absolute urls whose first folder is resources.
 
-	return htmlString.replace(CORS_BUSTER_REGEX,
-		(_, attr, uri) => `${attr}="${uri}?${name}=${value}"`);
+	return htmlString.replace(
+		CORS_BUSTER_REGEX,
+		(_, attr, uri) => `${attr}="${uri}?${name}=${value}"`
+	);
 }
 
+export default function rebaseAndSaltReferences(htmlString, basePath) {
+	const location = global.location || {}; //This will not work well on server-side render
 
-export default function rebaseAndSaltReferences (htmlString, basePath) {
-	const location = global.location || {};//This will not work well on server-side render
-
-	function fixReferences (original, attr, uri) {
+	function fixReferences(original, attr, uri) {
 		const url = Url.parse(uri);
 
 		const anchor = url.pathname == null && url.hash !== null;
@@ -44,7 +44,6 @@ export default function rebaseAndSaltReferences (htmlString, basePath) {
 		const absolute = firstChar === '/';
 
 		const fullyQualified = Boolean(url.protocol || url.host || absolute);
-
 
 		if (isSrc(attr) && isYouTube(uri)) {
 			const params = [
@@ -55,7 +54,10 @@ export default function rebaseAndSaltReferences (htmlString, basePath) {
 				'rel=0',
 				'showinfo=0',
 				'wmode=opaque',
-				'origin=' + encodeURIComponent(location.protocol + '//' + location.host)
+				'origin=' +
+					encodeURIComponent(
+						location.protocol + '//' + location.host
+					),
 			];
 
 			url.search = params.join('&');
@@ -65,19 +67,25 @@ export default function rebaseAndSaltReferences (htmlString, basePath) {
 		}
 
 		if (!anchor && !fullyQualified && !isDataURI(url)) {
-			logger.debug('Content Still has non-fullyqualified HTML references! (assumed base: %s, ref: %s)', basePath, uri);
+			logger.debug(
+				'Content Still has non-fullyqualified HTML references! (assumed base: %s, ref: %s)',
+				basePath,
+				uri
+			);
 
 			uri = url.parse(basePath).resolve(uri);
 		}
 
 		//inline
-		return (anchor || fullyQualified || isDataURI(url)) ?
-			original : `${attr}="${uri}"`;
+		return anchor || fullyQualified || isDataURI(url)
+			? original
+			: `${attr}="${uri}"`;
 	}
 
-
-	function fixParamValue (original, uri) {
-		if (isNTIID(uri)) { return original; }
+	function fixParamValue(original, uri) {
+		if (isNTIID(uri)) {
+			return original;
+		}
 
 		const url = Url.parse(uri);
 
@@ -86,25 +94,30 @@ export default function rebaseAndSaltReferences (htmlString, basePath) {
 		const absolute = firstChar === '/';
 
 		const fullyQualified = Boolean(url.protocol || url.host || absolute);
-		const fixed = fullyQualified || anchor || isDataURI(url) ? uri : url.parse(basePath).resolve(uri);
+		const fixed =
+			fullyQualified || anchor || isDataURI(url)
+				? uri
+				: url.parse(basePath).resolve(uri);
 
 		return `value="${fixed}"`;
 	}
 
-
-	function maybeFixParam (original, attributes) {
-		if (!isHrefParam(attributes)) { return original; }
+	function maybeFixParam(original, attributes) {
+		if (!isHrefParam(attributes)) {
+			return original;
+		}
 
 		return original.replace(paramValue, fixParamValue);
 	}
-
-
 
 	const envSalt = '';
 	const locationHash = hash(location.hostname + envSalt);
 
 	htmlString = bustCorsForResources(htmlString, 'h', locationHash);
-	htmlString = htmlString.replace(/(src|href|poster|data-source-wrapped)="(.*?)"/igm, fixReferences);
-	htmlString = htmlString.replace(/<param([^>]+)>/igm, maybeFixParam);
+	htmlString = htmlString.replace(
+		/(src|href|poster|data-source-wrapped)="(.*?)"/gim,
+		fixReferences
+	);
+	htmlString = htmlString.replace(/<param([^>]+)>/gim, maybeFixParam);
 	return htmlString;
 }

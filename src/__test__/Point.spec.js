@@ -2,42 +2,40 @@
 import Point from '../Point';
 
 describe('Point', () => {
-
-	test ('should have a Point.ORIGIN of (0,0)', () => {
+	test('should have a Point.ORIGIN of (0,0)', () => {
 		expect(Point.ORIGIN).toBeDefined();
 		expect(Point.ORIGIN.x).toEqual(0);
 		expect(Point.ORIGIN.y).toEqual(0);
 	});
 
-	test ('should create a Point instance with the specified x and y', () => {
+	test('should create a Point instance with the specified x and y', () => {
 		let p = new Point(100, 200);
 		expect(p.x).toEqual(100);
 		expect(p.y).toEqual(200);
 	});
 
-	test ('should have the id provided to the constructor', () => {
+	test('should have the id provided to the constructor', () => {
 		let testId = 'test-id';
 		let p = new Point(100, 200, testId);
 		expect(p.id).toEqual(testId);
 	});
 
-	test ('should generate an ID if one is not provided', () => {
+	test('should generate an ID if one is not provided', () => {
 		let p = new Point(100, 200);
 		expect(p.id).toBeDefined();
 		expect(p.id).not.toBeNull();
 	});
 
-	test ('should return the sum of two points', () => {
+	test('should return the sum of two points', () => {
 		let p1 = new Point(10, 20);
 		let p2 = new Point(30, 40);
 		let p3 = p1.plus(p2);
 
 		expect(p3.x).toEqual(40);
 		expect(p3.y).toEqual(60);
-
 	});
 
-	test ('should return the difference between two points', () => {
+	test('should return the difference between two points', () => {
 		let p1 = new Point(10, 30);
 		let p2 = new Point(30, 40);
 		let p3 = p1.minus(p2);
@@ -46,7 +44,7 @@ describe('Point', () => {
 		expect(p3.y).toEqual(-10);
 	});
 
-	test ('should return the product of two points', () => {
+	test('should return the product of two points', () => {
 		let p1 = new Point(10, 30);
 		let p2 = new Point(30, 40);
 		let p3 = p1.times(p2);
@@ -55,7 +53,7 @@ describe('Point', () => {
 		expect(p3.y).toEqual(1200);
 	});
 
-	test ('should scale the point by the given factor from the specified origin', () => {
+	test('should scale the point by the given factor from the specified origin', () => {
 		let p1 = new Point(0, 1);
 		let p2 = new Point(2, 1);
 		let p3 = p1.scale(2, p2);
@@ -75,7 +73,7 @@ describe('Point', () => {
 		expect(p3.y).toBe(3);
 	});
 
-	test ('should find the middle point between p1 and p2', () => {
+	test('should find the middle point between p1 and p2', () => {
 		let p1 = new Point(0, 0);
 		let p2 = new Point(2, 4);
 		let p3 = p1.middle(p2);
@@ -88,9 +86,8 @@ describe('Point', () => {
 		expect(p4.y).toBe(2);
 	});
 
-	test ('should have a toString in the form of \'Point (id): (x, y)\'', () => {
+	test("should have a toString in the form of 'Point (id): (x, y)'", () => {
 		let p = new Point(10, 20, 'testPointId');
 		expect(''.concat(p)).toEqual('Point testPointId: (10, 20)');
 	});
-
 });

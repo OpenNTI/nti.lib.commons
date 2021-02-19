@@ -1,7 +1,6 @@
-import wait, {SHORT, LONG} from './index';
+import wait, { SHORT, LONG } from './index';
 
-export {SHORT, LONG};
-
+export { SHORT, LONG };
 
 /**
  * Given a minimum duration, return a function that when called
@@ -19,8 +18,7 @@ export default function (minWait) {
 		const duration = end - start;
 
 		if (duration < minWait) {
-			return wait(minWait - duration)
-				.then(() => result);
+			return wait(minWait - duration).then(() => result);
 		}
 
 		return Promise.resolve(result);

@@ -1,6 +1,6 @@
 import Logger from '@nti/util-logger';
 
-import Mime, {ANY} from './MimeComparator';
+import Mime, { ANY } from './MimeComparator';
 
 const logger = Logger.get('lib:FileTypeDescriptor');
 
@@ -26,15 +26,15 @@ const logger = Logger.get('lib:FileTypeDescriptor');
  * defined instead of one or the other.
  */
 
-
-
-export function parseExtention (extention) {
+export function parseExtention(extention) {
 	const WILDCARD = '*';
 	const WILD = /\*/g;
 	const OLD_WILD = /\*\.\*/g;
 
 	if (typeof extention !== 'string') {
-		throw new TypeError('Argument should be a string representing an extention');
+		throw new TypeError(
+			'Argument should be a string representing an extention'
+		);
 	}
 
 	if (OLD_WILD.test(extention)) {
@@ -43,15 +43,16 @@ export function parseExtention (extention) {
 	}
 
 	if (
-		WILD.test(extention) && (
-			!extention.startsWith('*') ||
-			(extention.match(WILD).length > 1 && extention !== WILDCARD)
-		)
+		WILD.test(extention) &&
+		(!extention.startsWith('*') ||
+			(extention.match(WILD).length > 1 && extention !== WILDCARD))
 	) {
-		throw new TypeError('Argument cannot have wildcards, other than at the beginning');
+		throw new TypeError(
+			'Argument cannot have wildcards, other than at the beginning'
+		);
 	}
 
-	const normalize = x => x[0] === '.' ? x : `.${x}`;
+	const normalize = x => (x[0] === '.' ? x : `.${x}`);
 	const stripWild = x => x.replace(WILD, '');
 
 	const normal = normalize(stripWild(extention));
@@ -61,34 +62,34 @@ export function parseExtention (extention) {
 		isWild,
 		extention: isWild ? '' : normal,
 		mask: {
-			extention: `*${isWild ? '' : normal}`
+			extention: `*${isWild ? '' : normal}`,
 		},
 
-		match: (file) => file && (isWild || String(file.name).endsWith(normal)),
+		match: file => file && (isWild || String(file.name).endsWith(normal)),
 
-		raw: extention
+		raw: extention,
 	};
 }
 
-
-export function parseMimeType (mimeType) {
+export function parseMimeType(mimeType) {
 	const mime = new Mime(mimeType);
 	if (String(mime) === 'invalid') {
 		throw new TypeError('Argument was not a valid MimeType');
 	}
 
-	const isWild = mime.type === ANY || Object.values(mime.type).some(x => '*' === x);
+	const isWild =
+		mime.type === ANY || Object.values(mime.type).some(x => '*' === x);
 
 	return {
 		isWild,
 		mimeType: String(mime),
 		mask: {
 			mimeType: String(mime),
-			...mime.type
+			...mime.type,
 		},
 
-		match: (file) => file && (mime.matches(String(file.type))),
+		match: file => file && mime.matches(String(file.type)),
 
-		raw: mimeType
+		raw: mimeType,
 	};
 }

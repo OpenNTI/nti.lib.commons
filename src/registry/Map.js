@@ -1,6 +1,5 @@
 import Base from './Base';
-import {Default} from './Constants';
-
+import { Default } from './Constants';
 
 const ITEMS = Symbol('Items');
 
@@ -9,15 +8,19 @@ const ITEMS = Symbol('Items');
  * Should never be used directly, only extended.
  */
 export default class MapRegistry extends Base {
-	constructor () {
+	constructor() {
 		super();
 
-		if (this.constructor === MapRegistry) { throw new Error('Do not use MapRegistry directly, should be subclassed.'); }
+		if (this.constructor === MapRegistry) {
+			throw new Error(
+				'Do not use MapRegistry directly, should be subclassed.'
+			);
+		}
 
 		this[ITEMS] = {};
 	}
 
-	register (types, item) {
+	register(types, item) {
 		if (!Array.isArray(types)) {
 			types = [types];
 		}
@@ -31,8 +34,7 @@ export default class MapRegistry extends Base {
 		}
 	}
 
-	getItem (type) {
+	getItem(type) {
 		return this[ITEMS][type] || this[ITEMS][Default];
 	}
 }
-

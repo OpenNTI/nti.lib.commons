@@ -1,6 +1,6 @@
-import {getID} from './identify-objects';
+import { getID } from './identify-objects';
 
-export default function matcherFactory (object) {
+export default function matcherFactory(object) {
 	const otherId = getID(object);
 	const otherName = object && object.Username;
 

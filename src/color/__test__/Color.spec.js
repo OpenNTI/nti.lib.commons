@@ -4,9 +4,9 @@ import Color from '../Color';
 describe('Color', () => {
 	describe('RGB', () => {
 		test('accepts different formats', () => {
-			const test = {r: 255, g: 125, b: 25};
+			const test = { r: 255, g: 125, b: 25 };
 
-			const matches = (color) => {
+			const matches = color => {
 				expect(color.rgb.r).toEqual(test.r);
 				expect(color.rgb.red).toEqual(test.r);
 

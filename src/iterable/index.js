@@ -1,1 +1,1 @@
-export { default as ensure } from './ensure';
+export * from './ensure';

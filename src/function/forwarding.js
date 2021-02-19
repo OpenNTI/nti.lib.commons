@@ -1,5 +1,5 @@
 /*eslint no-console:0*/
-function reflect (fn, key) {
+function reflect(fn, key) {
 	let keys = key.split('.');
 
 	return function (...args) {
@@ -10,32 +10,36 @@ function reflect (fn, key) {
 		let path = [];
 
 		//walk down the path...
-		for(let i = 0, l = keys.length; i <= l; i++) {
+		for (let i = 0, l = keys.length; i <= l; i++) {
 			let k = keys[i];
 			if (i < l && scope) {
-
 				if (!scope[k]) {
-					let {name} = scope.constructor;
-					throw new Error(`Class ${name} does not have property ${k}`);
+					let { name } = scope.constructor;
+					throw new Error(
+						`Class ${name} does not have property ${k}`
+					);
 				}
 
 				scope = scope[k];
 				path.push(k);
 				if (!scope) {
-					console.warn('Property path `%s` does not exist on: %o', path.join('.'), this);
+					console.warn(
+						'Property path `%s` does not exist on: %o',
+						path.join('.'),
+						this
+					);
 				}
 			}
 		}
 
 		if (!scope[fn]) {
-			let {name} = scope.constructor;
+			let { name } = scope.constructor;
 			throw new Error(`Class ${name} does not implement ${fn}`);
 		}
 
 		return scope[fn](...args);
 	};
 }
-
 
 /**
  * binds functions from the object at the given key so they can be added to an
@@ -45,10 +49,10 @@ function reflect (fn, key) {
  * @param  {string} key The key where the object is at.
  * @returns {Object}	Object with function names to bound functions
  */
-export function forward (fns, key) {
+export function forward(fns, key) {
 	let result = {};
 
-	for(let fn of fns) {
+	for (let fn of fns) {
 		result[fn] = reflect(fn, key);
 	}
 

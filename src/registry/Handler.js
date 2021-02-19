@@ -1,5 +1,5 @@
 import Base from './Base';
-import {Default} from './Constants';
+import { Default } from './Constants';
 
 const ITEMS = Symbol('Items');
 
@@ -8,30 +8,32 @@ const ITEMS = Symbol('Items');
  * Should never be used directly, only extended.
  */
 export default class HandlerRegistry extends Base {
-	constructor () {
+	constructor() {
 		super();
 
-		if (this.constructor === HandlerRegistry) { throw new Error('Do not user HandlerRegistry directly, should be subclassed'); }
+		if (this.constructor === HandlerRegistry) {
+			throw new Error(
+				'Do not user HandlerRegistry directly, should be subclassed'
+			);
+		}
 
 		this[ITEMS] = [];
 	}
 
-
-	register (key, handler) {
+	register(key, handler) {
 		if (key === Default) {
 			this[Default] = handler;
 		}
 
 		this[ITEMS].push({
 			key,
-			handler
+			handler,
 		});
 	}
 
-
-	getItem (...args) {
+	getItem(...args) {
 		for (let item of this[ITEMS]) {
-			const {handler, key} = item;
+			const { handler, key } = item;
 
 			if (typeof key === 'function' && key(...args)) {
 				return handler;

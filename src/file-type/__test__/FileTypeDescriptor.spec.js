@@ -2,12 +2,11 @@
 /* eslint-env jest */
 import Logger from '@nti/util-logger';
 
-import {parseMimeType, parseExtention} from '../FileTypeDescriptor';
+import { parseMimeType, parseExtention } from '../FileTypeDescriptor';
 
 const logger = Logger.get('lib:FileTypeDescriptor');
 
 describe('FileTypeDescriptor', () => {
-
 	/*
 	 * type FileTypeDescriptor {
 	 *     isWild: Boolean
@@ -30,11 +29,19 @@ describe('FileTypeDescriptor', () => {
 	 * defined instead of one or the other.
 	 */
 
-	test ('Parsing extention', () => {
-
-		expect(parseExtention.bind(null)).toThrowError(TypeError, 'Argument should be a string representing an extention');
-		expect(parseExtention.bind(null, 'json.*')).toThrowError(TypeError, 'Argument cannot have wildcards, other than at the beginning');
-		expect(parseExtention.bind(null, '*.j*')).toThrowError(TypeError, 'Argument cannot have wildcards, other than at the beginning');
+	test('Parsing extention', () => {
+		expect(parseExtention.bind(null)).toThrowError(
+			TypeError,
+			'Argument should be a string representing an extention'
+		);
+		expect(parseExtention.bind(null, 'json.*')).toThrowError(
+			TypeError,
+			'Argument cannot have wildcards, other than at the beginning'
+		);
+		expect(parseExtention.bind(null, '*.j*')).toThrowError(
+			TypeError,
+			'Argument cannot have wildcards, other than at the beginning'
+		);
 
 		const extA = parseExtention('*.pdf');
 		const extB = parseExtention('.pdf');
@@ -56,16 +63,25 @@ describe('FileTypeDescriptor', () => {
 
 		expect(extA.match).toBeDefined();
 		expect(extB.match).toBeDefined();
-		expect(extA.match({name: 'Report.pdf'})).toBeTruthy();
-		expect(extB.match({name: 'Report.pdf'})).toBeTruthy();
-		expect(extA.match({name: 'Report.doc'})).not.toBeTruthy();
-		expect(extB.match({name: 'Report.doc'})).not.toBeTruthy();
+		expect(extA.match({ name: 'Report.pdf' })).toBeTruthy();
+		expect(extB.match({ name: 'Report.pdf' })).toBeTruthy();
+		expect(extA.match({ name: 'Report.doc' })).not.toBeTruthy();
+		expect(extB.match({ name: 'Report.doc' })).not.toBeTruthy();
 	});
 
-	test ('Parsing MimeType', () => {
-		expect(parseMimeType.bind(null)).toThrowError(TypeError, 'Argument was not a valid MimeType');
-		expect(parseMimeType.bind(null, 'type*/*')).toThrowError(TypeError, 'Argument was not a valid MimeType');
-		expect(parseMimeType.bind(null, '*/subtype')).toThrowError(TypeError, 'Argument was not a valid MimeType');
+	test('Parsing MimeType', () => {
+		expect(parseMimeType.bind(null)).toThrowError(
+			TypeError,
+			'Argument was not a valid MimeType'
+		);
+		expect(parseMimeType.bind(null, 'type*/*')).toThrowError(
+			TypeError,
+			'Argument was not a valid MimeType'
+		);
+		expect(parseMimeType.bind(null, '*/subtype')).toThrowError(
+			TypeError,
+			'Argument was not a valid MimeType'
+		);
 
 		const mime = parseMimeType('application/pdf');
 
@@ -78,20 +94,20 @@ describe('FileTypeDescriptor', () => {
 		// expect(mime.extention).toBe('.pdf');
 		// expect(mime.mask.extention).toBe('*.pdf');
 
-
 		expect(mime.match).toBeDefined();
 
-		expect(mime.match({type: 'application/pdf'})).toBeTruthy();
-		expect(mime.match({type: 'application/json'})).not.toBeTruthy();
+		expect(mime.match({ type: 'application/pdf' })).toBeTruthy();
+		expect(mime.match({ type: 'application/json' })).not.toBeTruthy();
 	});
 
-	test ('Parsing wildcard extention', () => {
-
+	test('Parsing wildcard extention', () => {
 		expect(parseExtention.bind(null, '*')).not.toThrow();
 
 		spyOn(logger, 'warn');
 		const oldWild = parseExtention('*.*');
-		expect(logger.warn).toHaveBeenCalledWith('For file wildcards, use *, not *.*');
+		expect(logger.warn).toHaveBeenCalledWith(
+			'For file wildcards, use *, not *.*'
+		);
 
 		const wild = parseExtention('*');
 
@@ -100,20 +116,19 @@ describe('FileTypeDescriptor', () => {
 		expect(wild.mask.extention).toBe('*');
 
 		expect(wild.match).toBeDefined();
-		expect(wild.match({name: 'Report.pdf'})).toBeTruthy();
-		expect(wild.match({name: 'Report.doc'})).toBeTruthy();
+		expect(wild.match({ name: 'Report.pdf' })).toBeTruthy();
+		expect(wild.match({ name: 'Report.doc' })).toBeTruthy();
 
 		expect(oldWild.isWild).toBeTruthy();
 		expect(oldWild.extention).toBe('');
 		expect(oldWild.mask.extention).toBe('*');
 
 		expect(oldWild.match).toBeDefined();
-		expect(oldWild.match({name: 'Report.pdf'})).toBeTruthy();
-		expect(oldWild.match({name: 'Report.doc'})).toBeTruthy();
+		expect(oldWild.match({ name: 'Report.pdf' })).toBeTruthy();
+		expect(oldWild.match({ name: 'Report.doc' })).toBeTruthy();
 	});
 
-	test ('Parsing wildcard MimeType', () => {
-
+	test('Parsing wildcard MimeType', () => {
 		expect(parseMimeType.bind(null, '*/*')).not.toThrow();
 
 		const wild = parseMimeType('*/*');
@@ -125,7 +140,7 @@ describe('FileTypeDescriptor', () => {
 
 		expect(wild.match).toBeDefined();
 		expect(wild.match).toBeDefined();
-		expect(wild.match({type: 'application/pdf'})).toBeTruthy();
-		expect(wild.match({type: 'text/plain'})).toBeTruthy();
+		expect(wild.match({ type: 'application/pdf' })).toBeTruthy();
+		expect(wild.match({ type: 'text/plain' })).toBeTruthy();
 	});
 });

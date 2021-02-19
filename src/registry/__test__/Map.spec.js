@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import MapRegistry from '../Map';
-import {Default} from '../Constants';
+import { Default } from '../Constants';
 
 class TestRegistry extends MapRegistry {}
 

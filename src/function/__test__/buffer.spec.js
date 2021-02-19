@@ -1,14 +1,17 @@
 /* eslint-env jest */
-import {buffer} from '../buffer';
+import { buffer } from '../buffer';
 
 describe('buffer', () => {
-
-	test ('basics', () => {
+	test('basics', () => {
 		jest.useFakeTimers();
 		const fn = jest.fn();
 
-		expect(() => buffer()).toThrow('Illegal Argument: The first argument must be a number');
-		expect(() => buffer(1)).toThrow('Illegal Argument: The second argument must be a function');
+		expect(() => buffer()).toThrow(
+			'Illegal Argument: The first argument must be a number'
+		);
+		expect(() => buffer(1)).toThrow(
+			'Illegal Argument: The second argument must be a function'
+		);
 
 		const b = buffer(1, fn);
 
@@ -25,7 +28,7 @@ describe('buffer', () => {
 		expect(fn).toHaveBeenCalledTimes(1);
 	});
 
-	test ('flush', () => {
+	test('flush', () => {
 		jest.useFakeTimers();
 		const fn = jest.fn();
 

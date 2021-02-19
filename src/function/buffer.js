@@ -6,21 +6,30 @@
  * @param {Function} fn the function to execute.
  * @returns {void}
  */
-export function buffer (time, fn) {
-	if (typeof time !== 'number') { throw new Error('Illegal Argument: The first argument must be a number'); }
-	if (typeof fn !== 'function') { throw new Error('Illegal Argument: The second argument must be a function'); }
+export function buffer(time, fn) {
+	if (typeof time !== 'number') {
+		throw new Error(
+			'Illegal Argument: The first argument must be a number'
+		);
+	}
+	if (typeof fn !== 'function') {
+		throw new Error(
+			'Illegal Argument: The second argument must be a function'
+		);
+	}
 
 	let id = null;
 	let call = null;
 
-	const clear = () => (clearTimeout(id), id = null);
+	const clear = () => (clearTimeout(id), (id = null));
 
-	const f = function () { //must be a regular function (not an arrow function)
+	const f = function () {
+		//must be a regular function (not an arrow function)
 		const args = arguments;
 
 		clear();
 
-		call = () => (id = null, call = null, fn.apply(this, args));
+		call = () => ((id = null), (call = null), fn.apply(this, args));
 		id = setTimeout(call, time);
 	};
 
@@ -37,9 +46,9 @@ export function buffer (time, fn) {
 	};
 
 	Object.defineProperty(f, 'pending', {
-		get () {
+		get() {
 			return !!id;
-		}
+		},
 	});
 
 	return f;

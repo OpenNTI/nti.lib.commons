@@ -1,6 +1,6 @@
 /* eslint-env jest */
 import HandlerRegistry from '../Handler';
-import {Default} from '../Constants';
+import { Default } from '../Constants';
 
 class TestRegistry extends HandlerRegistry {}
 

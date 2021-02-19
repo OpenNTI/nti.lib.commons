@@ -11,13 +11,13 @@ import parsePath from './parse-path';
  * @param {function} keyCollector - a function called each time we access a key
  * @returns {*} - Value of the nested key or undefined/null if any key along that path is missing/null.
  */
-export default function get (root, path, keyCollector) {
-	let {parts, sep} = parsePath(path);
+export default function get(root, path, keyCollector) {
+	let { parts, sep } = parsePath(path);
 	let o = root;
 
 	parts = parts.reverse();
 
-	while(o != null && parts.length > 0) {
+	while (o != null && parts.length > 0) {
 		let key = null;
 		while ((!key || !has(o, key)) && parts.length > 0) {
 			let segment = parts.pop();
@@ -28,7 +28,6 @@ export default function get (root, path, keyCollector) {
 			keyCollector?.(key);
 		}
 		o = o[key];
-
 	}
 
 	return o;

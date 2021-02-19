@@ -1,6 +1,8 @@
-export default function deprecated (props, propName, componentName) {
+export default function deprecated(props, propName, componentName) {
 	if (props[propName] != null) {
-		return new Error(`Used a deprecated prop "${propName}". See ${componentName} component for for details.`);
+		return new Error(
+			`Used a deprecated prop "${propName}". See ${componentName} component for for details.`
+		);
 	}
 }
 

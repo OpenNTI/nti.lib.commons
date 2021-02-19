@@ -4,7 +4,7 @@
  * @param  {string} string The value to be parsed into json
  * @returns {*} The result of parsing.
  */
-export default function parseJSONSafely (string) {
+export default function parseJSONSafely(string) {
 	try {
 		return JSON.parse(string || 'null');
 	} catch (e) {

@@ -19,8 +19,8 @@ const RESERVED_STATICS = {
 	type: true,
 };
 
-const unwrapComponentReference = x => (x && unwrapComponentReference(x.WrappedComponent)) || x;
-
+const unwrapComponentReference = x =>
+	(x && unwrapComponentReference(x.WrappedComponent)) || x;
 
 /**
  * Hoists static properties from the composed component onto the composer component.
@@ -31,13 +31,20 @@ const unwrapComponentReference = x => (x && unwrapComponentReference(x.WrappedCo
  * @param  {Object|string[]} [blacklist={}] A list of property names to NOT hoist.
  * @returns {Component|Function} the composer, modified.
  */
-export default function hoistStatics (composer, component, displayName, blacklist = {}) {
-	const {create, assign, defineProperty} = Object;
+export default function hoistStatics(
+	composer,
+	component,
+	displayName,
+	blacklist = {}
+) {
+	const { create, assign, defineProperty } = Object;
 	const cmp = composer;
 	//Make sure we always deal with the original component...not a wrapper.
 	const target = unwrapComponentReference(component);
 
-	cmp.displayName = `${displayName}(${target.displayName || target.name || 'Component'})`;
+	cmp.displayName = `${displayName}(${
+		target.displayName || target.name || 'Component'
+	})`;
 	cmp.WrappedComponent = target;
 
 	const keys = [
@@ -54,25 +61,27 @@ export default function hoistStatics (composer, component, displayName, blacklis
 		}
 	}
 
-
 	for (let key of keys) {
 		if (RESERVED_STATICS[key] || blacklist[key] || cmp[key] != null) {
 			continue;
 		}
 
 		try {
-			defineProperty(cmp, key, assign(
-				create(null),
-				{
+			defineProperty(
+				cmp,
+				key,
+				assign(create(null), {
 					get: () => target[key],
-					set: (s) => target[key] = s,
-				}
-			));
+					set: s => (target[key] = s),
+				})
+			);
 		} catch (e) {
 			//eslint-disable-next-line no-console
 			console.warn(
 				'There was an error hoisting static %s for %s over %o\nReason: %o',
-				key, displayName, target,
+				key,
+				displayName,
+				target,
 				e.stack || e.message || e
 			);
 		}

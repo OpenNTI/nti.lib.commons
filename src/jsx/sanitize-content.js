@@ -1,5 +1,5 @@
 /* eslint-env browser */
-export default function sanitizeContent (html) {
+export default function sanitizeContent(html) {
 	let d = document.createElement('div');
-	return (d.innerHTML = html, d.innerHTML);
+	return (d.innerHTML = html), d.innerHTML;
 }

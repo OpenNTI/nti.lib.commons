@@ -10,19 +10,21 @@ import tinycolor from 'tinycolor2';
  * @param  {Object|string} input the color to normalize to HSL
  * @returns {Object}       the hsl description of the input
  */
-export default function normalizeToHSL (input) {
+export default function normalizeToHSL(input) {
 	const color = tinycolor(input);
 
-	if (!color.isValid()) { throw new Error('Invalid Color'); }
-	
+	if (!color.isValid()) {
+		throw new Error('Invalid Color');
+	}
+
 	const hsl = color.toHsl();
 
 	if (input.h != null && input.s != null && input.l != null) {
-		return {h: input.h, s: input.s, l: input.l};
-	//The H in HSL and HSV are the same value, so if we are given HSV
-	//keep the input H.
+		return { h: input.h, s: input.s, l: input.l };
+		//The H in HSL and HSV are the same value, so if we are given HSV
+		//keep the input H.
 	} else if (input.h != null && input.s != null && input.v != null) {
-		return {h: input.h, s: hsl.s, l: hsl.l};
+		return { h: input.h, s: hsl.s, l: hsl.l };
 	}
 
 	return hsl;

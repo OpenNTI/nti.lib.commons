@@ -1,22 +1,21 @@
 export const PERIOD = Object.freeze({
 	AM: 'AM',
-	PM: 'PM'
+	PM: 'PM',
 });
 
 export default class Time {
-
-	constructor (date = new Date()) {
+	constructor(date = new Date()) {
 		Object.defineProperty(this, 'date', {
 			configurable: false,
 			enumerable: false,
 			writable: false,
-			value: Object.freeze(new Date(date))
+			value: Object.freeze(new Date(date)),
 		});
 
 		return Object.freeze(this);
 	}
 
-	applyTime (date) {
+	applyTime(date) {
 		const hours = this.getHours();
 		const minutes = this.getMinutes();
 		date = new Date(date);
@@ -24,31 +23,31 @@ export default class Time {
 		return date;
 	}
 
-	getHours () {
+	getHours() {
 		return this.date.getHours();
 	}
 
-	setHours (hours) {
+	setHours(hours) {
 		const d = new Date(this.date);
 		d.setHours(hours);
 		return new Time(d);
 	}
 
-	getMinutes () {
+	getMinutes() {
 		return this.date.getMinutes();
 	}
 
-	setMinutes (minutes) {
+	setMinutes(minutes) {
 		const d = new Date(this.date);
 		d.setMinutes(minutes);
 		return new Time(d);
 	}
 
-	getPeriod () {
-		return (this.getHours() < 12) ? PERIOD.AM : PERIOD.PM;
+	getPeriod() {
+		return this.getHours() < 12 ? PERIOD.AM : PERIOD.PM;
 	}
 
-	setPeriod (period) {
+	setPeriod(period) {
 		if (!Object.values(PERIOD).includes(period)) {
 			throw new Error('Must supply a period.');
 		}
@@ -58,11 +57,9 @@ export default class Time {
 
 		if (old === PERIOD.AM && period === PERIOD.PM) {
 			hours += 12;
-		}
-		else if (old === PERIOD.PM && period === PERIOD.AM) {
+		} else if (old === PERIOD.PM && period === PERIOD.AM) {
 			hours -= 12;
-		}
-		else {
+		} else {
 			return this;
 		}
 
@@ -73,25 +70,25 @@ export default class Time {
 
 	/////////////////
 
-	incrementHours () {
+	incrementHours() {
 		const d = new Date(this.date);
 		d.setHours(d.getHours() + 1);
 		return new Time(d);
 	}
 
-	decrementHours () {
+	decrementHours() {
 		const d = new Date(this.date);
 		d.setHours(d.getHours() - 1);
 		return new Time(d);
 	}
 
-	incrementMinutes () {
+	incrementMinutes() {
 		const d = new Date(this.date);
 		d.setMinutes(d.getMinutes() + 1);
 		return new Time(d);
 	}
 
-	decrementMinutes () {
+	decrementMinutes() {
 		const d = new Date(this.date);
 		d.setMinutes(d.getMinutes() - 1);
 		return new Time(d);
