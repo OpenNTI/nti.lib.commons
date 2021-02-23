@@ -6,4 +6,5 @@ export * from './forwarding';
 export * from './is-async';
 export * from './await-async-call';
 export * from './await-wrapper';
+export * from './ignore-missing-links';
 export * from './is-iterable';
