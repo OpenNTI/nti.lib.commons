@@ -31,7 +31,7 @@
     "esm": "^3.2.25",
     "isempty": "0.0.1",
     "media-typer": "^1.1.0",
-    "query-string": "^6.1.0",
+    "query-string": "^7.0.0",
     "prop-types": "^15.7.2",
     "tinycolor2": "^1.4.1",
     "uuid": "^8.3.0"
