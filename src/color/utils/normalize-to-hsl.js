@@ -1,5 +1,11 @@
 import tinycolor from 'tinycolor2';
 
+const within = (x, min, max) => x >= min && x <= max;
+
+const validators = {
+	rgb: (i) => within(i.r, 0, 255) && within(i.g, 0, 255) && within(i.b, 0, 255)
+};
+
 /**
  * tinycolor2 is converting the color to RGB to store it. Which is
  * fine in most cases... However, there are cases (#000, #fff) that
@@ -8,9 +14,14 @@ import tinycolor from 'tinycolor2';
  * information. So we are going to use HSL as the storage format.
  *
  * @param  {Object|string} input the color to normalize to HSL
+ * @param {string} format the format the color is in
  * @returns {Object}       the hsl description of the input
  */
-export default function normalizeToHSL(input) {
+export default function normalizeToHSL(input, format) {
+	const validator = validators[format] || (() => true);
+
+	if (!validator(input)) { throw new Error ('Invalid Color'); }
+
 	const color = tinycolor(input);
 
 	if (!color.isValid()) {
