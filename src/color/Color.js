@@ -248,7 +248,9 @@ function getColorMethods(input, format, source) {
 		hsl: {value: hslColor},
 		hsv: {value: hsvColor},
 
-		source: {value: valid ? color : source, enumerable: false}
+		source: {value: valid ? color : source, enumerable: false},
+
+		toJSON: {value: () => hexColor.toString()}
 	});
 
 	return color;
