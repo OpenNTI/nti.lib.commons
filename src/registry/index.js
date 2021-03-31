@@ -1,4 +1,4 @@
-export { default as Map } from './Map';
-export { default as Handler } from './Handler';
+export * from './Map.js';
+export * from './Handler.js';
 
-export * from './Constants';
+export * from './constants.js';

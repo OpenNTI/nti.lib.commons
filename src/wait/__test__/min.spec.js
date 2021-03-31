@@ -1,7 +1,7 @@
 /* globals spyOn */
 /* eslint-env jest */
-import waitMin from '../min';
-import { MockDate } from '../../date';
+import { min as waitMin } from '../min.js';
+import { MockDate } from '../../date/MockDate.js';
 
 describe('wait-min', () => {
 	beforeEach(() => {

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import join from '../join';
+import { join } from '../join.js';
 
 describe('join', () => {
 	test('Simple Case', () => {

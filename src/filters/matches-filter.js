@@ -35,6 +35,6 @@ export function generateMatchFilter(term = '', getter = x => x) {
  * @param  {string} filter the filter to check against
  * @returns {boolean}       if it matches or not
  */
-export default function matchesFilter(value, filter) {
+export function matchesFilter(value, filter) {
 	return doesMatchFilter(normalize(value), normalize(filter));
 }

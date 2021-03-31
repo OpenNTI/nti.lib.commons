@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import MimeComparator from '../MimeComparator';
+import { MimeComparator } from '../MimeComparator.js';
 
 describe('MimeComparator', () => {
 	test('new MimeComparator()', () => {

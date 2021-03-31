@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import BaseRegistry from '../Base';
+import BaseRegistry from '../Base.js';
 
 class TestRegistry extends BaseRegistry {}
 

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { decorate } from '../decorate';
+import { decorate } from '../decorate.js';
 
 describe('decorate', () => {
 	test('Basic assumptions', () => {

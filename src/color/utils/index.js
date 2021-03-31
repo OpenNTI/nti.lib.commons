@@ -1,1 +1,1 @@
-export { default as normalizeToHSL } from './normalize-to-hsl';
+export * from './normalize-to-hsl.js';

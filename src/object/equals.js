@@ -10,9 +10,9 @@ function getComparable(o) {
 }
 
 const compare = (A, B, deep) =>
-	typeof A !== 'object' || !deep ? A === B : objectEquals(A, B, deep);
+	typeof A !== 'object' || !deep ? A === B : equals(A, B, deep);
 
-export default function objectEquals(A, B, deep) {
+export function equals(A, B, deep) {
 	if (!A && !B) {
 		return true;
 	}

@@ -1,5 +1,5 @@
-import Base from './Base';
-import { Default } from './Constants';
+import Base from './Base.js';
+import { Default } from './constants.js';
 
 const ITEMS = Symbol('Items');
 
@@ -43,3 +43,5 @@ export default class HandlerRegistry extends Base {
 		return this[Default];
 	}
 }
+
+export const Handler = HandlerRegistry;

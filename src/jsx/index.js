@@ -1,4 +1,4 @@
-export { default as rawContent } from './raw-content';
-export { default as sanitizeContent } from './sanitize-content';
-export * from './get-ref-handler';
-export * from './rest-props';
+export * from './raw-content.js';
+export * from './sanitize-content.js';
+export * from './get-ref-handler.js';
+export * from './rest-props.js';

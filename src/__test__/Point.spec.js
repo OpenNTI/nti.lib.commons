@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import Point from '../Point';
+import { Point } from '../Point.js';
 
 describe('Point', () => {
 	test('should have a Point.ORIGIN of (0,0)', () => {

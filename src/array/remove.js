@@ -1,3 +1,3 @@
-export default function removeAt(arr, at) {
+export function remove(arr, at) {
 	return [...arr.slice(0, at), ...arr.slice(at + 1)];
 }

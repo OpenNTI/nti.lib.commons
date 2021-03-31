@@ -1,1 +1,1 @@
-export { default as default } from './Color';
+export { default as Color } from './Color.js';

@@ -1,8 +1,8 @@
-import readOnly from './define-readonly';
+import { defineReadOnly } from './define-readonly.js';
 
-export default function definePublic(o) {
+export function definePublic(o) {
 	return Object.entries(o).reduce(
-		(out, [key, value]) => ((out[key] = readOnly(value, true)), out),
+		(out, [key, value]) => ((out[key] = defineReadOnly(value, true)), out),
 		{}
 	);
 }

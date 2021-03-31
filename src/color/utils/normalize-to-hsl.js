@@ -3,7 +3,7 @@ import tinycolor from 'tinycolor2';
 const within = (x, min, max) => x >= min && x <= max;
 
 const validators = {
-	rgb: (i) => within(i.r, 0, 255) && within(i.g, 0, 255) && within(i.b, 0, 255)
+	rgb: i => within(i.r, 0, 255) && within(i.g, 0, 255) && within(i.b, 0, 255),
 };
 
 /**
@@ -17,10 +17,12 @@ const validators = {
  * @param {string} format the format the color is in
  * @returns {Object}       the hsl description of the input
  */
-export default function normalizeToHSL(input, format) {
+export function normalizeToHSL(input, format) {
 	const validator = validators[format] || (() => true);
 
-	if (!validator(input)) { throw new Error ('Invalid Color'); }
+	if (!validator(input)) {
+		throw new Error('Invalid Color');
+	}
 
 	const color = tinycolor(input);
 

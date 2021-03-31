@@ -1,5 +1,5 @@
 /* eslint-env browser */
-import { supportsPassive } from '../events';
+import { supportsPassive } from '../events/supports-passive.js';
 
 const ACTIVE = 'active';
 const IDLE = 'idle';
@@ -21,7 +21,7 @@ const DEFAULTS = {
 const Schedule = Symbol('state:schedule');
 const ToggleState = Symbol('state:toggle');
 
-export default class Idle {
+export class Idle {
 	constructor(opt) {
 		let op = (this.opt = { ...DEFAULTS, ...opt });
 		this.element =

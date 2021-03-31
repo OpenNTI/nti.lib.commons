@@ -1,6 +1,6 @@
 let supported = null;
 
-export default function supportsPassive() {
+export function supportsPassive() {
 	if (supported == null) {
 		try {
 			global.addEventListener('test', null, {

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import rebase from '../rebase-references.js';
+import { rebaseReferences as rebase } from '../rebase-references.js';
 
 describe('rebase-references', () => {
 	describe('params', () => {

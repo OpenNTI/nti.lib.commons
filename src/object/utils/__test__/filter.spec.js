@@ -1,6 +1,6 @@
 /* eslint-env jest */
-import filter from '../filter';
-import set from '../set';
+import { filter } from '../filter.js';
+import { set } from '../set.js';
 
 test('base cases', () => {
 	const d = new Date();

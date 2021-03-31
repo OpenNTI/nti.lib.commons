@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import defineProtected from '../define-protected';
+import { defineProtected } from '../define-protected.js';
 
 describe('Object property spec macros:', () => {
 	test('defineProtected (non-enumerable/skipped by JSON.stringify)', () => {

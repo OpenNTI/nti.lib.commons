@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import between from '../between';
+import { between } from '../between.js';
 
 describe('between', () => {
 	test('should not throw errors with odd input', () => {

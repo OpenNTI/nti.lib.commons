@@ -5,7 +5,7 @@ import Logger from '@nti/util-logger';
 
 const logger = Logger.get('lib:date-parsing');
 
-export default function parseDate(value) {
+export function parseDate(value) {
 	if (value == null) {
 		return null;
 	}

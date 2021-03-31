@@ -1,5 +1,5 @@
-import has from './has';
-import parsePath from './parse-path';
+import { has } from './has.js';
+import { parsePath } from './parse-path.js';
 
 /**
  * A function that given an object and a path to a value, will return a safe value. (will not throw) If any key in the
@@ -11,7 +11,7 @@ import parsePath from './parse-path';
  * @param {function} keyCollector - a function called each time we access a key
  * @returns {*} - Value of the nested key or undefined/null if any key along that path is missing/null.
  */
-export default function get(root, path, keyCollector) {
+export function get(root, path, keyCollector) {
 	let { parts, sep } = parsePath(path);
 	let o = root;
 

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import remove from '../remove';
+import { remove } from '../remove.js';
 
 describe('remove-item', () => {
 	test('should remove the element at the specified index', () => {

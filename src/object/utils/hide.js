@@ -1,4 +1,4 @@
-export default function hide(o, keys = Object.keys(o)) {
+export function hide(o, keys = Object.keys(o)) {
 	for (let key of keys) {
 		const desc = Object.getOwnPropertyDescriptor(o, key);
 		if (desc) {

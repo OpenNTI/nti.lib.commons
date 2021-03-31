@@ -16,7 +16,7 @@ function buildRef(node, pathPrefix) {
 	);
 }
 
-export default class ListBackedPageSource {
+export class ListBackedPageSource {
 	constructor(list, pathPrefix = '', id) {
 		this.list = list;
 		this.pathPrefix = pathPrefix;

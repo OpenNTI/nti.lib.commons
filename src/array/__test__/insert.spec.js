@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import insert from '../insert';
+import { insert } from '../insert.js';
 
 describe('insert-item', () => {
 	test('should insert the element at the specified index', () => {

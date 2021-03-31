@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import move from '../move';
+import { move } from '../move.js';
 
 describe('move-item', () => {
 	test('should move the element upward in the array', () => {

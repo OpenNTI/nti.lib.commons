@@ -1,13 +1,13 @@
-export { default as applyIf } from './applyif';
-export { default as equals } from './equals';
-export { default as mixin } from './mixin';
-export { default as pluck } from './pluck';
+export * from './apply-if.js';
+export * from './equals.js';
+export * from './mixin.js';
+export * from './pluck.js';
 
-export * as ObjectUtils from './utils';
+export * as ObjectUtils from './utils/index.js';
 
-export { default as defineProtected } from './define-protected';
-export { default as definePublic } from './define-public';
-export { default as defineReadOnly } from './define-readonly';
-export { default as updateValue } from './define-update-value';
+export * from './define-protected.js';
+export * from './define-public.js';
+export * from './define-readonly.js';
+export * from './define-update-value.js';
 
-export { default as Proxy } from './Proxy';
+export * from './Proxy.js';

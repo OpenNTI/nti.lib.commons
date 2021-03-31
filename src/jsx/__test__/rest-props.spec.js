@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { restProps } from '../rest-props';
+import { restProps } from '../rest-props.js';
 
 test('restProps', () => {
 	const [a, b, c, d, e, f, g] = [];

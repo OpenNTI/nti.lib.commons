@@ -1,6 +1,6 @@
 import tinycolor from 'tinycolor2';
 
-import { normalizeToHSL } from './utils';
+import { normalizeToHSL } from './utils/normalize-to-hsl.js';
 
 function callOnce(method) {
 	let result = null;
@@ -17,10 +17,10 @@ function callOnce(method) {
 function getRGB(hsl, rgb, update) {
 	const value = callOnce(() => rgb ?? tinycolor(hsl).toRgb());
 
-	const setR = r => update({...value(), r });
-	const setG = g => update({...value(), g });
-	const setB = b => update({...value(), b });
-	const setA = a => update({...value(), a });
+	const setR = r => update({ ...value(), r });
+	const setG = g => update({ ...value(), g });
+	const setB = b => update({ ...value(), b });
+	const setA = a => update({ ...value(), a });
 
 	return {
 		get r() {
@@ -77,17 +77,17 @@ function getHex(hsl, hex, update) {
 			return tinycolor(hsl).toHexString();
 		},
 
-		setValue: (newHex) => update(newHex)
+		setValue: newHex => update(newHex),
 	};
 }
 
 function getHSL(hsl, hslOverride, update) {
 	const value = callOnce(() => hslOverride ?? hsl);
 
-	const setH = h => update({...value(), h });
-	const setS = s => update({...value(), s });
-	const setL = l => update({...value(), l });
-	const setA = a => update({...value(), a });
+	const setH = h => update({ ...value(), h });
+	const setS = s => update({ ...value(), s });
+	const setL = l => update({ ...value(), l });
+	const setA = a => update({ ...value(), a });
 
 	return {
 		get h() {
@@ -134,16 +134,18 @@ function getHSL(hsl, hslOverride, update) {
 
 function getHSV(hsl, hsvOverride, update) {
 	const value = callOnce(() => {
-		if (hsvOverride) { return hsvOverride; }
+		if (hsvOverride) {
+			return hsvOverride;
+		}
 
 		const hsv = tinycolor(hsl).toHsv();
 		return { h: hsl.h, s: hsv.s, v: hsv.v };
 	});
 
-	const setH = h => update({...value(), h });
-	const setS = s => update({...value(), s });
-	const setV = v => update({...value(), v });
-	const setA = a => update({...value(), a });
+	const setH = h => update({ ...value(), h });
+	const setS = s => update({ ...value(), s });
+	const setV = v => update({ ...value(), v });
+	const setA = a => update({ ...value(), a });
 
 	return {
 		get h() {
@@ -192,12 +194,16 @@ function getAccessibilityMethods(hsl) {
 	const color = hsl && tinycolor(hsl);
 
 	return {
-		isReadable: (other, size) => (
-			color ?
-				tinycolor.isReadable(color,	other, size || { level: 'AA', size: 'small' }) :
-				false
-		),
-		readability: other => color ? tinycolor.readability(color, other) : null,
+		isReadable: (other, size) =>
+			color
+				? tinycolor.isReadable(
+						color,
+						other,
+						size || { level: 'AA', size: 'small' }
+				  )
+				: false,
+		readability: other =>
+			color ? tinycolor.readability(color, other) : null,
 	};
 }
 
@@ -205,52 +211,75 @@ function isSameColor(a, b) {
 	return a.hex.toString() === b.hex.toString();
 }
 
-function normalize (color, format) {
+function normalize(color, format) {
 	try {
-		return {hsl: normalizeToHSL(color, format), valid: true};
+		return { hsl: normalizeToHSL(color, format), valid: true };
 	} catch (e) {
-		return {valid: false};
+		return { valid: false };
 	}
 }
 
-class Color { isColor = true }
-class InvalidColor extends Color { invalid = true }
+class Color {
+	isColor = true;
+}
+class InvalidColor extends Color {
+	invalid = true;
+}
 
 function getColorMethods(input, format, source) {
 	if (input.isColor) {
 		return input;
 	}
 
-	const {hsl, valid} = normalize(input, format);
+	const { hsl, valid } = normalize(input, format);
 	const color = valid ? new Color() : new InvalidColor();
 
-	const getSource = valid ?
-		() => hsl :
-		type => (type === format ? input : source?.hsl.toString());
+	const getSource = valid
+		? () => hsl
+		: type => (type === format ? input : source?.hsl.toString());
 
-	const getOverride = valid ?
-		() => null :
-		type => (type === format ? input : null);
+	const getOverride = valid
+		? () => null
+		: type => (type === format ? input : null);
 
-	const getUpdate = (type) => ((updated) => getColorMethods(updated, type, color.source));
+	const getUpdate = type => updated =>
+		getColorMethods(updated, type, color.source);
 
-	const hexColor = getHex(getSource('hex'), getOverride('hex'), getUpdate('hex'));
-	const rgbColor = getRGB(getSource('rgb'), getOverride('rgb'), getUpdate('rgb'));
-	const hslColor = getHSL(getSource('hsl'), getOverride('hsl'), getUpdate('hsl'));
-	const hsvColor = getHSV(getSource('hsv'), getOverride('hsv'), getUpdate('hsv'));
+	const hexColor = getHex(
+		getSource('hex'),
+		getOverride('hex'),
+		getUpdate('hex')
+	);
+	const rgbColor = getRGB(
+		getSource('rgb'),
+		getOverride('rgb'),
+		getUpdate('rgb')
+	);
+	const hslColor = getHSL(
+		getSource('hsl'),
+		getOverride('hsl'),
+		getUpdate('hsl')
+	);
+	const hsvColor = getHSV(
+		getSource('hsv'),
+		getOverride('hsv'),
+		getUpdate('hsv')
+	);
 
 	Object.defineProperties(color, {
-		isSameColor: {value: other => other?.isColor && isSameColor(color, other)},
-		a11y: {value: getAccessibilityMethods(hsl)},
+		isSameColor: {
+			value: other => other?.isColor && isSameColor(color, other),
+		},
+		a11y: { value: getAccessibilityMethods(hsl) },
 
-		hex: {value: hexColor},
-		rgb: {value: rgbColor},
-		hsl: {value: hslColor},
-		hsv: {value: hsvColor},
+		hex: { value: hexColor },
+		rgb: { value: rgbColor },
+		hsl: { value: hslColor },
+		hsv: { value: hsvColor },
 
-		source: {value: valid ? color : source, enumerable: false},
+		source: { value: valid ? color : source, enumerable: false },
 
-		toJSON: {value: () => hexColor.toString()}
+		toJSON: { value: () => hexColor.toString() },
 	});
 
 	return color;
@@ -258,7 +287,8 @@ function getColorMethods(input, format, source) {
 
 CreateColor.fromCSS = css => getColorMethods(css, 'css');
 CreateColor.fromHex = hex => getColorMethods(hex, 'hex');
-CreateColor.fromRGB = (r, g, b, a = 1) => getColorMethods({ r, g, b, a }, 'rgb');
+CreateColor.fromRGB = (r, g, b, a = 1) =>
+	getColorMethods({ r, g, b, a }, 'rgb');
 CreateColor.fromHSL = (h, s, l) => getColorMethods({ h, s, l }, 'hsl');
 CreateColor.fromHSV = (h, s, v) => getColorMethods({ h, s, v }, 'hsv');
 export default function CreateColor(color, format) {

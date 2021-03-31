@@ -1,4 +1,4 @@
-export default function isEventActionable(e) {
+export function isActionable(e) {
 	return (
 		!e ||
 		e.type === 'click' ||

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 /* eslint-env jest */
-import { getRefHandler } from '../get-ref-handler';
+import { getRefHandler } from '../get-ref-handler.js';
 
 test('getRefHandler', () => {
 	const parentRef = jest.fn();

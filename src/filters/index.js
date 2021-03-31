@@ -1,4 +1,4 @@
-export { default as EntityMatcherFactory } from './identify-entities';
-export { default as ObjectMatcherFactory } from './identify-objects';
+export * from './identify-entities.js';
+export * from './identify-objects.js';
 
-export { default as matchesFilter } from './matches-filter';
+export * from './matches-filter.js';

@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid';
 
-export default class Point {
+export class Point {
 	// static ORIGIN = new Point(0, 0)
 
 	/**

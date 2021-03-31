@@ -37,7 +37,7 @@ export function get(x) {
 	return void 0;
 }
 
-export default class MimeComparator {
+export class MimeComparator {
 	constructor(mime) {
 		this.type = get(mime);
 	}

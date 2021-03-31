@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { buffer } from '../buffer';
+import { buffer } from '../buffer.js';
 
 describe('buffer', () => {
 	test('basics', () => {

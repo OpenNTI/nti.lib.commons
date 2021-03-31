@@ -1,8 +1,8 @@
-import mixin from './mixin';
+import { mixin } from './mixin.js';
 
 const TARGET = Symbol();
 
-export default class ProxyObject {
+export class Proxy {
 	constructor(target, properties, ...mixins) {
 		this[TARGET] = target;
 		for (let m of mixins) {

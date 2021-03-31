@@ -1,8 +1,8 @@
-import { EntityMatcherFactory } from '../filters';
+import { EntityMatcherFactory } from '../filters/identify-entities.js';
 
-import SelectionModel from './SelectionModel';
+import SelectionModel from './SelectionModel.js';
 
-export default class EntitySelectionModel extends SelectionModel {
+export class EntitySelectionModel extends SelectionModel {
 	constructor(initialSelection = []) {
 		super(EntityMatcherFactory, initialSelection);
 	}

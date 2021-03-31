@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import FileSet from '../FileSetDescriptor';
+import { FileSetDescriptor as FileSet } from '../FileSetDescriptor.js';
 
 const MOCK_PDF_FILE = {
 	type: 'application/pdf',

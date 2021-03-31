@@ -1,6 +1,6 @@
 import EventEmitter from 'events';
 
-export default class Executor extends EventEmitter {
+export class Executor extends EventEmitter {
 	constructor(maxConcurrency = 1) {
 		super();
 		Object.defineProperties(this, {

@@ -2,7 +2,7 @@
 /* eslint-env jest */
 import Logger from '@nti/util-logger';
 
-import { parseMimeType, parseExtention } from '../FileTypeDescriptor';
+import { parseMimeType, parseExtension } from '../FileTypeDescriptor.js';
 
 const logger = Logger.get('lib:FileTypeDescriptor');
 
@@ -30,21 +30,21 @@ describe('FileTypeDescriptor', () => {
 	 */
 
 	test('Parsing extention', () => {
-		expect(parseExtention.bind(null)).toThrowError(
+		expect(parseExtension.bind(null)).toThrowError(
 			TypeError,
 			'Argument should be a string representing an extention'
 		);
-		expect(parseExtention.bind(null, 'json.*')).toThrowError(
+		expect(parseExtension.bind(null, 'json.*')).toThrowError(
 			TypeError,
 			'Argument cannot have wildcards, other than at the beginning'
 		);
-		expect(parseExtention.bind(null, '*.j*')).toThrowError(
+		expect(parseExtension.bind(null, '*.j*')).toThrowError(
 			TypeError,
 			'Argument cannot have wildcards, other than at the beginning'
 		);
 
-		const extA = parseExtention('*.pdf');
-		const extB = parseExtention('.pdf');
+		const extA = parseExtension('*.pdf');
+		const extB = parseExtension('.pdf');
 
 		expect(extA.isWild).not.toBeTruthy();
 		expect(extB.isWild).not.toBeTruthy();
@@ -101,15 +101,15 @@ describe('FileTypeDescriptor', () => {
 	});
 
 	test('Parsing wildcard extention', () => {
-		expect(parseExtention.bind(null, '*')).not.toThrow();
+		expect(parseExtension.bind(null, '*')).not.toThrow();
 
 		spyOn(logger, 'warn');
-		const oldWild = parseExtention('*.*');
+		const oldWild = parseExtension('*.*');
 		expect(logger.warn).toHaveBeenCalledWith(
 			'For file wildcards, use *, not *.*'
 		);
 
-		const wild = parseExtention('*');
+		const wild = parseExtension('*');
 
 		expect(wild.isWild).toBeTruthy();
 		expect(wild.extention).toBe('');

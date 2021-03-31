@@ -1,6 +1,6 @@
 const { max, min } = Math;
 
-export default function between(i, a, b) {
+export function between(i, a, b) {
 	let x = min(a, b),
 		y = max(a, b);
 	return i > x && i < y;

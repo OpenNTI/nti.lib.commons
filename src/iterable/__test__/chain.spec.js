@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { chain } from '../chain';
+import { chain } from '../chain.js';
 
 test('Iterable chain', () => {
 	expect([...chain([[1], 2, [3, 4], [5, 6]])]).toEqual([1, 2, 3, 4, 5, 6]);

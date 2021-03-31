@@ -89,3 +89,5 @@ export default class SelectionModel extends EventEmitter {
 		return this[Selected].slice();
 	}
 }
+
+export const Model = SelectionModel;

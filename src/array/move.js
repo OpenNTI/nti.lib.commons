@@ -1,6 +1,6 @@
-import removeAt from './remove';
-import insertAt from './insert';
+import { remove } from './remove.js';
+import { insert } from './insert.js';
 
-export default function moveItem(arr, from, to) {
-	return insertAt(removeAt(arr, from), arr[from], to);
+export function move(arr, from, to) {
+	return insert(remove(arr, from), arr[from], to);
 }

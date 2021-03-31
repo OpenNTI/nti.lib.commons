@@ -4,10 +4,9 @@
   "author": "nextthought",
   "license": "UNLICENSED",
   "description": "Common utility javascript functions & classes.",
-  "main": ".index.js",
-  "module": "src/index.js",
+  "main": "src/index.js",
+  "type": "module",
   "files": [
-    ".index.js",
     "src"
   ],
   "scripts": {
@@ -28,7 +27,6 @@
     "@nti/lib-ntiids": "NextThought/nti.lib.ntiids",
     "@nti/util-logger": "NextThought/nti.util.logger",
     "content-type": "^1.0.4",
-    "esm": "^3.2.25",
     "isempty": "0.0.1",
     "media-typer": "^1.1.0",
     "query-string": "^7.0.0",

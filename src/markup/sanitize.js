@@ -14,7 +14,7 @@ function stripAnchors(tag, attrs, body) {
 // 	return end ? '\n' : '';
 // }
 
-export default function (string) {
+export function sanitize(string) {
 	string = string && string.replace(anchors, stripAnchors);
 	// string = string && string.replace(pars, stripPars);
 

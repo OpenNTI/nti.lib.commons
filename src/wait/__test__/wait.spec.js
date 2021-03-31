@@ -1,7 +1,7 @@
 /* globals spyOn */
 /* eslint-env jest */
-import wait from '../index';
-import { MockDate } from '../../date';
+import { wait } from '../wait.js';
+import { MockDate } from '../../date/MockDate.js';
 
 describe('wait', () => {
 	beforeEach(() => {

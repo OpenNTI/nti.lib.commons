@@ -1,4 +1,4 @@
-export default function (dest, src) {
+export function applyIf(dest, src) {
 	for (let i of Object.keys(src)) {
 		if (dest[i] == null) {
 			//intentional "== null"

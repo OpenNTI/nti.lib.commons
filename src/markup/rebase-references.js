@@ -3,7 +3,7 @@ import Url from 'url';
 import Logger from '@nti/util-logger';
 import { isNTIID } from '@nti/lib-ntiids';
 
-import { hash } from '../string';
+import { hash } from '../string/hash.js';
 
 const logger = Logger.get('lib:rebase-references');
 
@@ -22,8 +22,8 @@ export function bustCorsForResources(htmlString, name, value) {
 	//add a query param related to our location host so that
 	//we can tell amazon's caching servers to take that into consideration
 
-	//We are looking for an attribute whose valus is a quoted string
-	//referenceing resources.  We ignore urls with a protocol or protcolless
+	//We are looking for an attribute whose values is a quoted string
+	//referencing resources.  We ignore urls with a protocol or protocol-less
 	//absolute urls (//).  We look for relative urls rooted at resources.
 	//or absolute urls whose first folder is resources.
 
@@ -33,7 +33,7 @@ export function bustCorsForResources(htmlString, name, value) {
 	);
 }
 
-export default function rebaseAndSaltReferences(htmlString, basePath) {
+export function rebaseReferences(htmlString, basePath) {
 	const location = global.location || {}; //This will not work well on server-side render
 
 	function fixReferences(original, attr, uri) {

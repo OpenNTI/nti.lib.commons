@@ -1,8 +1,9 @@
 /* eslint-env jest */
-import matchesFilter, {
+import {
+	matchesFilter,
 	normalize,
 	generateMatchFilter,
-} from '../matches-filter';
+} from '../matches-filter.js';
 
 describe('Matches Filter Tests', () => {
 	describe('Normalize', () => {

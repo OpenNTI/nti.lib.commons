@@ -1,5 +1,5 @@
-import Base from './Base';
-import { Default } from './Constants';
+import Base from './Base.js';
+import { Default } from './constants.js';
 
 const ITEMS = Symbol('Items');
 
@@ -38,3 +38,5 @@ export default class MapRegistry extends Base {
 		return this[ITEMS][type] || this[ITEMS][Default];
 	}
 }
+
+export const Map = MapRegistry;

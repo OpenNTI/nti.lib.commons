@@ -27,7 +27,7 @@ function getPathParts(path) {
  * @param  {string|Object} pathConfig - pathConfig to normalize
  * @returns {Object} - the normalized path
  */
-export default function parsePath(pathConfig) {
+export function parsePath(pathConfig) {
 	const { path, sep } = getPathParts(pathConfig);
 
 	return {

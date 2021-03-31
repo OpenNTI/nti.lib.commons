@@ -1,3 +1,3 @@
-export default function readOnly(value, enumerable = false) {
+export function defineReadOnly(value, enumerable = false) {
 	return { configurable: true, enumerable, writable: false, value };
 }

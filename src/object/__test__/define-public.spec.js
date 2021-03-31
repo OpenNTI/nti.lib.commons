@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import definePublic from '../define-public';
+import { definePublic } from '../define-public.js';
 
 describe('Object property spec macros:', () => {
 	test('definePublic (readOnly, but enumerable)', () => {

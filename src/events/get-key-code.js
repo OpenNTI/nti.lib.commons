@@ -9,7 +9,7 @@
  * @param  {boolean} e.shiftKey - a flag that states if the shift key is active.
  * @returns {string|null} Returns the key-command or null if the object did not represent keys.
  */
-export default function getKeyCode(e) {
+export function getKeyCode(e) {
 	const modifiers = ['ctrlKey', 'altKey', 'shiftKey', 'metaKey'];
 	const code = ['nti'];
 

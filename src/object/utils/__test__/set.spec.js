@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import set from '../set';
+import { set } from '../set.js';
 
 describe('object set util', () => {
 	test('throws if no args', () => {

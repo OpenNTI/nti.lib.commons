@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import Color from '../Color';
+import Color from '../Color.js';
 
 describe('Color', () => {
 	describe('HEX', () => {
@@ -52,7 +52,7 @@ describe('Color', () => {
 
 	describe('HSL', () => {
 		test('accepts different formats', () => {
-			const test = {h: 180, s: 0.5, l: 0.5};
+			const test = { h: 180, s: 0.5, l: 0.5 };
 
 			const matches = color => {
 				expect(color.hsl.h).toEqual(test.h);
@@ -80,7 +80,7 @@ describe('Color', () => {
 
 	describe('HSV', () => {
 		test('accepts different formats', () => {
-			const test = {h: 0, s: 1, v: 1};
+			const test = { h: 0, s: 1, v: 1 };
 
 			const matches = color => {
 				expect(color.hsv.h).toEqual(test.h);

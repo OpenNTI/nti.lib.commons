@@ -1,3 +1,3 @@
-export * from './chain';
-export * from './ensure';
-export * from './map';
+export * from './chain.js';
+export * from './ensure.js';
+export * from './map.js';

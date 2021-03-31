@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import appendQueryParams from '../append-query-params';
+import { appendQueryParams } from '../append-query-params.js';
 
 describe('appendQueryParams', () => {
 	test('Throws on invalid arguments', () => {

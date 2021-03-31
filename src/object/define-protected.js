@@ -1,8 +1,8 @@
-import readOnly from './define-readonly';
+import { defineReadOnly } from './define-readonly.js';
 
-export default function defineProtected(o) {
+export function defineProtected(o) {
 	return Object.entries(o).reduce(
-		(out, [key, value]) => ((out[key] = readOnly(value)), out),
+		(out, [key, value]) => ((out[key] = defineReadOnly(value)), out),
 		{}
 	);
 }

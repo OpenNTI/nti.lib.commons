@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import ensureArray from '../ensure';
+import { ensure as ensureArray } from '../ensure.js';
 
 describe('ensure-array', () => {
 	test('should return the array that is passed', () => {

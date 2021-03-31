@@ -1,14 +1,24 @@
-import URL from 'url';
+import { ensure } from '../array/ensure.js';
 
-import QueryString from 'query-string';
+import { parse, NULL_PROTO } from './parse.js';
+export function appendQueryParams(uri, params) {
+	if (uri == null) {
+		throw new Error('Invalid URI');
+	}
+	const url = parse(uri);
 
-export default function appendQueryParams(uri, params) {
-	const url = URL.parse(uri);
+	for (const [key, value] of Object.entries(params || {})) {
+		url.searchParams.delete(key);
 
-	url.search = QueryString.stringify({
-		...QueryString.parse(url.search),
-		...params,
-	});
+		for (const v of ensure(value)) {
+			url.searchParams.append(key, '' + v);
+		}
+	}
 
-	return url.format();
+	url.searchParams.sort();
+
+	return url
+		.toString()
+		.replace(new RegExp('^' + NULL_PROTO), '')
+		.replace(/^\/undefined/, '');
 }

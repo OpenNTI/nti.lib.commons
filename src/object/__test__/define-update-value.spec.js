@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import updateValue from '../define-update-value';
+import { updateValue } from '../define-update-value.js';
 
 describe('Object property spec macros:', () => {
 	test('updateValue', () => {
@@ -15,7 +15,7 @@ describe('Object property spec macros:', () => {
 			value: 'xyz',
 		});
 
-		//Updating a non-existant property creates it 'readOnly and non-enumerable'
+		//Updating a non-existent property creates it 'readOnly and non-enumerable'
 		expect(o.foo).toBeUndefined();
 		updateValue(o, 'foo', 'bar');
 		expect(o.foo).toBe('bar');

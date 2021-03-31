@@ -1,16 +1,16 @@
 import Logger from '@nti/util-logger';
 
-import Mime, { ANY } from './MimeComparator';
+import { ANY, MimeComparator as Mime } from './MimeComparator.js';
 
 const logger = Logger.get('lib:FileTypeDescriptor');
 
 /*
  * type FileTypeDescriptor {
  *     isWild: Boolean
- *     [extention]: String
+ *     [extension]: String
  *     [mimeType]: String
  *     mask: Object {
- *         [extention]: String
+ *         [extension]: String
  *
  *         [mimeType]: String
  *         [type]: String
@@ -21,31 +21,31 @@ const logger = Logger.get('lib:FileTypeDescriptor');
  *     raw: String
  * }
  *
- * Once we can look up mimeTypes from extensions, and lookup cannonical/default
- * extensions for mimeTypes we can enforce extention and mimeType to always be
+ * Once we can look up mimeTypes from extensions, and lookup canonical/default
+ * extensions for mimeTypes we can enforce extension and mimeType to always be
  * defined instead of one or the other.
  */
 
-export function parseExtention(extention) {
+export function parseExtension(extension) {
 	const WILDCARD = '*';
 	const WILD = /\*/g;
 	const OLD_WILD = /\*\.\*/g;
 
-	if (typeof extention !== 'string') {
+	if (typeof extension !== 'string') {
 		throw new TypeError(
 			'Argument should be a string representing an extention'
 		);
 	}
 
-	if (OLD_WILD.test(extention)) {
+	if (OLD_WILD.test(extension)) {
 		logger.warn('For file wildcards, use *, not *.*');
-		extention = extention.replace(OLD_WILD, '*'); //replace *.* with *. This for backwards compatibility.
+		extension = extension.replace(OLD_WILD, '*'); //replace *.* with *. This for backwards compatibility.
 	}
 
 	if (
-		WILD.test(extention) &&
-		(!extention.startsWith('*') ||
-			(extention.match(WILD).length > 1 && extention !== WILDCARD))
+		WILD.test(extension) &&
+		(!extension.startsWith('*') ||
+			(extension.match(WILD).length > 1 && extension !== WILDCARD))
 	) {
 		throw new TypeError(
 			'Argument cannot have wildcards, other than at the beginning'
@@ -55,7 +55,7 @@ export function parseExtention(extention) {
 	const normalize = x => (x[0] === '.' ? x : `.${x}`);
 	const stripWild = x => x.replace(WILD, '');
 
-	const normal = normalize(stripWild(extention));
+	const normal = normalize(stripWild(extension));
 	const isWild = normal === '.';
 
 	return {
@@ -67,7 +67,7 @@ export function parseExtention(extention) {
 
 		match: file => file && (isWild || String(file.name).endsWith(normal)),
 
-		raw: extention,
+		raw: extension,
 	};
 }
 

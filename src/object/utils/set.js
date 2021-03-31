@@ -1,7 +1,7 @@
-import has from './has';
-import parsePath from './parse-path';
+import { has } from './has.js';
+import { parsePath } from './parse-path.js';
 
-export default function set(root, path, value) {
+export function set(root, path, value) {
 	if (!root || typeof root !== 'object') {
 		throw new Error('Object Set: Cannot call with a non object root');
 	}

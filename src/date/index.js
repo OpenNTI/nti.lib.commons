@@ -1,1 +1,1 @@
-export { default as MockDate } from './MockDate';
+export * from './MockDate.js';

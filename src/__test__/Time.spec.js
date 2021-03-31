@@ -1,6 +1,6 @@
 /* eslint-env jest */
-import { MockDate } from '../date';
-import Time from '../Time';
+import { MockDate } from '../date/MockDate.js';
+import { Time } from '../Time.js';
 
 describe('Time', () => {
 	beforeEach(() => {

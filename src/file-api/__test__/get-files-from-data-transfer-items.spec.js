@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import getFilesFromDataTransferItems from '../get-files-from-data-transfer-items';
+import { getFilesFromDataTransferItems } from '../get-files-from-data-transfer-items.js';
 
 function createItem(name, isDirectory) {
 	return {

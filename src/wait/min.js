@@ -1,6 +1,4 @@
-import wait, { SHORT, LONG } from './index';
-
-export { SHORT, LONG };
+import { wait } from './wait.js';
 
 /**
  * Given a minimum duration, return a function that when called
@@ -10,7 +8,7 @@ export { SHORT, LONG };
  * @param  {number} minWait the min time to wait
  * @returns {Function} see description
  */
-export default function (minWait) {
+export function min(minWait) {
 	const start = new Date();
 
 	return result => {

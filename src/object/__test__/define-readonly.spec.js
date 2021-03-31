@@ -1,15 +1,15 @@
 /* eslint-env jest */
-import readOnly from '../define-readonly';
+import { defineReadOnly } from '../define-readonly.js';
 
 describe('Object property spec macros:', () => {
 	test('readOnly', () => {
-		expect(readOnly('abc')).toEqual({
+		expect(defineReadOnly('abc')).toEqual({
 			configurable: true,
 			enumerable: false,
 			writable: false,
 			value: 'abc',
 		});
-		expect(readOnly('abc', true)).toEqual({
+		expect(defineReadOnly('abc', true)).toEqual({
 			configurable: true,
 			enumerable: true,
 			writable: false,
@@ -19,7 +19,7 @@ describe('Object property spec macros:', () => {
 		function test(visible) {
 			const o = {};
 			expect(o.test).toBeUndefined();
-			Object.defineProperty(o, 'test', readOnly('abc', visible));
+			Object.defineProperty(o, 'test', defineReadOnly('abc', visible));
 			expect(o.test).not.toBeUndefined();
 			expect(o.test).toBe('abc');
 			expect(() => (o.test = 'xyz')).toThrow();

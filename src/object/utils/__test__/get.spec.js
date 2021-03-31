@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import get from '../get';
+import { get } from '../get.js';
 
 test('Safely get values', () => {
 	expect(get()).toBe(undefined);

@@ -1,3 +1,3 @@
-export default function ensureArray(a) {
+export function ensure(a) {
 	return Array.isArray(a) ? a : a == null ? [] : [a];
 }

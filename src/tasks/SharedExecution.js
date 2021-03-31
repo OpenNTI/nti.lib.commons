@@ -3,7 +3,7 @@ const logger = Logger.get('SharedExecution');
 /**
  * Goal: Group dom reads/writes into single passes.
  */
-export default class SharedExecution {
+export class SharedExecution {
 	static isInterrupted(task) {
 		return task.skip || (task.parent && this.isInterrupted(task.parent));
 	}

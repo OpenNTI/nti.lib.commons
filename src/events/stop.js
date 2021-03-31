@@ -1,4 +1,4 @@
-export default function stopEvent(e) {
+export function stop(e) {
 	if (!e) {
 		return;
 	}

@@ -3,7 +3,7 @@ export const PERIOD = Object.freeze({
 	PM: 'PM',
 });
 
-export default class Time {
+export class Time {
 	constructor(date = new Date()) {
 		Object.defineProperty(this, 'date', {
 			configurable: false,

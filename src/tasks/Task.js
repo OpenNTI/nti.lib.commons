@@ -1,5 +1,5 @@
 const ID = Symbol();
-export default class Task {
+export class Task {
 	constructor(fn, interval) {
 		this.fn = fn;
 		this.interval = interval || 1000;

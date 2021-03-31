@@ -1,5 +1,5 @@
-import { isAsyncFunction } from './is-async';
-import { awaitWrapper } from './await-wrapper';
+import { isAsyncFunction } from './is-async.js';
+import { awaitWrapper } from './await-wrapper.js';
 
 /**
  * Make all async functions defined on the prototype wait on the given task.

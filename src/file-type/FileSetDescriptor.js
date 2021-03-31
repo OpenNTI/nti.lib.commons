@@ -1,9 +1,9 @@
-import { ensure as array } from '../array';
+import { ensure as array } from '../array/ensure.js';
 
-import { parseExtention, parseMimeType } from './FileTypeDescriptor';
+import { parseExtension, parseMimeType } from './FileTypeDescriptor.js';
 
 /* A class to help classify Accepted File types */
-export default class FileSetDescriptor {
+export class FileSetDescriptor {
 	/**
 	 * Constructs class and sets up data.
 	 *
@@ -12,7 +12,7 @@ export default class FileSetDescriptor {
 	 * @returns {void}
 	 */
 	constructor(extensions, mimeTypes) {
-		extensions = array(extensions).map(parseExtention);
+		extensions = array(extensions).map(parseExtension);
 		mimeTypes = array(mimeTypes).map(parseMimeType);
 
 		/**

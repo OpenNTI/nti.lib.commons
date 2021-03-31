@@ -1,4 +1,4 @@
-export default function bufferRequest(delay, requestFactory) {
+export function buffer(delay, requestFactory) {
 	let abort = null;
 
 	const requestWrapper = new Promise((fulfill, reject) => {

@@ -2,7 +2,7 @@
 /* eslint no-unused-vars: 0 */
 /* globals spyOn */
 
-import buffer from '../buffer';
+import { buffer } from '../buffer.js';
 
 describe('Promises: buffer', () => {
 	jest.useFakeTimers();

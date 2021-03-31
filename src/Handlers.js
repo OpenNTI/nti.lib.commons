@@ -7,7 +7,7 @@ function getTypeFor(obj) {
 	return obj.MimeType || obj.type || obj;
 }
 
-export default class Handlers {
+export class Handlers {
 	/**
 	 * Create a utility to map types of objects to handlers
 	 *

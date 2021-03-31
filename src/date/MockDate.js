@@ -1,6 +1,6 @@
 const GlobalDate = global.Date;
 
-export default class MockDate extends Date {
+export class MockDate extends Date {
 	static OriginalDate = GlobalDate;
 
 	static get time() {

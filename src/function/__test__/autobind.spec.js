@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { autobind } from '../autobind';
+import { autobind } from '../autobind.js';
 
 describe('autobind', () => {
 	test('should replace the keys with bound functions', () => {

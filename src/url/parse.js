@@ -1,5 +1,2 @@
-import Url from 'url';
-
-export default function parse(uri) {
-	return Url.parse(uri);
-}
+export const NULL_PROTO = 'file://';
+export const parse = (uri, b) => new URL(uri, new URL(b, NULL_PROTO));

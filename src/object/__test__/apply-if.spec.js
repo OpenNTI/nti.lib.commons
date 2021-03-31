@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import applyIf from '../applyif';
+import { applyIf } from '../apply-if.js';
 
 describe('applyIf', () => {
 	test('should modifiy the first object and return it', () => {

@@ -9,7 +9,7 @@ const isEmpty = x =>
 	(Array.isArray(x) && x.length === 0) ||
 	(isObj(x) && Object.keys(x).length === 0);
 
-export default function filter(o, fn = (_, x) => x, omitEmpty = false) {
+export function filter(o, fn = (_, x) => x, omitEmpty = false) {
 	const out = getOut(o);
 
 	if (isIter(out)) {

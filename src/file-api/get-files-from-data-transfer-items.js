@@ -1,4 +1,4 @@
-export default function getFilesFromDataTransferItems(items) {
+export function getFilesFromDataTransferItems(items) {
 	return Array.from(items)
 		.filter(x => x.kind === 'file' && !isDataTransferItemDirectory(x))
 		.map(x => x.getAsFile());

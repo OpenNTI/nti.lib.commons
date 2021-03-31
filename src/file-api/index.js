@@ -1,1 +1,1 @@
-export { default as getFilesFromDataTransferItems } from './get-files-from-data-transfer-items';
+export * from './get-files-from-data-transfer-items.js';

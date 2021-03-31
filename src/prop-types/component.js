@@ -43,4 +43,4 @@ function getComponentValidator() {
 	return chainedCheckType;
 }
 
-export default getComponentValidator();
+export const component = getComponentValidator();

@@ -31,12 +31,7 @@ const unwrapComponentReference = x =>
  * @param  {Object|string[]} [blacklist={}] A list of property names to NOT hoist.
  * @returns {Component|Function} the composer, modified.
  */
-export default function hoistStatics(
-	composer,
-	component,
-	displayName,
-	blacklist = {}
-) {
+export function hoistStatics(composer, component, displayName, blacklist = {}) {
 	const { create, assign, defineProperty } = Object;
 	const cmp = composer;
 	//Make sure we always deal with the original component...not a wrapper.

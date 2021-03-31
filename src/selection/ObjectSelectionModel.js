@@ -1,8 +1,8 @@
-import { ObjectMatcherFactory } from '../filters';
+import { ObjectMatcherFactory } from '../filters/identify-objects.js';
 
-import SelectionModel from './SelectionModel';
+import SelectionModel from './SelectionModel.js';
 
-export default class ObjectSelectionModel extends SelectionModel {
+export class ObjectSelectionModel extends SelectionModel {
 	constructor(initialSelection = []) {
 		super(ObjectMatcherFactory, initialSelection);
 	}
