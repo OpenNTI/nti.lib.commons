@@ -5,7 +5,7 @@ import { parse, NULL_PROTO } from './parse.js';
 export function join(...parts) {
 	const base = parse(parts.shift());
 
-	const urls = parts.filter(Boolean).map(x => parse(x.toString(), base));
+	const urls = parts.filter(Boolean).map(x => parse(x.toString()));
 
 	for (let part of urls) {
 		base.pathname = path.join(base.pathname, part.pathname);
