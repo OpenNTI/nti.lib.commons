@@ -3,13 +3,20 @@ import { join } from '../join.js';
 
 describe('join', () => {
 	test('Simple Case', () => {
+		//server relative parts (absolute paths)
 		expect(join('/test/', '/resources/images/favicon.ico')).toBe(
 			'/test/resources/images/favicon.ico'
 		);
 
+		// absolute base, server relative parts (absolute paths)
 		expect(
 			join('http://foo.bar:123/test/', '/resources/images/favicon.ico')
 		).toBe('http://foo.bar:123/test/resources/images/favicon.ico');
+
+		// Relative parts
+		expect(join('/dataserver2/ResolveUser', 'content.editor.alpha')).toBe(
+			'/dataserver2/ResolveUser/content.editor.alpha'
+		);
 	});
 
 	test('Preserve Query', () => {
