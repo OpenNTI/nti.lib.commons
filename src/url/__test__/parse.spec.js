@@ -1,10 +1,7 @@
 /* eslint-env jest */
 
 describe('URL.parse', () => {
-	test('calls url.parse()', () => {
-		const mockUrl = { parse: jest.fn() };
-		jest.doMock('url', () => mockUrl);
-
+	test('new URL', () => {
 		const { parse } = require('../parse');
 
 		const get = ({
