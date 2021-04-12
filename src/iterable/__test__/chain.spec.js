@@ -5,7 +5,7 @@ async function* makeAsyncIterable (values) {
 	for (let value of values) {
 		const resolved = await value;
 
-		yield value;
+		yield resolved;
 	}
 }
 
