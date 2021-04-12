@@ -1,13 +1,21 @@
-async function* asyncChain (...generators) {
-	for (let generator of generators) {
-		if (!generator || !(generator[Symbol.asyncIterator] ?? generator[Symbol.iterator])) {
-			yield await generator;
+/**
+ * This is primarily used to combine several asynchronous iterators together. Lazy iterators welcome.
+ *
+ * Given varArgs of items iterate and:
+ * 1.) if the item is not iterable, yield that value
+ * 2.) if the item is iterable, yield* that item's iterator before continuing to the next item
+ *
+ * @param {...*} items a list of items to chain
+ * @returns {Iterator}
+ */
+async function* asyncChain (...items) {
+	for (let item of items) {
+		if (!item || !(item[Symbol.asyncIterator] ?? item[Symbol.iterator])) {
+			yield await item;
 			continue;
 		}
 
-		for await (let value of generator) {
-			yield value;
-		}
+		yield* item;
 	}
 }
 
@@ -15,18 +23,20 @@ chain.async = asyncChain;
 /**
  * This is primarily used to combine several iterators together. Lazy iterators welcome.
  *
- * @param {...*} generators any input. If iterable, will iterate it. If the element of the iterable is iterable it will recurse and iterate that.
+ * Given varArgs of items iterate and:
+ * 1.) if the item is not iterable, yield that value
+ * 2.) if the item is iterable, yield* that item's iterator before continuing to the next item
+ *
+ * @param {...*} items a list of items to chain
  * @returns {Iterator}
  */
-export function* chain (...generators) {
-	for (let generator of generators) {
-		if (!generator || !generator[Symbol.iterator]) {
-			yield generator;
+export function* chain (...items) {
+	for (let item of items) {
+		if (!item || !item[Symbol.iterator]) {
+			yield item;
 			continue;
 		}
 
-		for (let value of generator) {
-			yield value;
-		}
+		yield* item;
 	}
 }

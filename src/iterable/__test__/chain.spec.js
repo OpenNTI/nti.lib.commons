@@ -1,15 +1,17 @@
 /* eslint-env jest */
 import { chain } from '../chain.js';
+import { wait } from '../../wait/wait';
 
 async function* makeAsyncIterable (values) {
 	for (let value of values) {
-		const resolved = await value;
+		await wait(1);
 
-		yield resolved;
+		yield value;
 	}
 }
 
 async function makeAsyncValue (value) {
+	await wait(1);
 	return value;
 }
 
