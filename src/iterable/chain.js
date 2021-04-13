@@ -8,10 +8,10 @@
  * @param {...*} items a list of items to chain
  * @returns {Iterator}
  */
-async function* asyncChain (...items) {
+async function* asyncChain(...items) {
 	for (let item of items) {
 		if (!item || !(item[Symbol.asyncIterator] ?? item[Symbol.iterator])) {
-			yield await item;
+			yield item;
 			continue;
 		}
 
@@ -30,7 +30,7 @@ chain.async = asyncChain;
  * @param {...*} items a list of items to chain
  * @returns {Iterator}
  */
-export function* chain (...items) {
+export function* chain(...items) {
 	for (let item of items) {
 		if (!item || !item[Symbol.iterator]) {
 			yield item;
