@@ -25,31 +25,32 @@ async function resolveAsyncIterable(iter) {
 	return resolved;
 }
 
-const asyncIterable = {
-	[Symbol.asyncIterator]() {
+const syncIterable = {
+	[Symbol.iterator]() {
+		let i = 0;
 		return {
-			i: 0,
+			// This is a basic iterator that simply counts up to 2 from 0.
 			next() {
-				if (this.i < 3) {
-					return Promise.resolve({ value: this.i++, done: false });
+				if (i < 3) {
+					return { value: i++, done: false };
 				}
 
-				return Promise.resolve({ done: true });
+				return { done: true };
 			},
 		};
 	},
 };
 
-const syncIterable = {
-	[Symbol.iterator]() {
+const asyncIterable = {
+	[Symbol.asyncIterator]() {
+		// The main difference between an asynchronous iterator and a
+		// synchronous iterator is the `next()` method is async. (returns a
+		// promise)
+		const itr = syncIterable[Symbol.iterator]();
 		return {
-			i: 0,
-			next() {
-				if (this.i < 3) {
-					return { value: this.i++, done: false };
-				}
-
-				return { done: true };
+			async next() {
+				// async functions auto-wrap return values into promises.
+				return itr.next();
 			},
 		};
 	},
