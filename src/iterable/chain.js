@@ -8,7 +8,7 @@
  * @param {...*} items a list of items to chain
  * @returns {Iterator}
  */
-async function* asyncChain(...items) {
+async function* chainAsync(...items) {
 	for (let item of items) {
 		if (!item || !(item[Symbol.asyncIterator] ?? item[Symbol.iterator])) {
 			yield item;
@@ -19,7 +19,6 @@ async function* asyncChain(...items) {
 	}
 }
 
-chain.async = asyncChain;
 /**
  * This is primarily used to combine several iterators together. Lazy iterators welcome.
  *
@@ -40,3 +39,5 @@ export function* chain(...items) {
 		yield* item;
 	}
 }
+
+chain.async = chainAsync;
