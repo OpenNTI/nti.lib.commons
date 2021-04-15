@@ -1,6 +1,11 @@
 const IsFunction = x => typeof x === 'function';
 
 /**
+ * @template T
+ * @typedef {(T) => T} Decorator
+ */
+
+/**
  * Decorators were applied inside out. This function is intended to assist the
  * existing syntax from:
  * <pre><code>
@@ -15,11 +20,11 @@ const IsFunction = x => typeof x === 'function';
  * class Thing {}
  * export default decorate({target: Thing, with:[foo, bar]})
  * </code></pre>
- *
- * @param {*} target - The target class
- * @param {Object|Function[]} spec - the decoration specification
- * @param {Function[]} spec.with - list of decorators, last one is applied first. (inside out application)
- * @returns {*} target (as mutated or replaced by the decorators)
+ * @template T
+ * @param {T} target - The target class
+ * @param {Object|Decorator[]} spec - the decoration specification
+ * @param {Decorator[]} spec.with - list of decorators, last one is applied first. (inside out application)
+ * @returns {T} target (as mutated or replaced by the decorators)
  */
 export function decorate(target, spec) {
 	const { with: decorators = Array.isArray(spec) ? spec : [] } = spec || {};
@@ -30,7 +35,9 @@ export function decorate(target, spec) {
 	// handle the inside-out nature of decorators
 	decorators.reverse();
 
+	/** @type {Decorator[]} (decorators) */
 	for (const decorator of decorators) {
+		/** @type {Decorator} (decorator) */
 		if (decorator.length > 1) {
 			throw TypeError(
 				'Invalid decorator. It should only take one argument. (the target)'
