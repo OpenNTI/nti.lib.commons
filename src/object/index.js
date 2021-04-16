@@ -2,6 +2,7 @@ export * from './apply-if.js';
 export * from './equals.js';
 export * from './mixin.js';
 export * from './pluck.js';
+export * from './pop.js';
 
 export * as ObjectUtils from './utils/index.js';
 
