@@ -53,3 +53,12 @@ export function buffer(time, fn) {
 
 	return f;
 }
+
+buffer.inline = function inline(tracker, time, fn, ...args) {
+	const key = Symbol.for('bufferTimeoutId');
+	clearTimeout(tracker[key]);
+	tracker[key] = setTimeout(() => {
+		delete tracker[key];
+		fn(...args);
+	}, time);
+};
