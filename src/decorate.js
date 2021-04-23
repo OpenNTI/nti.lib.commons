@@ -1,8 +1,9 @@
+/// <reference path="./index.d.ts" />
 const IsFunction = x => typeof x === 'function';
 
 /**
  * @template T
- * @typedef {(T) => T} Decorator
+ * @typedef {(target:T) => T} Decorator
  */
 
 /**
@@ -10,8 +11,8 @@ const IsFunction = x => typeof x === 'function';
  * existing syntax from:
  * <pre><code>
  * export default
- * @foo
- * @bar
+ * \@foo
+ * \@bar
  * class Thing {}
  * </code></pre>
  *
@@ -20,14 +21,13 @@ const IsFunction = x => typeof x === 'function';
  * class Thing {}
  * export default decorate({target: Thing, with:[foo, bar]})
  * </code></pre>
+ *
  * @template T
  * @param {T} target - The target class
- * @param {Object|Decorator[]} spec - the decoration specification
- * @param {Decorator[]} spec.with - list of decorators, last one is applied first. (inside out application)
+ * @param {Decorator<T>[]} decorators - list of decorators, last one is applied first. (inside out application)
  * @returns {T} target (as mutated or replaced by the decorators)
  */
-export function decorate(target, spec) {
-	const { with: decorators = Array.isArray(spec) ? spec : [] } = spec || {};
+export function decorate(target, decorators) {
 	if (decorators.length === 0 || !decorators.every(IsFunction) || !target) {
 		throw new TypeError('Invalid arguments to decorate()');
 	}
@@ -37,7 +37,6 @@ export function decorate(target, spec) {
 
 	/** @type {Decorator[]} (decorators) */
 	for (const decorator of decorators) {
-		/** @type {Decorator} (decorator) */
 		if (decorator.length > 1) {
 			throw TypeError(
 				'Invalid decorator. It should only take one argument. (the target)'
