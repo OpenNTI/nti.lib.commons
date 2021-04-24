@@ -28,7 +28,7 @@ const IsFunction = x => typeof x === 'function';
  * @returns {T} target (as mutated or replaced by the decorators)
  */
 export function decorate(target, decorators) {
-	if (decorators.length === 0 || !decorators.every(IsFunction) || !target) {
+	if (!decorators?.length || !decorators.every(IsFunction) || !target) {
 		throw new TypeError('Invalid arguments to decorate()');
 	}
 
