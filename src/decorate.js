@@ -22,6 +22,7 @@ const IsFunction = x => typeof x === 'function';
  * export default decorate({target: Thing, with:[foo, bar]})
  * </code></pre>
  *
+ * @deprecated
  * @template T
  * @param {T} target - The target class
  * @param {Decorator<T>[]} decorators - list of decorators, last one is applied first. (inside out application)
