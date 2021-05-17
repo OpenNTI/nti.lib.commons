@@ -1,13 +1,16 @@
 /**
+ * @template T
+ * @typedef {{ read: () => T }} Reader
+ */
+
+/**
  * This is the Suspense wrapper for async fetching/resolving.
  * Use this to make a reader so that you can read a value as
  * if it were sync.
  *
  * @template T
  * @param {Promise<T>} promise
- * @returns {{
- *  read: () => T
- * }}
+ * @returns {Reader<T>}
  */
 export function toReader(promise) {
 	let status = 'pending';
@@ -22,6 +25,7 @@ export function toReader(promise) {
 			result = e;
 		}
 	);
+
 	return {
 		read() {
 			if (status === 'pending') {
