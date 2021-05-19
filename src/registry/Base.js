@@ -7,6 +7,7 @@ const INSTANCE = Symbol.for('Instance');
 export default class Registry {
 	/**
 	 * A decorator to register a class as the item for given key
+	 *
 	 * @param  {[string]|string} key the key to register the decorated item for
 	 * @returns {Function}              function for the decorator to call
 	 */
@@ -20,7 +21,8 @@ export default class Registry {
 
 	/**
 	 * Return a the same instance of the registry
-	 * @returns {MapRegistry} instance of MapRegistry
+	 *
+	 * @returns {Registry} instance of MapRegistry
 	 */
 	static getInstance() {
 		const Register = this;
@@ -32,6 +34,7 @@ export default class Registry {
 
 	/**
 	 * Register an item for the key on the shared instance
+	 *
 	 * @param  {[string]|string} key the key to register for
 	 * @param  {Object} item     the item for the key
 	 * @returns {void}

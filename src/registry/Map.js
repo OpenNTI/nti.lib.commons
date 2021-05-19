@@ -1,13 +1,13 @@
 import Base from './Base.js';
 import { Default } from './constants.js';
 
-const ITEMS = Symbol('Items');
-
 /**
  * A base class for registries that use maps.
  * Should never be used directly, only extended.
  */
 export default class MapRegistry extends Base {
+	#items = {};
+
 	constructor() {
 		super();
 
@@ -16,8 +16,6 @@ export default class MapRegistry extends Base {
 				'Do not use MapRegistry directly, should be subclassed.'
 			);
 		}
-
-		this[ITEMS] = {};
 	}
 
 	register(types, item) {
@@ -26,16 +24,16 @@ export default class MapRegistry extends Base {
 		}
 
 		for (let t of types) {
-			if (this[ITEMS][t]) {
+			if (this.#items[t]) {
 				throw new Error('Overriding existing registry item');
 			}
 
-			this[ITEMS][t] = item;
+			this.#items[t] = item;
 		}
 	}
 
 	getItem(type) {
-		return this[ITEMS][type] || this[ITEMS][Default];
+		return this.#items[type] || this.#items[Default];
 	}
 }
 
