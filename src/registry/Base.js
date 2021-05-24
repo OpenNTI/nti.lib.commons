@@ -3,6 +3,8 @@ const INSTANCE = Symbol.for('Instance');
 /**
  * A base class for registries.
  * Should never be used directly, only extended.
+ *
+ * @template K, T
  */
 export default class Registry {
 	/**
@@ -22,7 +24,7 @@ export default class Registry {
 	/**
 	 * Return a the same instance of the registry
 	 *
-	 * @returns {Registry} instance of MapRegistry
+	 * @returns {Registry<K,T>} instance of MapRegistry
 	 */
 	static getInstance() {
 		const Register = this;
@@ -35,8 +37,9 @@ export default class Registry {
 	/**
 	 * Register an item for the key on the shared instance
 	 *
-	 * @param  {[string]|string} key the key to register for
-	 * @param  {Object} item     the item for the key
+	 * @template K,T
+	 * @param  {K} key the key to register for
+	 * @param  {T} item     the item for the key
 	 * @returns {void}
 	 */
 	static registerItem(key, item) {
@@ -55,13 +58,23 @@ export default class Registry {
 		throw new Error('register should be implemented by the subclass.');
 	}
 
+	/**
+	 * @param {...any} args
+	 * @deprecated Use getItem() instead
+	 * @returns {T}
+	 */
 	getItemFor(...args) {
 		return this.getItem(...args);
 	}
 
-	getItem() {
+	/**
+	 * @abstract
+	 * @param {K} key
+	 * @returns {T}
+	 */
+	getItem(key) {
 		throw new Error(
-			'getItemFor register should be implemented by the subclass.'
+			'getItem register should be implemented by the subclass.'
 		);
 	}
 }
