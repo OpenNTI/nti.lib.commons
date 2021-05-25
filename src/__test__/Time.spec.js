@@ -3,13 +3,8 @@ import { MockDate } from '../date/MockDate.js';
 import { Time } from '../Time.js';
 
 describe('Time', () => {
-	beforeEach(() => {
-		jest.useFakeTimers();
-	});
-
 	afterEach(() => {
 		MockDate.uninstall();
-		jest.useRealTimers();
 	});
 
 	test('Time intializes with current time by default', () => {

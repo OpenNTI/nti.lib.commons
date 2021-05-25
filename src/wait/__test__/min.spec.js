@@ -1,19 +1,15 @@
-/* globals spyOn */
 /* eslint-env jest */
 import { min as waitMin } from '../min.js';
 import { MockDate } from '../../date/MockDate.js';
 
 describe('wait-min', () => {
-	beforeEach(() => {
-		jest.useFakeTimers();
-	});
-
 	afterEach(() => {
 		MockDate.uninstall();
 		jest.useRealTimers();
 	});
 
 	test('Fulfills before min wait time, waits at least the min wait time and then resolves with result', done => {
+		jest.useFakeTimers();
 		MockDate.install();
 		const start = Date.now();
 		const time = 500;
@@ -21,7 +17,7 @@ describe('wait-min', () => {
 
 		const o = { spy() {} };
 
-		spyOn(o, 'spy').and.callFake(result => {
+		jest.spyOn(o, 'spy').mockImplementation(result => {
 			const diff = Date.now() - start;
 			expect(diff >= time).toBeTruthy();
 			expect(result).toBe(value);
@@ -34,8 +30,9 @@ describe('wait-min', () => {
 
 		expect(o.spy).not.toHaveBeenCalled();
 
+		MockDate.uninstall();
 		MockDate.install(start + time);
-		jest.runTimersToTime(time);
+		jest.advanceTimersByTime(time);
 	});
 
 	test('Fulfills after min wait time, resolves with result', done => {
@@ -47,18 +44,18 @@ describe('wait-min', () => {
 
 		const o = { spy1() {}, spy2() {} };
 
-		spyOn(o, 'spy1').and.callFake(result => {
+		jest.spyOn(o, 'spy1').mockImplementation(result => {
 			gap = Date.now();
 			const diff = gap - start;
 			expect(o.spy2).not.toHaveBeenCalled();
 			expect(diff >= time).toBeTruthy();
 			expect(result).toBe(value);
 			MockDate.install(gap + 1);
-			jest.runTimersToTime(1);
+			jest.advanceTimersByTime(1);
 			return result;
 		});
 
-		spyOn(o, 'spy2').and.callFake(result => {
+		jest.spyOn(o, 'spy2').mockImplementation(result => {
 			const now = Date.now();
 			const diff = now - start;
 			expect(gap - now < time / 2).toBeTruthy();
@@ -76,6 +73,6 @@ describe('wait-min', () => {
 		expect(o.spy2).not.toHaveBeenCalled();
 
 		MockDate.install(start + time);
-		jest.runTimersToTime(time);
+		jest.advanceTimersByTime(time);
 	});
 });

@@ -1,4 +1,3 @@
-/* globals spyOn */
 /* eslint-env jest */
 import Logger from '@nti/util-logger';
 
@@ -10,10 +9,10 @@ describe('FileTypeDescriptor', () => {
 	/*
 	 * type FileTypeDescriptor {
 	 *     isWild: Boolean
-	 *     [extention]: String
+	 *     [extension]: String
 	 *     [mimeType]: String
 	 *     mask: Object {
-	 *         [extention]: String
+	 *         [extension]: String
 	 *
 	 *         [mimeType]: String
 	 *         [type]: String
@@ -24,15 +23,15 @@ describe('FileTypeDescriptor', () => {
 	 *     raw: String
 	 * }
 	 *
-	 * Once we can look up mimeTypes from extensions, and lookup cannonical/default
-	 * extensions for mimeTypes we can enforce extention and mimeType to always be
+	 * Once we can look up mimeTypes from extensions, and lookup canonical/default
+	 * extensions for mimeTypes we can enforce extension and mimeType to always be
 	 * defined instead of one or the other.
 	 */
 
-	test('Parsing extention', () => {
+	test('Parsing extension', () => {
 		expect(parseExtension.bind(null)).toThrowError(
 			TypeError,
-			'Argument should be a string representing an extention'
+			'Argument should be a string representing an extension'
 		);
 		expect(parseExtension.bind(null, 'json.*')).toThrowError(
 			TypeError,
@@ -49,11 +48,11 @@ describe('FileTypeDescriptor', () => {
 		expect(extA.isWild).not.toBeTruthy();
 		expect(extB.isWild).not.toBeTruthy();
 
-		expect(extA.extention).toBe('.pdf');
-		expect(extB.extention).toBe('.pdf');
+		expect(extA.extension).toBe('.pdf');
+		expect(extB.extension).toBe('.pdf');
 
-		expect(extA.mask.extention).toBe('*.pdf');
-		expect(extB.mask.extention).toBe('*.pdf');
+		expect(extA.mask.extension).toBe('*.pdf');
+		expect(extB.mask.extension).toBe('*.pdf');
 
 		//TODO: lookup mimeType for extensions
 		// expect(extA.mimeType).toBe('application/pdf');
@@ -91,8 +90,8 @@ describe('FileTypeDescriptor', () => {
 		expect(mime.mask.mimeType).toBe('application/pdf');
 
 		// TODO: lookup extensions for mimeTypes
-		// expect(mime.extention).toBe('.pdf');
-		// expect(mime.mask.extention).toBe('*.pdf');
+		// expect(mime.extension).toBe('.pdf');
+		// expect(mime.mask.extension).toBe('*.pdf');
 
 		expect(mime.match).toBeDefined();
 
@@ -100,10 +99,10 @@ describe('FileTypeDescriptor', () => {
 		expect(mime.match({ type: 'application/json' })).not.toBeTruthy();
 	});
 
-	test('Parsing wildcard extention', () => {
+	test('Parsing wildcard extension', () => {
 		expect(parseExtension.bind(null, '*')).not.toThrow();
 
-		spyOn(logger, 'warn');
+		jest.spyOn(logger, 'warn');
 		const oldWild = parseExtension('*.*');
 		expect(logger.warn).toHaveBeenCalledWith(
 			'For file wildcards, use *, not *.*'
@@ -112,16 +111,16 @@ describe('FileTypeDescriptor', () => {
 		const wild = parseExtension('*');
 
 		expect(wild.isWild).toBeTruthy();
-		expect(wild.extention).toBe('');
-		expect(wild.mask.extention).toBe('*');
+		expect(wild.extension).toBe('');
+		expect(wild.mask.extension).toBe('*');
 
 		expect(wild.match).toBeDefined();
 		expect(wild.match({ name: 'Report.pdf' })).toBeTruthy();
 		expect(wild.match({ name: 'Report.doc' })).toBeTruthy();
 
 		expect(oldWild.isWild).toBeTruthy();
-		expect(oldWild.extention).toBe('');
-		expect(oldWild.mask.extention).toBe('*');
+		expect(oldWild.extension).toBe('');
+		expect(oldWild.mask.extension).toBe('*');
 
 		expect(oldWild.match).toBeDefined();
 		expect(oldWild.match({ name: 'Report.pdf' })).toBeTruthy();

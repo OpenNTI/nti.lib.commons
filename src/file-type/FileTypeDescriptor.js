@@ -33,7 +33,7 @@ export function parseExtension(extension) {
 
 	if (typeof extension !== 'string') {
 		throw new TypeError(
-			'Argument should be a string representing an extention'
+			'Argument should be a string representing an extension'
 		);
 	}
 
@@ -60,9 +60,9 @@ export function parseExtension(extension) {
 
 	return {
 		isWild,
-		extention: isWild ? '' : normal,
+		extension: isWild ? '' : normal,
 		mask: {
-			extention: `*${isWild ? '' : normal}`,
+			extension: `*${isWild ? '' : normal}`,
 		},
 
 		match: file => file && (isWild || String(file.name).endsWith(normal)),

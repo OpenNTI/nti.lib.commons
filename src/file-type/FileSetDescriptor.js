@@ -18,7 +18,7 @@ export class FileSetDescriptor {
 		/**
 		 * Builds the Set of Descriptors used to identify a file by its "type"
 		 *
-		 * **Heuristic of exclusions:
+		 * Heuristic of exclusions:
 		 *   - wildcards in a list void the set.
 		 *   - Unless the counter list is empty.
 		 *

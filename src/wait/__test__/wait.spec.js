@@ -1,13 +1,8 @@
-/* globals spyOn */
 /* eslint-env jest */
 import { wait } from '../wait.js';
 import { MockDate } from '../../date/MockDate.js';
 
 describe('wait', () => {
-	beforeEach(() => {
-		jest.useFakeTimers();
-	});
-
 	afterEach(() => {
 		MockDate.uninstall();
 		jest.useRealTimers();
@@ -18,12 +13,13 @@ describe('wait', () => {
 	});
 
 	test('Fulfills on timeout', done => {
+		jest.useFakeTimers();
 		MockDate.install();
 		const time = Date.now();
 		const waitTime = 100;
 		const o = { spy() {} };
 
-		spyOn(o, 'spy').and.callFake(() => {
+		jest.spyOn(o, 'spy').mockImplementation(() => {
 			const dur = Date.now() - time;
 			expect(dur >= waitTime).toBeTruthy();
 		});
@@ -33,6 +29,6 @@ describe('wait', () => {
 		expect(o.spy).not.toHaveBeenCalled();
 
 		MockDate.install(time + waitTime);
-		jest.runTimersToTime(waitTime);
+		jest.advanceTimersByTime(waitTime);
 	});
 });

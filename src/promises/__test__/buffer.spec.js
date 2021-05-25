@@ -1,6 +1,5 @@
 /* eslint-env jest */
 /* eslint no-unused-vars: 0 */
-/* globals spyOn */
 
 import { buffer } from '../buffer.js';
 
