@@ -5,9 +5,14 @@
   "license": "UNLICENSED",
   "description": "Common utility javascript functions & classes.",
   "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./test-utils": "./test-utils.js"
+  },
   "type": "module",
   "files": [
-    "src"
+    "src",
+    "test-utils.js"
   ],
   "scripts": {
     "test": "lib-scripts test",
