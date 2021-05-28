@@ -4,27 +4,32 @@ const INSTANCE = Symbol.for('Instance');
  * A base class for registries.
  * Should never be used directly, only extended.
  *
+ * @interface
  * @template K, T
  */
 export default class Registry {
 	/**
-	 * A decorator to register a class as the item for given key
+	 * This registers items to the singleton instance of this registry.
 	 *
-	 * @param  {[string]|string} key the key to register the decorated item for
-	 * @returns {Function}              function for the decorator to call
+	 * @template K, T
+	 * @param  {K|K[]} key 		the key to register the item for
+	 * @param {T?} item 		if given, registers the item right away. If omitted, a call back is returned (for legacy decorator patterns)
+	 * @returns {Function|void} if returning a value, it will be a function for the decorator to call
 	 */
-	static register(key) {
+	static register(key, item) {
 		const registry = this;
 
-		return function decorator(item) {
-			registry.registerItem(key, item);
-		};
+		function decorator(v) {
+			registry.registerItem(key, v);
+		}
+
+		return arguments.length > 1 ? decorator(item) : decorator;
 	}
 
 	/**
 	 * Return a the same instance of the registry
 	 *
-	 * @returns {Registry<K,T>} instance of MapRegistry
+	 * @returns {Registry<K,T>} instance of Registry
 	 */
 	static getInstance() {
 		const Register = this;
@@ -44,6 +49,10 @@ export default class Registry {
 	 */
 	static registerItem(key, item) {
 		return this.getInstance().register(key, item);
+	}
+
+	static getItem(...args) {
+		return this.getInstance().getItem(...args);
 	}
 
 	constructor() {

@@ -31,16 +31,28 @@ export default class HandlerRegistry extends Base {
 		});
 	}
 
-	getItem(...args) {
+	getRegistration(...args) {
 		for (let item of this[ITEMS]) {
-			const { handler, key } = item;
+			const { key } = item;
 
 			if (typeof key === 'function' && key(...args)) {
-				return handler;
+				return item;
 			}
 		}
 
-		return this[Default];
+		return !this[Default]
+			? null
+			: {
+					key: Default,
+					handler: this[Default],
+					default: true,
+			  };
+	}
+
+	getItem(...args) {
+		const { handler } = this.getRegistration(...args) || {};
+
+		return handler || this[Default];
 	}
 }
 
