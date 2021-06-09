@@ -19,24 +19,28 @@ describe('join', () => {
 		);
 	});
 
+	//XXX: This doesn't make logical sense. Only the query/search on the last input with a path segment should carry forward
 	test('Preserve Query', () => {
 		expect(join('/test/?foo=test', '/resources/images/favicon.ico')).toBe(
 			'/test/resources/images/favicon.ico?foo=test'
 		);
 	});
 
+	//XXX: This doesn't make logical sense. Only the query/search on the last input with a path segment should carry forward
 	test('Append Query', () => {
 		expect(
 			join('/test/?foo=test', '/resources/?item=2', '/images/favicon.ico')
 		).toBe('/test/resources/images/favicon.ico?foo=test&item=2');
 	});
 
+	//XXX: This doesn't make logical sense. Only the query/search on the last input with a path segment should carry forward.
 	test('Update Query', () => {
 		expect(
 			join('/test/?foo=test', '/resources/images/favicon.ico?foo=bar')
 		).toBe('/test/resources/images/favicon.ico?foo=bar');
 	});
 
+	//XXX: This doesn't make logical sense. Only the query/search on the last input with a path segment should carry forward (or matching paths)
 	test('Preserve Hash', () => {
 		expect(join('/test/#test', '/resources/images/favicon.ico')).toBe(
 			'/test/resources/images/favicon.ico#test'
@@ -49,6 +53,7 @@ describe('join', () => {
 		);
 	});
 
+	//XXX: This doesn't make logical sense. Only the query/search on the last input with a path segment should carry forward (or matching paths)
 	test('Append Query, Preserve Hash', () => {
 		expect(
 			join('/test/?foo=test#lala', '/resources/images/favicon.ico?item=2')
