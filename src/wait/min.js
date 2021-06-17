@@ -6,19 +6,25 @@ import { wait } from './wait.js';
  * at least the duration given has passed.
  *
  * @param  {number} minWait the min time to wait
- * @returns {Function} see description
+ * @returns {()=>void & {cancel: () => void}}
  */
 export function min(minWait) {
 	const start = new Date();
+	let waiting;
 
-	return result => {
+	const waiter = async result => {
 		const end = new Date();
 		const duration = end - start;
 
 		if (duration < minWait) {
-			return wait(minWait - duration).then(() => result);
+			waiting = wait(minWait - duration);
+			await waiting;
 		}
 
-		return Promise.resolve(result);
+		return result;
 	};
+
+	waiter.cancel = () => waiting?.cancel();
+
+	return waiter;
 }
