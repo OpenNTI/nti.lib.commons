@@ -5,7 +5,8 @@ import { MockDate } from '../../date/MockDate.js';
 describe('wait-min', () => {
 	afterEach(() => {
 		MockDate.uninstall();
-		jest.useRealTimers();
+		// jest.useRealTimers();
+		jest.useFakeTimers();
 	});
 
 	test('Fulfills before min wait time, waits at least the min wait time and then resolves with result', done => {
