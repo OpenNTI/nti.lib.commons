@@ -1,5 +1,3 @@
-import { on } from './on.js';
-import { min } from './min.js';
 export const SHORT = 300;
 export const LONG = 5000;
 
@@ -22,7 +20,5 @@ export function wait(milliseconds) {
 	return waiter;
 }
 
-wait.on = on;
-wait.min = min;
 wait.SHORT = SHORT;
 wait.LONG = LONG;
