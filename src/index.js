@@ -16,6 +16,13 @@ export * as Registry from './registry/index.js';
 export * as Selection from './selection/index.js';
 export * as String from './string/index.js';
 export * as Tasks from './tasks/index.js';
+export * as Url from './url/index.js';
+
+/**
+ * Use the other name
+ *
+ * @deprecated
+ */
 export * as URL from './url/index.js';
 
 export * from './function/index.js';
