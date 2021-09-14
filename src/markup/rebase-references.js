@@ -1,13 +1,13 @@
-import Url from 'url';
-
 import Logger from '@nti/util-logger';
 import { isNTIID } from '@nti/lib-ntiids';
 
+import * as url from '../url/index.js';
 import { hash } from '../string/hash.js';
 
 const logger = Logger.get('lib:rebase-references');
 
-const CORS_BUSTER_REGEX = /(\S+)\s*=\s*"(((\/[^"/]+\/)||\/)resources\/[^?"]*?)"/gim;
+const CORS_BUSTER_REGEX =
+	/(\S+)\s*=\s*"(((\/[^"/]+\/)||\/)resources\/[^?"]*?)"/gim;
 
 const isDataURI = RegExp.prototype.test.bind(/^data:/i);
 const isSrc = RegExp.prototype.test.bind(/src/i);
@@ -36,50 +36,50 @@ export function bustCorsForResources(htmlString, name, value) {
 export function rebaseReferences(htmlString, basePath) {
 	const location = global.location || {}; //This will not work well on server-side render
 
+	const checkValue = _url => {
+		const anchor = _url.pathname == null && _url.hash !== null;
+
+		const fullyQualified = Boolean(
+			(_url.protocol && _url.protocol !== 'file:') ||
+				_url.host ||
+				_url.origin !== 'null'
+		);
+		return fullyQualified || anchor || isDataURI(_url);
+	};
+
 	function fixReferences(original, attr, uri) {
-		const url = Url.parse(uri);
-
-		const anchor = url.pathname == null && url.hash !== null;
-		const firstChar = (url.pathname || '').charAt(0);
-		const absolute = firstChar === '/';
-
-		const fullyQualified = Boolean(url.protocol || url.host || absolute);
+		const _url = url.parse(uri);
 
 		if (isSrc(attr) && isYouTube(uri)) {
-			const params = [
-				'html5=1',
-				'enablejsapi=1',
-				'autohide=1',
-				'modestbranding=1',
-				'rel=0',
-				'showinfo=0',
-				'wmode=opaque',
-				'origin=' +
-					encodeURIComponent(
-						location.protocol + '//' + location.host
-					),
-			];
+			const params = new URLSearchParams([
+				['html5', 1],
+				['enablejsapi', 1],
+				['autohide', 1],
+				['modestbranding', 1],
+				['rel', 0],
+				['showinfo', 0],
+				['wmode', 'opaque'],
+				['origin', location.protocol + '//' + location.host],
+			]);
 
-			url.search = params.join('&');
-			url.protocol = 'https';
+			_url.search = params.toString();
+			_url.protocol = 'https';
 
-			return `src="${url.format()}"`;
+			return `src="${_url.toString()}"`;
 		}
 
-		if (!anchor && !fullyQualified && !isDataURI(url)) {
+		if (!checkValue(_url)) {
 			logger.debug(
 				'Content Still has non-fullyqualified HTML references! (assumed base: %s, ref: %s)',
 				basePath,
 				uri
 			);
 
-			uri = url.parse(basePath).resolve(uri);
+			uri = url.resolve(basePath, uri);
 		}
 
 		//inline
-		return anchor || fullyQualified || isDataURI(url)
-			? original
-			: `${attr}="${uri}"`;
+		return checkValue(_url) ? original : `${attr}="${uri}"`;
 	}
 
 	function fixParamValue(original, uri) {
@@ -87,17 +87,9 @@ export function rebaseReferences(htmlString, basePath) {
 			return original;
 		}
 
-		const url = Url.parse(uri);
+		const _url = url.parse(uri);
 
-		const anchor = url.pathname == null && url.hash !== null;
-		const firstChar = (url.pathname || '').charAt(0);
-		const absolute = firstChar === '/';
-
-		const fullyQualified = Boolean(url.protocol || url.host || absolute);
-		const fixed =
-			fullyQualified || anchor || isDataURI(url)
-				? uri
-				: url.parse(basePath).resolve(uri);
+		const fixed = checkValue(_url) ? uri : url.resolve(basePath, uri);
 
 		return `value="${fixed}"`;
 	}
