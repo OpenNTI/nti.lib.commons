@@ -40,9 +40,7 @@ export function rebaseReferences(htmlString, basePath) {
 		const anchor = _url.pathname == null && _url.hash !== null;
 
 		const fullyQualified = Boolean(
-			(_url.protocol && _url.protocol !== 'file:') ||
-				_url.host ||
-				_url.origin !== 'null'
+			_url.protocol || _url.host || _url.origin !== 'null'
 		);
 		return fullyQualified || anchor || isDataURI(_url);
 	};

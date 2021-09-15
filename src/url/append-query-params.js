@@ -1,6 +1,6 @@
 import { ensure } from '../array/ensure.js';
 
-import { parse, NULL_PROTO } from './parse.js';
+import { parse } from './parse.js';
 export function appendQueryParams(uri, params) {
 	if (uri == null) {
 		throw new Error('Invalid URI');
@@ -11,14 +11,16 @@ export function appendQueryParams(uri, params) {
 		url.searchParams.delete(key);
 
 		for (const v of ensure(value)) {
-			url.searchParams.append(key, '' + v);
+			url.searchParams.append(key, `${v}`);
 		}
 	}
 
 	url.searchParams.sort();
 
-	return url
-		.toString()
-		.replace(new RegExp('^' + NULL_PROTO), '')
-		.replace(/^\/undefined/, '');
+	let str = url.toString().replace(/^\/undefined/, '');
+	if (uri === '') {
+		str = str.replace(/^\//, '');
+	}
+
+	return str;
 }
