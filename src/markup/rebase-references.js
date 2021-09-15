@@ -38,10 +38,7 @@ export function rebaseReferences(htmlString, basePath) {
 
 	const checkValue = _url => {
 		const anchor = _url.pathname == null && _url.hash !== null;
-
-		const fullyQualified = Boolean(
-			_url.protocol || _url.host || _url.origin !== 'null'
-		);
+		const fullyQualified = Boolean(_url.protocol || _url.host);
 		return fullyQualified || anchor || isDataURI(_url);
 	};
 

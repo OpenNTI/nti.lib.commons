@@ -29,6 +29,11 @@ class LooseURL extends URL {
 		super.protocol = scheme;
 	}
 
+	get origin() {
+		const base = super.origin;
+		return this._defaulted && /^file:/.test(base) ? 'null' : base;
+	}
+
 	toString() {
 		return filterString(super.toString(), this._defaulted);
 	}
