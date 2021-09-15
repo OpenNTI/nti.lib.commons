@@ -10,8 +10,14 @@ const filterString = (str, defaulted) =>
 class LooseURL extends URL {
 	static NULL_PROTO = NULL_PROTO;
 	constructor(uri, ref = NULL_PROTO) {
-		const defaulted = isDefault(uri, ref);
-		const parsed = new URL(uri, new URL(ref, NULL_PROTO));
+		let defaulted = isDefault(uri, ref);
+		let parsed;
+		try {
+			parsed = new URL(uri, new URL(ref, NULL_PROTO));
+		} catch {
+			parsed = new URL('file://null');
+			defaulted = true;
+		}
 
 		super(parsed.toString());
 		this._defaulted = defaulted;
