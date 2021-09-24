@@ -61,11 +61,14 @@ export function hoistStatics(composer, component, displayName, blacklist = {}) {
 			continue;
 		}
 
+		const descriptor = Object.getOwnPropertyDescriptor(target, key);
+
 		try {
 			defineProperty(
 				cmp,
 				key,
 				assign(create(null), {
+					enumerable: descriptor.enumerable,
 					get: () => target[key],
 					set: s => (target[key] = s),
 				})
