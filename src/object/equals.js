@@ -29,6 +29,10 @@ const compare = (A, B, deep, ...args) =>
 	typeof A !== 'object' || !deep ? A === B : equals(A, B, deep, ...args);
 
 export function equals(A, B, deep, path = '') {
+	if (typeof A !== 'object' || typeof B !== 'object') {
+		return compare(A, B);
+	}
+
 	if (A === B || (A == null && B == null)) {
 		return true;
 	}

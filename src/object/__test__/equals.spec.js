@@ -8,6 +8,12 @@ test('equals', () => {
 	expect(falsy.every(x => equals(x, x))).toBe(true);
 	expect(falsy.every(x => truthy.every(y => equals(x, y)))).toBe(false);
 
+	expect(equals(4, 4)).toBe(true);
+	expect(equals('4', '4')).toBe(true);
+	expect(equals(4, new Date(4))).toBe(false);
+	expect(equals('4', 4)).toBe(false);
+	expect(equals(4, 5)).toBe(false);
+
 	// no leaks
 	expect(equals.__getSeen().every(x => x.length === 0)).toBe(true);
 });
