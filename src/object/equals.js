@@ -4,7 +4,7 @@ const hasSameNumberOfKeys = (A, B) =>
 const getKeys = (A, B) =>
 	Array.from(new Set([...Object.keys(A), ...Object.keys(B)]));
 
-/** @type {Array<[unknown, string]>} */
+/** @type {Array<[unknown, string]>[]} */
 const seen = [[], []];
 const get = (x, o) => seen[x].find(x => x[0] === o)?.[1];
 const add = (x, o, p) => seen[x].push([o, p]);
@@ -60,6 +60,6 @@ export function equals(A, B, deep, path = '') {
  * Used in testing only
  *
  * @private
- * @returns {Array<[unknown, string]>}
+ * @returns {Array<[unknown, string]>[]}
  */
 equals.__getSeen = () => seen;
