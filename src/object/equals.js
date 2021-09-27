@@ -4,17 +4,22 @@ const hasSameNumberOfKeys = (A, B) =>
 const getKeys = (A, B) =>
 	Array.from(new Set([...Object.keys(A), ...Object.keys(B)]));
 
-const seen = new Map();
-function getComparable(o, path) {
+/** @type {Array<[unknown, string]>} */
+const seen = [[], []];
+const get = (x, o) => seen[x].find(x => x[0] === o)?.[1];
+const add = (x, o, p) => seen[x].push([o, p]);
+
+function getComparable(o, bin, path) {
 	if (o instanceof Date) {
 		return o.getTime();
 	}
 
 	if (typeof o === 'object') {
-		if (seen.has(o)) {
-			return `[cycle ${seen.get(o)} <-> ${path}]`;
+		const p = get(bin, o);
+		if (p) {
+			return `[cycle ${p} <-> ${path}]`;
 		}
-		seen.set(o, path);
+		add(bin, o, path);
 	}
 
 	return o;
@@ -31,18 +36,30 @@ export function equals(A, B, deep, path = '') {
 		return false;
 	}
 
+	const [AStack, BStack] = seen;
+	const { length: markA } = AStack;
+	const { length: markB } = BStack;
+
 	try {
 		return (
 			hasSameNumberOfKeys(A, B) &&
 			getKeys(A, B).every(key => {
-				const values = [A[key], B[key]].map(x =>
-					getComparable(x, path + 'key')
+				const values = [A[key], B[key]].map((x, bin) =>
+					getComparable(x, bin, [path, key].join('.'))
 				);
 				return compare(...values, deep, path + '.' + key);
 			})
 		);
 	} finally {
-		seen.delete(A);
-		seen.delete(B);
+		AStack.splice(markA, AStack.length);
+		BStack.splice(markB, BStack.length);
 	}
 }
+
+/**
+ * Used in testing only
+ *
+ * @private
+ * @returns {Array<[unknown, string]>}
+ */
+equals.__getSeen = () => seen;

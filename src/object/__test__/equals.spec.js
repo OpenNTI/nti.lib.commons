@@ -7,6 +7,9 @@ const truthy = [{}, 'a', 1, true];
 test('equals', () => {
 	expect(falsy.every(x => equals(x, x))).toBe(true);
 	expect(falsy.every(x => truthy.every(y => equals(x, y)))).toBe(false);
+
+	// no leaks
+	expect(equals.__getSeen().every(x => x.length === 0)).toBe(true);
 });
 
 test('equals deep', () => {
@@ -24,6 +27,9 @@ test('equals deep', () => {
 
 	expect(equals(a, b, true)).toBe(true);
 	expect(equals(a, c, true)).toBe(false);
+
+	// no leaks
+	expect(equals.__getSeen().every(x => x.length === 0)).toBe(true);
 });
 
 test('equals deep, cycles', () => {
@@ -46,6 +52,8 @@ test('equals deep, cycles', () => {
 		c3: makeCycle(),
 	};
 
-	expect(equals(a, b, true)).toBe(true);
 	expect(equals(a, c, true)).toBe(false);
+	expect(equals(a, b, true)).toBe(true);
+	// no leaks
+	expect(equals.__getSeen().every(x => x.length === 0)).toBe(true);
 });
