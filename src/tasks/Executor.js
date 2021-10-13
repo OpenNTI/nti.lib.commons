@@ -13,7 +13,7 @@ export class Executor extends EventEmitter {
 	/**
 	 * Add a single task to the queue.
 	 *
-	 * @param  {function} task a single function that returns a Promise
+	 * @param  {Function} task a single function that returns a Promise
 	 * @returns {Promise}      the fulfillment of the functions return
 	 */
 	queueTask(task) {
@@ -23,7 +23,7 @@ export class Executor extends EventEmitter {
 	/**
 	 * Adds tasks to the queue for execution.
 	 *
-	 * @param  {...function} tasks - Each argument of this method should be a function that returns a Promise.
+	 * @param  {...Function} tasks - Each argument of this method should be a function that returns a Promise.
 	 * @returns {Promise[]} The promise of each argument.
 	 * @public
 	 */

@@ -5,6 +5,7 @@ export class Point {
 
 	/**
 	 * Creates a new Point
+	 *
 	 * @class
 	 * @param {number} x - the x coordinate
 	 * @param {number} y - the y coordinate
@@ -18,6 +19,7 @@ export class Point {
 
 	/**
 	 * Returns a new Point that is the sum of this point and p2
+	 *
 	 * @param {Point} p2 The other point
 	 * @returns {Point} a new Point that is the sum of this Point and Point p2.
 	 */
@@ -27,6 +29,7 @@ export class Point {
 
 	/**
 	 * Returns a new Point that is this point minus point p2
+	 *
 	 * @param {Point} p2 The other point
 	 * @returns {Point} a new Point that is this point minus p2.
 	 */
@@ -43,6 +46,7 @@ export class Point {
 
 	/**
 	 * Returns a new Point that is this point multiplied by the given scale factor
+	 *
 	 * @param {number} factor The scale factor
 	 * @param {Point} [origin] origin point
 	 * @returns {Point} a new Point that is this point multiplied by the given scale factor
@@ -53,6 +57,7 @@ export class Point {
 
 	/**
 	 * Returns a new Point halfway between this and the given point
+	 *
 	 * @param {Point} p The other point
 	 * @returns {Point} the point halfway between this and Point p
 	 */

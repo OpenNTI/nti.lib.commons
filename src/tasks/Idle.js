@@ -42,6 +42,7 @@ export class Idle {
 
 	/**
 	 * Start the idle timer.
+	 *
 	 * @returns {void}
 	 */
 	start() {
@@ -75,6 +76,7 @@ export class Idle {
 
 	/**
 	 * Stop the idle timer.
+	 *
 	 * @returns {void}
 	 */
 	stop() {

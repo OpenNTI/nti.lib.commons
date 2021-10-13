@@ -1,6 +1,7 @@
-/** @typedef {string | number | Symbol} Key */
+/** @typedef {string | number | symbol} Key */
 /**
  * Remove and return value at key.
+ *
  * @template T
  * @param {Record<Key, T>} object
  * @param {Key} key
