@@ -1,5 +1,6 @@
 export * from './apply-if.js';
 export * from './equals.js';
+export * from './get-property-descriptor.js';
 export * from './mixin.js';
 export * from './pluck.js';
 export * from './pop.js';
