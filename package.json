@@ -36,7 +36,7 @@
     "isempty": "0.0.1",
     "media-typer": "^1.1.0",
     "tinycolor2": "^1.4.1",
-    "uuid": "^8.3.0"
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "@nti/lib-scripts": "^2.0.0"
